@@ -1,4 +1,4 @@
-WORKSHOP_TITLE
+Web Design for Shiny Developers
 ================
 
 ### posit::conf 2023
