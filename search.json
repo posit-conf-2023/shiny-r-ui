@@ -1,0 +1,583 @@
+[
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#chatty-apps",
+    "href": "slides/2-best-practices/best-practices.html#chatty-apps",
+    "title": "Web design best practices",
+    "section": "Chatty apps",
+    "text": "Chatty apps\nUsers should not guess what the app is doing:\n- If something goes wrong, user should know.\n- If something was successful, users should also know."
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#respect-design-principles",
+    "href": "slides/2-best-practices/best-practices.html#respect-design-principles",
+    "title": "Web design best practices",
+    "section": "Respect Design Principles",
+    "text": "Respect Design Principles\nuser action –&gt; app reaction"
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#respect-peoples-perseption",
+    "href": "slides/2-best-practices/best-practices.html#respect-peoples-perseption",
+    "title": "Web design best practices",
+    "section": "Respect people’s perseption",
+    "text": "Respect people’s perseption\n\nNot everyone can properly see red/green.\nPrioritise components that are accessibility proven (can be digested by screen readers)."
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#handle-feedback",
+    "href": "slides/2-best-practices/best-practices.html#handle-feedback",
+    "title": "Web design best practices",
+    "section": "Handle feedback",
+    "text": "Handle feedback\nHow to:\n\nProcess user input/outputs?\nHandle notifications?\nHandle loading/waiting time?\nConvey extra information?"
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#inputs-validation",
+    "href": "slides/2-best-practices/best-practices.html#inputs-validation",
+    "title": "Web design best practices",
+    "section": "(1) Inputs validation",
+    "text": "(1) Inputs validation"
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#inputs-validation-best-practices",
+    "href": "slides/2-best-practices/best-practices.html#inputs-validation-best-practices",
+    "title": "Web design best practices",
+    "section": "Inputs validation: best practices",
+    "text": "Inputs validation: best practices\n\n\n\nDo’s\nDon’ts\n\n\n\n\nProper color\nOnly rely on color\n\n\nAdd icon\nPrint raw error message\n\n\nMeaningful text\nDisplay error before the element\n\n\nExtra tooltip (on press)\nUse toasts (disable auto dismiss)\n\n\nProvide example of valid statement\nDon’t highlight correct fields\n\n\nAn error summary (accordion)"
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#inputs-validation-example-with-a-single-field",
+    "href": "slides/2-best-practices/best-practices.html#inputs-validation-example-with-a-single-field",
+    "title": "Web design best practices",
+    "section": "Inputs validation: example with a single field",
+    "text": "Inputs validation: example with a single field\n\n\nE-mail\n\n+417562356\n\n\nError 23\n\n\n\n E-mail\n\n+417562356\n\n\n Error: a valid email should be like name.surname@domain.com\n\n\n\n\nAdded icon next to field label (avoid error).\nAdded icon to error message.\nProvide valid example."
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#example-from-my-health-insurance",
+    "href": "slides/2-best-practices/best-practices.html#example-from-my-health-insurance",
+    "title": "Web design best practices",
+    "section": "Example from my health insurance 😃",
+    "text": "Example from my health insurance 😃"
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#inputs-validation-with-shinyvalidate",
+    "href": "slides/2-best-practices/best-practices.html#inputs-validation-with-shinyvalidate",
+    "title": "Web design best practices",
+    "section": "Inputs validation: with {shinyvalidate}",
+    "text": "Inputs validation: with {shinyvalidate}\n\n\n\nlibrary(shiny)\nlibrary(shinyvalidate)\n\nui &lt;- fluidPage(\n  textInput(\n    \"email\", \n    tagList(icon(\"envelope\"), \"Email\"),\n1    placeholder = \"example: name.surname@domain.com\"\n1  )\n2)\n\nserver &lt;- function(input, output, session) {\n2  iv &lt;- InputValidator$new()\n3  iv$add_rule(\"email\", sv_required())\n  iv$add_rule(\n    \"email\",\n    sv_email(\n        message = tagList(\n            icon(\"exclamation-circle\"),\n            \"Error: a valid email should be like:\",\n            span(class = \"underline\", \"name.surname@domain.com\")\n        )\n    )\n  )\n4  iv$enable()\n}\n\n\n1\n\nAdd placeholder as example.\n\n2\n\nInitialise input validator R6 instance.\n\n3\n\nPrerequisites + add custom error message with icon.\n\n4\n\nActivate the validation.\n\n\n\n\n\nVideo"
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#output-validation",
+    "href": "slides/2-best-practices/best-practices.html#output-validation",
+    "title": "Web design best practices",
+    "section": "Output validation",
+    "text": "Output validation\nHow to get an output? 1\n\n\n\nui &lt;- fluidPage(\n  textInput(\"name\", \"Name\"),\n  textInput(\"surname\", \"Surname\"),\n  textOutput(\"res\")\n)\n\nserver &lt;- function(input, output) {\n  output$res &lt;- renderText({\n    if (nchar(input$name) == 0 || nchar(input$surname) == 0) {\n        validate(\"Fill all the inputs to see the result\")\n    } else {\n        paste0(input$name, input$surname)\n    }\n  })\n}\n\n\n1\n\nCondition for which the message will be shown.\n\n2\n\nWrap end-user message within shiny::validate.\n\n\n\n\n\nVideo\n\n\ncomplement input validation."
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#going-further",
+    "href": "slides/2-best-practices/best-practices.html#going-further",
+    "title": "Web design best practices",
+    "section": "Going further",
+    "text": "Going further\n\n{shiny.emptystate}: https://appsilon.github.io/shiny.emptystate/"
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#notifications",
+    "href": "slides/2-best-practices/best-practices.html#notifications",
+    "title": "Web design best practices",
+    "section": "(2) Notifications",
+    "text": "(2) Notifications"
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#different-levels-of-urgency",
+    "href": "slides/2-best-practices/best-practices.html#different-levels-of-urgency",
+    "title": "Web design best practices",
+    "section": "Different levels of urgency",
+    "text": "Different levels of urgency\n\nHigh attention: errors, user confirmation.\nMedium attention: warnings.\nLower attention: success."
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#best-practices",
+    "href": "slides/2-best-practices/best-practices.html#best-practices",
+    "title": "Web design best practices",
+    "section": "Best practices",
+    "text": "Best practices\n\n\n\nHigh attention\nMedium attention\nLower attention\n\n\n\n\nNo auto close\nNo auto close\nAuto close\n\n\nModal with overlay\nToast\nToast\n\n\nMeaningful icon\nMeaningful icon\nMeaningful icon"
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#example-for-success",
+    "href": "slides/2-best-practices/best-practices.html#example-for-success",
+    "title": "Web design best practices",
+    "section": "Example for success",
+    "text": "Example for success\n\n\n\nui &lt;- fluidPage(\n  actionButton(\"send\", \"Send mail\", icon = icon(\"paper-plane\"))\n)\n\nserver &lt;- function(input, output) {\n  observeEvent(input$send, {\n    showNotification(\n        ui = tagList(\n            icon(\"check\"),\n            \"Message successfully sent!\"\n        )\n    )\n  })\n}\n\n\nWe used a toast shiny::showNotification.\nAuto close is ok.\nDisplayed in the corner (not high priority).\n\n\nVideo"
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#example-for-errors",
+    "href": "slides/2-best-practices/best-practices.html#example-for-errors",
+    "title": "Web design best practices",
+    "section": "Example for errors",
+    "text": "Example for errors\n\n\n\nui &lt;- fluidPage(\n  actionButton(\"run\", \"Run simulation\", icon = icon(\"calculator\"))\n)\n\nserver &lt;- function(input, output, session) {\n  observeEvent(input$run, {\n    Sys.sleep(2)\n    showModal(\n        modalDialog(\n            title = tagList(\n                icon(\"xmark\"),\n                \"Error: computation failed.\"\n            ),\n            p(\"Error description (depends on user level...)\"),\n            br(),\n            tagList(\n                icon(\"exclamation-circle\"),\n                \"Parameter a is ...\"\n            )\n        )\n    )\n  })\n}\n\n\nModal with overlay (focus on error).\nCorrect icons (no need for colors).\nBrief description.\nMore details (depends on the user level).\n\n\nVideo"
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#what-if-we-dont-know-the-result-of-a-given-task",
+    "href": "slides/2-best-practices/best-practices.html#what-if-we-dont-know-the-result-of-a-given-task",
+    "title": "Web design best practices",
+    "section": "What if we don’t know the result of a given task?",
+    "text": "What if we don’t know the result of a given task?\n\nThe same task may succeed or fail based on different parameters.\nNeed to capture exceptions.\ntryCatch is your friend."
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#capture-exceptions-with-shiny",
+    "href": "slides/2-best-practices/best-practices.html#capture-exceptions-with-shiny",
+    "title": "Web design best practices",
+    "section": "Capture exceptions: with {shiny}",
+    "text": "Capture exceptions: with {shiny}\n\n\n\nobserveEvent(input$run, {\n    res &lt;- sample(c(FALSE, TRUE), 1)\n    tryCatch({\n        if (res) {\n            showNotification(\n                ui = tagList(\n                    icon(\"check\"),\n                    \"Computation successful.\"\n                )\n            )\n        } else {\n            stop(\"&lt;Error message&gt;\")\n        }\n    }, error = function(e) {\n        showModal(\n            modalDialog(\n                title = tagList(icon(\"xmark\"),\n                    \"Error: computation failed.\"\n                ),\n                sprintf(\"%s\", e$message)\n            )\n        )\n    })\n})\n\n\nCapture error within tryCatch.\nReturn either notification or modal.\nNote: we could also capture warnings.\n\n\nVideo"
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#going-further-1",
+    "href": "slides/2-best-practices/best-practices.html#going-further-1",
+    "title": "Web design best practices",
+    "section": "Going further",
+    "text": "Going further\n\n{elvis}: https://github.com/ThinkR-open/elvis.\nError summary: https://service-manual.nhs.uk/design-system/components/error-summary"
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#loadingwaiting-time",
+    "href": "slides/2-best-practices/best-practices.html#loadingwaiting-time",
+    "title": "Web design best practices",
+    "section": "(3) Loading/waiting time",
+    "text": "(3) Loading/waiting time"
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#progress-best-practices",
+    "href": "slides/2-best-practices/best-practices.html#progress-best-practices",
+    "title": "Web design best practices",
+    "section": "Progress: best practices",
+    "text": "Progress: best practices\n\nQuantifiable subtasks: shiny::withProgess.\nFor blocking tasks: full screen {waiter}.\nButton spinner: related to local task, async (can run in the background).\nInitial loading: full screen {waiter}."
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#button-spinner",
+    "href": "slides/2-best-practices/best-practices.html#button-spinner",
+    "title": "Web design best practices",
+    "section": "Button spinner",
+    "text": "Button spinner\nWhen we don’t necessarily know the waiting time …\n\n\n\nRJS\n\n\n\nui &lt;- fluidPage(\n  actionButton(\"run\", \"Run simulation\", icon = icon(\"calculator\"))\n)\n\nserver &lt;- function(input, output, session) {\n  observeEvent(input$run, {\n    session$sendCustomMessage(\"add-spinner\", \"run\")\n    Sys.sleep(2)\n    session$sendCustomMessage(\"remove-spinner\", \"run\")\n  })\n}\n\n\nIndicate user when task is running.\nNotify when task is over (not shown for space reasons).\n\n\n\n$(function() {\n    Shiny.addCustomMessageHandler('add-spinner', function(m) {\n        $('#run i')\n            .removeClass('fa-calculator')\n            .addClass('fa-spinner fa-spin');\n    });\n    Shiny.addCustomMessageHandler('remove-spinner', function(m) {\n        $('#run i')\n            .removeClass('fa-spinner fa-spin')\n            .addClass('fa-calculator')\n    });\n}); \n\n\n\n\nVideo"
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#preloader",
+    "href": "slides/2-best-practices/best-practices.html#preloader",
+    "title": "Web design best practices",
+    "section": "Preloader",
+    "text": "Preloader\nWhen the app is loading, you can display a spinner with Waiter.\n\n\n\nUIServerHelpers\n\n\n\nui &lt;- fluidPage(\n  useWaiter(), # include dependencies\n  h1(icon(\"world\"), \"My super app\")\n)\n\n\n\n\n\nserver &lt;- function(input, output, session) {\n  # create a waiter\n  state &lt;- reactiveValues(loaded = FALSE)\n  w &lt;- Waiter$new()\n  \n  # on button click\n  observeEvent(req(!state$loaded), {\n    w$show()\n    tryCatch({\n      connect_db(w)\n      w$update(\n        html = tagList(\n          icon(\"circle-check\", class = \"fa-2xl\"),\n          h3(\"Success: connected\")\n        )\n      )\n      Sys.sleep(1)\n      state$loaded &lt;- TRUE\n    }, error = function(e) {\n      w$update(\n        html = tagList(\n          icon(\"circle-xmark\", class = \"fa-2xl\"),\n          h3(sprintf(\"Error: %s\", e$message)),\n          a(\n            onclick = \"location.reload()\", \n            \"Reload app?\", \n            href = \"#\", \n            style = \"color: white\"\n          )\n        )\n      )\n      Sys.sleep(3)\n    })\n  })\n  \n  observeEvent(req(state$loaded), {\n    w$hide()\n  })\n}\n\n\n\n\n\nconnect_db &lt;- function(w) {\n  w$update(\n    html = tagList(\n      spin_flower(), \n      h3(\"Connecting to database ...\")\n    )\n  )\n  Sys.sleep(3)\n  res &lt;- sample(c(FALSE, TRUE), 1)\n  if (!res) stop(\"could not connect to DB\") \n}\n\n\n\n\n\nVideo"
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#local-progress",
+    "href": "slides/2-best-practices/best-practices.html#local-progress",
+    "title": "Web design best practices",
+    "section": "Local progress",
+    "text": "Local progress\nFor async tasks, we indicate local computation with waiter::Waitress …\n\n\n\nUIServerHelpers\n\n\n\n\nui &lt;- fluidPage(\n  useWaitress(),\n  fluidRow(\n    column(\n      width = 6,\n      h3(\"Long task\"),\n      actionButton(\"go\", \"Run long task\"),\n      plotOutput(\"long_task\") \n    ),\n    column(\n      width = 6,\n      wellPanel(\n        h3(\"Other task\"),\n        checkboxGroupInput(\n          \"variable\", \n          \"Variables to show:\",\n          c(\n            \"Cylinders\" = \"cyl\",\n            \"Transmission\" = \"am\",\n            \"Gears\" = \"gear\"\n          )\n        ),\n        tableOutput(\"quick_task\")\n      )\n    )\n  )\n)\n\n\n\n\n\n\nserver &lt;- function(input, output, session) {\n  # create a waiter\n  vals &lt;- reactiveValues(job = list(el = NULL, res = NULL))\n  \n  waitress &lt;- Waitress$new(\n    \"#go\", \n    theme = \"overlay-opacity\", \n    infinite = TRUE\n  )\n  \n  observeEvent(input$go, {\n    vals$job$el &lt;- NULL\n    vals$job$res &lt;- NULL\n    \n    waitress$start()\n    vals$job$el &lt;- callr::r_bg(\n      func = bg_task,\n      supervise = TRUE\n    )\n  })\n  \n  observe({\n    invalidateLater(1000)\n    req(vals$job$el)\n    if (!vals$job$el$is_alive()) {\n      vals$job$res &lt;- vals$job$el$get_result()\n      waitress$close()\n    }\n  })\n  \n  \n  \n  # render the background process message to the UI\n  output$long_task &lt;- renderPlot({\n    if (!is.null(vals$job$res)) {\n      plot(vals$job$res)\n    } \n  })\n  \n  output$quick_task &lt;- renderTable({\n    mtcars[, c(\"mpg\", input$variable), drop = FALSE]\n  }, rownames = TRUE)\n}\n\n\n\n\n\nbg_task &lt;- function() {\n  Sys.sleep(5)\n  return(hist(rnorm(1000)))\n}\n\n\n\n\n\nVideo"
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#going-further-2",
+    "href": "slides/2-best-practices/best-practices.html#going-further-2",
+    "title": "Web design best practices",
+    "section": "Going further",
+    "text": "Going further\n…"
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#extra-information",
+    "href": "slides/2-best-practices/best-practices.html#extra-information",
+    "title": "Web design best practices",
+    "section": "(4) Extra information",
+    "text": "(4) Extra information"
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#tooltips-vs-popovers",
+    "href": "slides/2-best-practices/best-practices.html#tooltips-vs-popovers",
+    "title": "Web design best practices",
+    "section": "Tooltips vs Popovers",
+    "text": "Tooltips vs Popovers\n\n\n\n\n\n\n\n\n\ntooltips\npopovers\n\n\n\n\nWhat?\nBubble appearing on hover over an element\nCard with title and body on press/hover\n\n\nHow to use?\nDisplay help, supplement input validation, avoid long text\nPrint extra info, links, … without cluttering/overloading the main UI"
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#supercharged-input-validation-with-tooltips",
+    "href": "slides/2-best-practices/best-practices.html#supercharged-input-validation-with-tooltips",
+    "title": "Web design best practices",
+    "section": "Supercharged input validation with tooltips",
+    "text": "Supercharged input validation with tooltips\nInstead of using placeholder field, we can show a tooltip.\n\n\n\nlibrary(shiny)\nlibrary(shinyvalidate)\nlibrary(bslib)\n\nui &lt;- fluidPage(\n  theme = bs_theme(version = 5L),\n  tooltip(\n    textInput(\n      \"email\",\n      tagList(icon(\"envelope\"), \"Email\")\n    ), \n    \"Example: name.surname@domain.com\"\n  )\n)\n\n# Server not shown (same as input validation above)\n\n\nTooltip only for Bootstrap 5.\nWrap UI element with bslib::tooltip.\nAdd message content.\n\n\nVideo"
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#popovers",
+    "href": "slides/2-best-practices/best-practices.html#popovers",
+    "title": "Web design best practices",
+    "section": "Popovers",
+    "text": "Popovers\nMany help libraries leverage popovers: introjs, …\n\n\n\nlibrary(shiny)\nlibrary(bslib)\n\nui &lt;- fluidPage(\n  theme = bs_theme(version = 5L),\n  popover(\n    plotOutput(\"distPlot\"),\n    title = \"Super plot\",\n    options = list(html = TRUE),\n    tagList(\n      tags$b(\"This is the same plot I've used for every single \n      demo I am doing since {shiny} exists. Maybe I should change\n      at some point.\"),\n      tags$img(src = \"https://placehold.jp/150x150.png\")\n    )\n  )\n)\n\nserver &lt;- function(input, output, session) {\n  output$distPlot &lt;- renderPlot({\n    hist(rnorm(1000))\n  })\n}\n\n\nPopover only for Bootstrap 5.\nWrap UI element with bslib::popover.\nAdd message content + custom HTML.\n\n\nVideo"
+  },
+  {
+    "objectID": "slides/2-best-practices/best-practices.html#tbd",
+    "href": "slides/2-best-practices/best-practices.html#tbd",
+    "title": "Web design best practices",
+    "section": "TBD",
+    "text": "TBD\nTBD"
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#what",
+    "href": "slides/1-introduction/introduction.html#what",
+    "title": "Web Design 101",
+    "section": "What?",
+    "text": "What?\n\n\nDesign user experiences: website, car navigation, tv system, …\nMake people’s life easier.\nWe can’t consider UX if we forget people!"
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#why",
+    "href": "slides/1-introduction/introduction.html#why",
+    "title": "Web Design 101",
+    "section": "Why?",
+    "text": "Why?\n\nTiny changes, high impact.\nFail early."
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#when-its-too-late",
+    "href": "slides/1-introduction/introduction.html#when-its-too-late",
+    "title": "Web Design 101",
+    "section": "When it’s too late",
+    "text": "When it’s too late"
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#how",
+    "href": "slides/1-introduction/introduction.html#how",
+    "title": "Web Design 101",
+    "section": "How?",
+    "text": "How?\n\n\nBe open-minded and kind.\nPut end user first.\nTalk to people.\nObserve and question (not shiny::observe)."
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#don-norman-design-principles",
+    "href": "slides/1-introduction/introduction.html#don-norman-design-principles",
+    "title": "Web Design 101",
+    "section": "Don Norman Design principles",
+    "text": "Don Norman Design principles\n\n\nVisibility: clear features and steps.\nFeedback: user action –&gt; app reaction.\nConstraints: avoid over interactions.\nConsistency: buttons look like buttons, …\nAffordance: can you guess what this unknown object is for?"
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#bad-design-is-everywhere-around-us-1x",
+    "href": "slides/1-introduction/introduction.html#bad-design-is-everywhere-around-us-1x",
+    "title": "Web Design 101",
+    "section": "Bad design is everywhere around us (1/X)",
+    "text": "Bad design is everywhere around us (1/X)\n\nThe “masochist’s teapot” by Jacques Caralman"
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#bad-design-is-everywhere-around-us-1x-1",
+    "href": "slides/1-introduction/introduction.html#bad-design-is-everywhere-around-us-1x-1",
+    "title": "Web Design 101",
+    "section": "Bad design is everywhere around us (1/X)",
+    "text": "Bad design is everywhere around us (1/X)\n\nFigure 1: How do I reach 17?"
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#bad-design-is-everywhere-around-us-1x-2",
+    "href": "slides/1-introduction/introduction.html#bad-design-is-everywhere-around-us-1x-2",
+    "title": "Web Design 101",
+    "section": "Bad design is everywhere around us (1/X)",
+    "text": "Bad design is everywhere around us (1/X)\nLet or right??"
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#bad-design-is-everywhere-around-us-1x-3",
+    "href": "slides/1-introduction/introduction.html#bad-design-is-everywhere-around-us-1x-3",
+    "title": "Web Design 101",
+    "section": "Bad design is everywhere around us (1/X)",
+    "text": "Bad design is everywhere around us (1/X)\n\nI have winamp on my site 😵‍💫"
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#your-turn-user-experience",
+    "href": "slides/1-introduction/introduction.html#your-turn-user-experience",
+    "title": "Web Design 101",
+    "section": "Your turn: user experience",
+    "text": "Your turn: user experience\nTell us what’s the worst user experience your remember?\n\n\n\n−+\n02:00"
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#your-turn-about-affordance-12",
+    "href": "slides/1-introduction/introduction.html#your-turn-about-affordance-12",
+    "title": "Web Design 101",
+    "section": "Your turn: about affordance (1/2)",
+    "text": "Your turn: about affordance (1/2)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n−+\n01:00\n\n\n\n\n\nold coffee grinder.\nold ear amplifier.\nInstrument to mimick starling calls."
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#your-turn-about-affordance-22",
+    "href": "slides/1-introduction/introduction.html#your-turn-about-affordance-22",
+    "title": "Web Design 101",
+    "section": "Your turn: about affordance (2/2)",
+    "text": "Your turn: about affordance (2/2)\n\n\nAn old pacifier (~1800)."
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#what-about-shiny",
+    "href": "slides/1-introduction/introduction.html#what-about-shiny",
+    "title": "Web Design 101",
+    "section": "What about Shiny?",
+    "text": "What about Shiny?\n\nWeb design is part of UX Design.\n\n\nShiny app design belongs to web design so UX design.\n\n\nProduction apps are used by many people …\n… they deserve a good experience.\n\n\n\n\nSo what are we waiting for?"
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#pointless-inconsistency",
+    "href": "slides/1-introduction/introduction.html#pointless-inconsistency",
+    "title": "Web Design 101",
+    "section": "Pointless Inconsistency",
+    "text": "Pointless Inconsistency\n\n\n\n\n\n\n\n\n\nBlog\n\n\n\n\n\n\n\n\n\nA Story Before the Recipe\n\n\nThis story is about when I fell in love with Mexican food.\n\n\n\n\n\n\n\n\nThe Recipe\n\n\nHere is where I detail the instructions to make Mole\n\n\n\n\n\n\n\n\n\n\n\nBlog\n\n\n\n\n\n\n\n\n\nA Story Before the Recipe\n\n\nThis story is about when I fell in love with Mexican food.\n\n\n\n\n\n\nThe Recipe\n\n\nHere is where I detail the instructions to make Mole"
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#pointless-inconsistency-1",
+    "href": "slides/1-introduction/introduction.html#pointless-inconsistency-1",
+    "title": "Web Design 101",
+    "section": "Pointless Inconsistency",
+    "text": "Pointless Inconsistency\n\n\n\n\n\n\n\n\n\nBlog\n\n\n\n\n\n\n\n\n\nA Story Before the Recipe\n\n\nThis story is about when I fell in love with Mexican food.\n\n\n\n\n\n\n\n\nThe Recipe\n\n\nHere is where I detail the instructions to make Mole\n\n\n\n\n\n\nSpot the differences!"
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#button-distinction",
+    "href": "slides/1-introduction/introduction.html#button-distinction",
+    "title": "Web Design 101",
+    "section": "Button Distinction",
+    "text": "Button Distinction\n\n\n\nLOGIN\n\n\nE-mail address\n\n\nPassword\n\n\nLOG IN\n\n\nSIGN UP\n\n\nForgot Password?\n\n\n\n\nLOGIN\n\n\nE-mail address\n\n\nPassword\n\n\nLOG IN\n\n\nSIGN UP\n\n\nForgot Password?"
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#button-distinction-1",
+    "href": "slides/1-introduction/introduction.html#button-distinction-1",
+    "title": "Web Design 101",
+    "section": "Button Distinction",
+    "text": "Button Distinction\n\n\n\nLOGIN\n\n\nE-mail address\n\n\nPassword\n\n\nLOG IN\n\n\nSIGN UP\n\n\nForgot Password?\n\n\n\n\nPrimary buttons are the most important actions to which we want to draw users’ attention.\n\n\nSecondary buttons are good for actions that require less emphasis but still require users’ attention.\n\n\nTertiary buttons represent less important actions a user can take."
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#unaligned-elements",
+    "href": "slides/1-introduction/introduction.html#unaligned-elements",
+    "title": "Web Design 101",
+    "section": "Unaligned Elements",
+    "text": "Unaligned Elements\n\n\n\nLorem ipsum dolor sit amet.\n\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusanti doloremque laudantium.\n\n\n\n\nLorem ipsum dolor sit amet.\n\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusanti doloremque laudantium.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nA note on alignment:\nDon’t align related items to different sides. Always try to aligning related elements to the same side because it connects them visually"
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#low-contrast",
+    "href": "slides/1-introduction/introduction.html#low-contrast",
+    "title": "Web Design 101",
+    "section": "Low contrast",
+    "text": "Low contrast\n\n\n\n\n\n\n\n\nMaya G\n\n\nmayagans@gmail\n\n\n\nAccount Info\n\n\n\n\n\n\nMobile Number\n\n\n+1 123 345-6789\n\n\n\n\n\n\n\n\n\nBank Account\n\n\n1234 xxxx xxxx1234\n\n\n\n\n\n\n\n\n\n\n\nMaya G\n\n\nmayagans@gmail\n\n\n\nAccount Info\n\n\n\n\n\n\nMobile Number\n\n\n+1 123 345-6789\n\n\n\n\n\n\n\n\n\nBank Account\n\n\n1234 xxxx xxxx1234"
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#confusing-forms",
+    "href": "slides/1-introduction/introduction.html#confusing-forms",
+    "title": "Web Design 101",
+    "section": "Confusing forms",
+    "text": "Confusing forms\n\n\nE-mail\n\nme@domain.com\n\n Password\n\n*****\n\n\nError!\n\n\n\nE-mail\n\nme@domain.com\n\n Password\n\n*****\n\n\nPassword incorrect. If you don’t remember your password, reset it here."
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#wrong-color-code",
+    "href": "slides/1-introduction/introduction.html#wrong-color-code",
+    "title": "Web Design 101",
+    "section": "Wrong color code",
+    "text": "Wrong color code\n\n\n\nBAD\n\n\nCancel\n\n\nSubmit\n\n\n\n\nGOOD\n\n\nSubmit\n\n\nCancel"
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#exercise-1-whats-wrong-in-this-shiny-app-design",
+    "href": "slides/1-introduction/introduction.html#exercise-1-whats-wrong-in-this-shiny-app-design",
+    "title": "Web Design 101",
+    "section": "Exercise 1: what’s wrong in this Shiny app design?",
+    "text": "Exercise 1: what’s wrong in this Shiny app design?\n\n\n\n\n−+\n02:00"
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#exercise-2-whats-wrong-in-this-shiny-app-design",
+    "href": "slides/1-introduction/introduction.html#exercise-2-whats-wrong-in-this-shiny-app-design",
+    "title": "Web Design 101",
+    "section": "Exercise 2: what’s wrong in this Shiny app design?",
+    "text": "Exercise 2: what’s wrong in this Shiny app design?\n\n\n\n\n−+\n02:00"
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#exercise-3",
+    "href": "slides/1-introduction/introduction.html#exercise-3",
+    "title": "Web Design 101",
+    "section": "Exercise 3",
+    "text": "Exercise 3\nWhy is this app design better?\nhttps://shiny.john-coene.com/coronavirus/\n\n\n\n\n−+\n02:00"
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#exercise-bonus",
+    "href": "slides/1-introduction/introduction.html#exercise-bonus",
+    "title": "Web Design 101",
+    "section": "Exercise Bonus",
+    "text": "Exercise Bonus"
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#forewords",
+    "href": "slides/1-introduction/introduction.html#forewords",
+    "title": "Web Design 101",
+    "section": "Forewords",
+    "text": "Forewords\nMastering HTML and CSS is clearly not the goal of this workshop but you need to know where all of this come from to move to the next part."
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#css",
+    "href": "slides/1-introduction/introduction.html#css",
+    "title": "Web Design 101",
+    "section": "CSS",
+    "text": "CSS\nCascading Style Sheets (CSS) is a property/rules based languages that lies next to HTML to style elements.\nCSS supports more sofisticated layouts such as:\n\nflexbox.\ngrid."
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#exercise-about-the-developer-inspector",
+    "href": "slides/1-introduction/introduction.html#exercise-about-the-developer-inspector",
+    "title": "Web Design 101",
+    "section": "Exercise: about the developer inspector",
+    "text": "Exercise: about the developer inspector\n\n\n\n−+\n02:00\n\n\n\n\nRun the below app and open it with Google Chrome:\n\nui &lt;- fluidPage(p(\"Hello World\"))\nserver &lt;- function(input, output, session) {}\nshinyApp(ui, server)\n\nDo CTRL + SHIFT + C Linux, F12 Windows, or Command + SHIFT + C on Mac (or just right click + inspect)."
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#modern-web-toolkits",
+    "href": "slides/1-introduction/introduction.html#modern-web-toolkits",
+    "title": "Web Design 101",
+    "section": "Modern web toolkits",
+    "text": "Modern web toolkits\nBenefit from more advanced CSS features such as grid."
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#about-bslib",
+    "href": "slides/1-introduction/introduction.html#about-bslib",
+    "title": "Web Design 101",
+    "section": "About {bslib}",
+    "text": "About {bslib}\nDuring this workshop, we’ll leverage {bslib} for the layout and colors, so you can focus on the features, rather than on the technical HTML and CSS aspects.\ninstall.packages(\"bslib\")\nUnder the hood, {bslib} offers a R abstraction for the Bootstrap framework."
+  },
+  {
+    "objectID": "slides/1-introduction/introduction.html#more",
+    "href": "slides/1-introduction/introduction.html#more",
+    "title": "Web Design 101",
+    "section": "More",
+    "text": "More\n\nCSS for Shiny.\nSass for Shiny."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About us",
+    "section": "",
+    "text": "Maya is a Data Visualization Engineer at Atorus Research where she designs and develops custom applications using R, JavaScript, or a combination of both. As an intern at RStudio Maya designed TidyBlocks, a visual block based programming language. Maya also co-wrote JavaScript for Data Science. When Maya isn’t designing or programming, she is rock climbing.\n\n\n\n\n\n\n\n\n\nDavid works as a Lead Shiny Developer at Cynkra. He is the founder and maintainer of the open source RinteRface organisation. He wrote Outstanding User Interfaces with Shiny, a CRC press book, available online."
+  },
+  {
+    "objectID": "about.html#maya-gans",
+    "href": "about.html#maya-gans",
+    "title": "About us",
+    "section": "",
+    "text": "Maya is a Data Visualization Engineer at Atorus Research where she designs and develops custom applications using R, JavaScript, or a combination of both. As an intern at RStudio Maya designed TidyBlocks, a visual block based programming language. Maya also co-wrote JavaScript for Data Science. When Maya isn’t designing or programming, she is rock climbing."
+  },
+  {
+    "objectID": "about.html#david-granjon",
+    "href": "about.html#david-granjon",
+    "title": "About us",
+    "section": "",
+    "text": "David works as a Lead Shiny Developer at Cynkra. He is the founder and maintainer of the open source RinteRface organisation. He wrote Outstanding User Interfaces with Shiny, a CRC press book, available online."
+  },
+  {
+    "objectID": "1-introduction.html#further-resources",
+    "href": "1-introduction.html#further-resources",
+    "title": "Web Design 101",
+    "section": "Further resources",
+    "text": "Further resources"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Web Design for Shiny Devs",
+    "section": "",
+    "text": "Website design and development is one of the most critical factors contributing to whether the user has a good or poor experience while browsing your site, directly influencing the overall impression of your brand. Besides, bad design decisions can significantly impact app performances. By exposing you to common governing rules of design, this course will walk you through the entire design process, from ideation to execution. These rules will help you to become a better collaborator to design teams, and enable you to create beautiful front-end experiences for Shiny."
+  },
+  {
+    "objectID": "index.html#overview",
+    "href": "index.html#overview",
+    "title": "Web Design for Shiny Devs",
+    "section": "",
+    "text": "Website design and development is one of the most critical factors contributing to whether the user has a good or poor experience while browsing your site, directly influencing the overall impression of your brand. Besides, bad design decisions can significantly impact app performances. By exposing you to common governing rules of design, this course will walk you through the entire design process, from ideation to execution. These rules will help you to become a better collaborator to design teams, and enable you to create beautiful front-end experiences for Shiny."
+  },
+  {
+    "objectID": "index.html#is-this-workshop-for-me",
+    "href": "index.html#is-this-workshop-for-me",
+    "title": "Web Design for Shiny Devs",
+    "section": "Is This Workshop for Me?",
+    "text": "Is This Workshop for Me?\nMinimum expectations: You’re an R developer with basic Shiny knowledge\n\nThis workshop will be appropriate for attendees who answer yes to these questions:\n\n\n Do you want to gain confidence in app design?\n\n\n Do you want to quickly test new business ideas?\n\n\n Do you want your website to reach more clients?"
+  },
+  {
+    "objectID": "index.html#preparation",
+    "href": "index.html#preparation",
+    "title": "Web Design for Shiny Devs",
+    "section": "Preparation",
+    "text": "Preparation\n\nPosit Cloud\nDuring this workshop, we’ll use Posit Cloud for the main activity. We kindly ask you to complete the following tasks prior to the workshop so you can get started.\n\nCreate an account on Posit Cloud (if you don’t have one).\nOpen the following Posit Cloud project and click on Start to create your own copy of the project. If you’re automatically asked to restore packages, answer yes. Otherwise run renv::restore() in the R console. Note: our activity project leverages {renv} for better reproducibility. It roughly takes 20-30 minutes to restore all the packages from the renv.lock file on Posit Cloud (less locally if binaries are installed).\n\n\n\nLocal setup (backup)\nHowever, it is more than recommended to have a backup on your personal laptop and that you have relevant software installed and configured prior to the workshop start.\n\nLocal setup: please be ready with recent versions of both R and RStudio. See: https://happygitwithr.com/install-r-rstudio.html#install-r-rstudio\nLocal setup: it is essential that you setup Git/GitHub in advance: https://happygitwithr.com/workshops.html#pre-workshop-set-up\nOptional: Install VS Code (https://code.visualstudio.com/), with R language support (https://marketplace.visualstudio.com/items?itemName=REditorSupport.r).\nEither with RStudio IDE or VSCode, clone the exercise from here and restore the {renv} packages (automatically or doing renv::restore() in the R console).\n\n\n\nAny questions?\nIf you have questions in advance of the workshop, please answer to this thread: https://community.rstudio.com/t/web-design-for-shiny-developers-workshop-posit-conf-2023/172257.\n\n\nHow we will communicate during the workshop\nDuring the workshop, we will be using Discord as our main communication method. To make the process go smoothly: 1. Please sign up for an account if you don’t already have one. 2. Make sure your display name is the one you used to register for the conference. 3. In your “About Me”, put the name of your workshop(s).\n\n\nFurther instructions\nCloser to the start of the conference, we will invite you to the posit::conf Discord server, share the repository containing the slides and further instructions to be ready.\nLooking forward to meeting you!"
+  },
+  {
+    "objectID": "2-best-practices.html#further-resources",
+    "href": "2-best-practices.html#further-resources",
+    "title": "Best Practices",
+    "section": "Further resources",
+    "text": "Further resources"
+  },
+  {
+    "objectID": "schedule.html",
+    "href": "schedule.html",
+    "title": "Schedule",
+    "section": "",
+    "text": "Time\nActivity\n\n\n\n\n09:00-10:00\n📚 Web Design 101\n\n\n10:00-10:45\n🌐 Layout\n\n\n10:45-11:00\n☕ Break\n\n\n11:00-12:30\n👢 Making grids with bslib\n\n\n12:30-13:30\n🥪 Lunch\n\n\n13:30-14:30\n🎨 Color\n\n\n14:30-15:00\n🔤 Typography\n\n\n15:00-15:15\n☕ Break\n\n\n15:15-16:00\n🕳 Pitfalls\n\n\n16:00-16:30\n🗣️ User Feedback\n\n\n16:30-17:00\n🎁 Wrap up"
+  },
+  {
+    "objectID": "schedule.html#outline",
+    "href": "schedule.html#outline",
+    "title": "Schedule",
+    "section": "Outline",
+    "text": "Outline\n\nDesign 101\n\nWhat is Design\n\nDon Norman\nExercices\n\nGood vs Bad UI\n\nDesign Best Practices\n\nLayout\n\nLayout and grid examples\nSymmetry/Asymmetry\nShapes\nComposition\nExercise on paper\nApplication to Shiny through bslib\n\nUser feedback\n\nNotifications and loading screen\nElegantly fail: tryCatch pattern\n\nColor and Typography\n\nColor Modes and Properties\nColor in Code\nColor tools\nCreating a color palette\nTypography basics\nFont pairing\nExercise\n\nCommon Pitfalls\n\nDon’ts + alternatives (nested boxes, …)\nPractice\n\n\nWireframing\n\nSimple is beaufiful\nDesign for performances\nExercise: redesign shinyMons.\n\nPractice\n\nTake your best app and apply design best practices\n\nWrap up"
+  },
+  {
+    "objectID": "schedule.html#backlog",
+    "href": "schedule.html#backlog",
+    "title": "Schedule",
+    "section": "Backlog",
+    "text": "Backlog\n\n{bslib}, {gridlayout}, …\nShiny UI editor for prototyping? Excalidraw, …\nShould we talk about cognition?\nAccessibility"
+  },
+  {
+    "objectID": "3-wireframing.html#further-resources",
+    "href": "3-wireframing.html#further-resources",
+    "title": "Wireframing resources",
+    "section": "Further resources",
+    "text": "Further resources"
+  },
+  {
+    "objectID": "LICENSE.html#creative-commons-attribution-sharealike-4.0-international-public-license",
+    "href": "LICENSE.html#creative-commons-attribution-sharealike-4.0-international-public-license",
+    "title": "Attribution-ShareAlike 4.0 International",
+    "section": "Creative Commons Attribution-ShareAlike 4.0 International Public License",
+    "text": "Creative Commons Attribution-ShareAlike 4.0 International Public License\nBy exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-ShareAlike 4.0 International Public License (“Public License”). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.\n\nSection 1 – Definitions.\n\nAdapted Material means material subject to Copyright and Similar Rights that is derived from or based upon the Licensed Material and in which the Licensed Material is translated, altered, arranged, transformed, or otherwise modified in a manner requiring permission under the Copyright and Similar Rights held by the Licensor. For purposes of this Public License, where the Licensed Material is a musical work, performance, or sound recording, Adapted Material is always produced where the Licensed Material is synched in timed relation with a moving image.\nAdapter’s License means the license You apply to Your Copyright and Similar Rights in Your contributions to Adapted Material in accordance with the terms and conditions of this Public License.\nBY-SA Compatible License means a license listed at creativecommons.org/compatiblelicenses, approved by Creative Commons as essentially the equivalent of this Public License.\nCopyright and Similar Rights means copyright and/or similar rights closely related to copyright including, without limitation, performance, broadcast, sound recording, and Sui Generis Database Rights, without regard to how the rights are labeled or categorized. For purposes of this Public License, the rights specified in Section 2(b)(1)-(2) are not Copyright and Similar Rights.\nEffective Technological Measures means those measures that, in the absence of proper authority, may not be circumvented under laws fulfilling obligations under Article 11 of the WIPO Copyright Treaty adopted on December 20, 1996, and/or similar international agreements.\nExceptions and Limitations means fair use, fair dealing, and/or any other exception or limitation to Copyright and Similar Rights that applies to Your use of the Licensed Material.\nLicense Elements means the license attributes listed in the name of a Creative Commons Public License. The License Elements of this Public License are Attribution and ShareAlike.\nLicensed Material means the artistic or literary work, database, or other material to which the Licensor applied this Public License.\nLicensed Rights means the rights granted to You subject to the terms and conditions of this Public License, which are limited to all Copyright and Similar Rights that apply to Your use of the Licensed Material and that the Licensor has authority to license.\nLicensor means the individual(s) or entity(ies) granting rights under this Public License.\nShare means to provide material to the public by any means or process that requires permission under the Licensed Rights, such as reproduction, public display, public performance, distribution, dissemination, communication, or importation, and to make material available to the public including in ways that members of the public may access the material from a place and at a time individually chosen by them.\nSui Generis Database Rights means rights other than copyright resulting from Directive 96/9/EC of the European Parliament and of the Council of 11 March 1996 on the legal protection of databases, as amended and/or succeeded, as well as other essentially equivalent rights anywhere in the world.\nYou means the individual or entity exercising the Licensed Rights under this Public License. Your has a corresponding meaning.\n\n\n\nSection 2 – Scope.\n\nLicense grant.\n\nSubject to the terms and conditions of this Public License, the Licensor hereby grants You a worldwide, royalty-free, non-sublicensable, non-exclusive, irrevocable license to exercise the Licensed Rights in the Licensed Material to:\nA. reproduce and Share the Licensed Material, in whole or in part; and\nB. produce, reproduce, and Share Adapted Material.\nExceptions and Limitations. For the avoidance of doubt, where Exceptions and Limitations apply to Your use, this Public License does not apply, and You do not need to comply with its terms and conditions.\nTerm. The term of this Public License is specified in Section 6(a).\nMedia and formats; technical modifications allowed. The Licensor authorizes You to exercise the Licensed Rights in all media and formats whether now known or hereafter created, and to make technical modifications necessary to do so. The Licensor waives and/or agrees not to assert any right or authority to forbid You from making technical modifications necessary to exercise the Licensed Rights, including technical modifications necessary to circumvent Effective Technological Measures. For purposes of this Public License, simply making modifications authorized by this Section 2(a)(4) never produces Adapted Material.\nDownstream recipients.\nA. Offer from the Licensor – Licensed Material. Every recipient of the Licensed Material automatically receives an offer from the Licensor to exercise the Licensed Rights under the terms and conditions of this Public License.\nB. __Additional offer from the Licensor – Adapted Material. Every recipient of Adapted Material from You automatically receives an offer from the Licensor to exercise the Licensed Rights in the Adapted Material under the conditions of the Adapter’s License You apply.\nC. No downstream restrictions. You may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, the Licensed Material if doing so restricts exercise of the Licensed Rights by any recipient of the Licensed Material.\nNo endorsement. Nothing in this Public License constitutes or may be construed as permission to assert or imply that You are, or that Your use of the Licensed Material is, connected with, or sponsored, endorsed, or granted official status by, the Licensor or others designated to receive attribution as provided in Section 3(a)(1)(A)(i).\n\nOther rights.\n\nMoral rights, such as the right of integrity, are not licensed under this Public License, nor are publicity, privacy, and/or other similar personality rights; however, to the extent possible, the Licensor waives and/or agrees not to assert any such rights held by the Licensor to the limited extent necessary to allow You to exercise the Licensed Rights, but not otherwise.\nPatent and trademark rights are not licensed under this Public License.\nTo the extent possible, the Licensor waives any right to collect royalties from You for the exercise of the Licensed Rights, whether directly or through a collecting society under any voluntary or waivable statutory or compulsory licensing scheme. In all other cases the Licensor expressly reserves any right to collect such royalties.\n\n\n\n\nSection 3 – License Conditions.\nYour exercise of the Licensed Rights is expressly made subject to the following conditions.\n\nAttribution.\n\nIf You Share the Licensed Material (including in modified form), You must:\nA. retain the following if it is supplied by the Licensor with the Licensed Material:\n\nidentification of the creator(s) of the Licensed Material and any others designated to receive attribution, in any reasonable manner requested by the Licensor (including by pseudonym if designated);\na copyright notice;\na notice that refers to this Public License;\na notice that refers to the disclaimer of warranties;\na URI or hyperlink to the Licensed Material to the extent reasonably practicable;\n\nB. indicate if You modified the Licensed Material and retain an indication of any previous modifications; and\nC. indicate the Licensed Material is licensed under this Public License, and include the text of, or the URI or hyperlink to, this Public License.\nYou may satisfy the conditions in Section 3(a)(1) in any reasonable manner based on the medium, means, and context in which You Share the Licensed Material. For example, it may be reasonable to satisfy the conditions by providing a URI or hyperlink to a resource that includes the required information.\nIf requested by the Licensor, You must remove any of the information required by Section 3(a)(1)(A) to the extent reasonably practicable.\n\nShareAlike.\n\nIn addition to the conditions in Section 3(a), if You Share Adapted Material You produce, the following conditions also apply.\n\nThe Adapter’s License You apply must be a Creative Commons license with the same License Elements, this version or later, or a BY-SA Compatible License.\nYou must include the text of, or the URI or hyperlink to, the Adapter’s License You apply. You may satisfy this condition in any reasonable manner based on the medium, means, and context in which You Share Adapted Material.\nYou may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, Adapted Material that restrict exercise of the rights granted under the Adapter’s License You apply.\n\n\n\nSection 4 – Sui Generis Database Rights.\nWhere the Licensed Rights include Sui Generis Database Rights that apply to Your use of the Licensed Material:\n\nfor the avoidance of doubt, Section 2(a)(1) grants You the right to extract, reuse, reproduce, and Share all or a substantial portion of the contents of the database;\nif You include all or a substantial portion of the database contents in a database in which You have Sui Generis Database Rights, then the database in which You have Sui Generis Database Rights (but not its individual contents) is Adapted Material, including for purposes of Section 3(b); and\nYou must comply with the conditions in Section 3(a) if You Share all or a substantial portion of the contents of the database.\n\nFor the avoidance of doubt, this Section 4 supplements and does not replace Your obligations under this Public License where the Licensed Rights include other Copyright and Similar Rights.\n\n\nSection 5 – Disclaimer of Warranties and Limitation of Liability.\n\nUnless otherwise separately undertaken by the Licensor, to the extent possible, the Licensor offers the Licensed Material as-is and as-available, and makes no representations or warranties of any kind concerning the Licensed Material, whether express, implied, statutory, or other. This includes, without limitation, warranties of title, merchantability, fitness for a particular purpose, non-infringement, absence of latent or other defects, accuracy, or the presence or absence of errors, whether or not known or discoverable. Where disclaimers of warranties are not allowed in full or in part, this disclaimer may not apply to You.\nTo the extent possible, in no event will the Licensor be liable to You on any legal theory (including, without limitation, negligence) or otherwise for any direct, special, indirect, incidental, consequential, punitive, exemplary, or other losses, costs, expenses, or damages arising out of this Public License or use of the Licensed Material, even if the Licensor has been advised of the possibility of such losses, costs, expenses, or damages. Where a limitation of liability is not allowed in full or in part, this limitation may not apply to You.\nThe disclaimer of warranties and limitation of liability provided above shall be interpreted in a manner that, to the extent possible, most closely approximates an absolute disclaimer and waiver of all liability.\n\n\n\nSection 6 – Term and Termination.\n\nThis Public License applies for the term of the Copyright and Similar Rights licensed here. However, if You fail to comply with this Public License, then Your rights under this Public License terminate automatically.\nWhere Your right to use the Licensed Material has terminated under Section 6(a), it reinstates:\n\nautomatically as of the date the violation is cured, provided it is cured within 30 days of Your discovery of the violation; or\nupon express reinstatement by the Licensor.\n\nFor the avoidance of doubt, this Section 6(b) does not affect any right the Licensor may have to seek remedies for Your violations of this Public License.\nFor the avoidance of doubt, the Licensor may also offer the Licensed Material under separate terms or conditions or stop distributing the Licensed Material at any time; however, doing so will not terminate this Public License.\nSections 1, 5, 6, 7, and 8 survive termination of this Public License.\n\n\n\nSection 7 – Other Terms and Conditions.\n\nThe Licensor shall not be bound by any additional or different terms or conditions communicated by You unless expressly agreed.\nAny arrangements, understandings, or agreements regarding the Licensed Material not stated herein are separate from and independent of the terms and conditions of this Public License.t stated herein are separate from and independent of the terms and conditions of this Public License.\n\n\n\nSection 8 – Interpretation.\n\nFor the avoidance of doubt, this Public License does not, and shall not be interpreted to, reduce, limit, restrict, or impose conditions on any use of the Licensed Material that could lawfully be made without permission under this Public License.\nTo the extent possible, if any provision of this Public License is deemed unenforceable, it shall be automatically reformed to the minimum extent necessary to make it enforceable. If the provision cannot be reformed, it shall be severed from this Public License without affecting the enforceability of the remaining terms and conditions.\nNo term or condition of this Public License will be waived and no failure to comply consented to unless expressly agreed to by the Licensor.\nNothing in this Public License constitutes or may be interpreted as a limitation upon, or waiver of, any privileges and immunities that apply to the Licensor or You, including from the legal processes of any jurisdiction or authority.\n\n\nCreative Commons is not a party to its public licenses. Notwithstanding, Creative Commons may elect to apply one of its public licenses to material it publishes and in those instances will be considered the “Licensor.” Except for the limited purpose of indicating that material is shared under a Creative Commons public license or as otherwise permitted by the Creative Commons policies published at creativecommons.org/policies, Creative Commons does not authorize the use of the trademark “Creative Commons” or any other trademark or logo of Creative Commons without its prior written consent including, without limitation, in connection with any unauthorized modifications to any of its public licenses or any other arrangements, understandings, or agreements concerning use of licensed material. For the avoidance of doubt, this paragraph does not form part of the public licenses.\nCreative Commons may be contacted at creativecommons.org"
+  },
+  {
+    "objectID": "slides/0-welcome/welcome.html#workshop-pre-requisites",
+    "href": "slides/0-welcome/welcome.html#workshop-pre-requisites",
+    "title": "Welcome 👋",
+    "section": "Workshop pre-requisites",
+    "text": "Workshop pre-requisites\n\nYou are an R developer with basic Shiny knowledge.\nYou want to quickly test new business ideas.\nYou want to increase the reach of your apps and websites."
+  },
+  {
+    "objectID": "slides/0-welcome/welcome.html#introduce-yourself-to-your-neighbors",
+    "href": "slides/0-welcome/welcome.html#introduce-yourself-to-your-neighbors",
+    "title": "Welcome 👋",
+    "section": "Introduce yourself to your neighbors 👋",
+    "text": "Introduce yourself to your neighbors 👋\n\n\n\n−+\n01:00"
+  },
+  {
+    "objectID": "slides/0-welcome/welcome.html#maya-gans",
+    "href": "slides/0-welcome/welcome.html#maya-gans",
+    "title": "Welcome 👋",
+    "section": "Maya Gans",
+    "text": "Maya Gans\n\n\n\n\nMaya is a Data Visualization Engineer at Atorus Research where she designs and develops custom applications using R, JavaScript, or a combination of both. As an intern at RStudio Maya designed TidyBlocks, a visual block based programming language. Maya also co-wrote JavaScript for Data Science. When Maya isn’t designing or programming, she is rock climbing."
+  },
+  {
+    "objectID": "slides/0-welcome/welcome.html#david-granjon",
+    "href": "slides/0-welcome/welcome.html#david-granjon",
+    "title": "Welcome 👋",
+    "section": "David Granjon",
+    "text": "David Granjon\n\n\n\n\nDavid works as a Lead Shiny Developer at Cynkra. He is the founder and maintainer of the open source RinteRface organisation. He wrote Outstanding User Interfaces with Shiny, a CRC press book, available online."
+  },
+  {
+    "objectID": "slides/0-welcome/welcome.html#we-got-an-important-call",
+    "href": "slides/0-welcome/welcome.html#we-got-an-important-call",
+    "title": "Welcome 👋",
+    "section": "We got an important call",
+    "text": "We got an important call"
+  },
+  {
+    "objectID": "slides/0-welcome/welcome.html#your-mission-should-you-accept-it",
+    "href": "slides/0-welcome/welcome.html#your-mission-should-you-accept-it",
+    "title": "Welcome 👋",
+    "section": "Your mission, should you accept it",
+    "text": "Your mission, should you accept it\nRedesign {shinyMons}"
+  },
+  {
+    "objectID": "slides/0-welcome/welcome.html#fear-not-well-do-it-step-by-step",
+    "href": "slides/0-welcome/welcome.html#fear-not-well-do-it-step-by-step",
+    "title": "Welcome 👋",
+    "section": "Fear not, we’ll do it step by step",
+    "text": "Fear not, we’ll do it step by step\n\n\nWe’ll start by the layout and do some wireframing.\nThen move to the colors and typography.\nHandle the user feedbacks."
+  },
+  {
+    "objectID": "slides/0-welcome/welcome.html#workshop-material",
+    "href": "slides/0-welcome/welcome.html#workshop-material",
+    "title": "Welcome 👋",
+    "section": "Workshop material",
+    "text": "Workshop material\nIf not done already (ICYMI):\n\n\n🧑‍🏫 Slides:\n\nYou can get slides from here.\n\n🥼 Exercises:\n\nCreate an account on Posit cloud.\nOpen the following Posit Cloud project and click on Start to create your own copy. If you’re automatically asked to restore packages, answer yes. Otherwise run renv::restore() in the R console.\nIf you work locally, clone this repo and proceed with renv as described above."
+  }
+]
