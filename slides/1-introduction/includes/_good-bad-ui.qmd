@@ -1,0 +1,530 @@
+# Good vs Bad UI {data-stack-name="Good VS Bad UI"}
+
+## Pointless Inconsistency
+
+<div class="good-bad-container">
+
+<div class="bad-ui">
+
+::: title
+::: big-i
+{{< fa arrow-left >}}
+:::
+
+<div>
+
+Blog
+
+</div>
+
+<div>
+
+{{< fa ellipsis >}}
+
+</div>
+:::
+
+::: banner1
+:::
+
+<h2>A Story Before the Recipe</h2>
+
+<p>This story is about when I fell in love with Mexican food.</p>
+
+<hr class="thick-hr">
+
+::: banner2
+:::
+
+<div class="second-section">
+
+<h2>The Recipe</h2>
+
+<p>Here is where I detail the instructions to make Mole</p>
+
+<hr>
+
+</div>
+
+</div>
+
+<div class="good-ui">
+
+::: title
+<div>
+
+{{< fa arrow-left >}}
+
+</div>
+
+<div>
+
+Blog
+
+</div>
+
+<div>
+
+{{< fa ellipsis >}}
+
+</div>
+:::
+
+::: banner1
+:::
+
+<h2>A Story Before the Recipe</h2>
+
+<p>This story is about when I fell in love with Mexican food.</p>
+
+<hr class="lowerhr">
+
+::: banner2
+:::
+
+<h2>The Recipe</h2>
+
+<p>Here is where I detail the instructions to make Mole</p>
+
+<hr>
+
+</div>
+
+</div>
+
+## Pointless Inconsistency
+
+<div class="good-bad-container">
+
+<div class="bad-ui">
+
+::: title
+::: big-i
+{{< fa arrow-left >}}
+:::
+
+<div>
+
+Blog
+
+</div>
+
+<div>
+
+{{< fa ellipsis >}}
+
+</div>
+:::
+
+::: banner1
+:::
+
+<h2>A Story Before the Recipe</h2>
+
+<p>This story is about when I fell in love with Mexican food.</p>
+
+<hr class="thick-hr">
+
+::: banner2
+:::
+
+<div class="second-section">
+
+<h2>The Recipe</h2>
+
+<p>Here is where I detail the instructions to make Mole</p>
+
+<hr>
+
+</div>
+
+</div>
+
+```{=html}
+<!--
+  - Icons different weight 
+  - Inconsistent font sizes and colors
+  - Differing line thickness
+-->
+```
+::: good-ui
+```{=html}
+<textarea>
+Spot the differences!
+</textarea>
+```
+:::
+
+</div>
+
+## Button Distinction
+
+::: good-bad-container
+::: login-screen
+<div>
+
+LOGIN
+
+</div>
+
+::: field
+E-mail address
+:::
+
+::: field
+Password
+:::
+
+::: {.btn .primary-btn}
+LOG IN
+:::
+
+::: {.btn .primary-btn}
+SIGN UP
+:::
+
+::: {.btn .primary-btn}
+Forgot Password?
+:::
+:::
+
+::: login-screen
+<div>
+
+LOGIN
+
+</div>
+
+::: field
+E-mail address
+:::
+
+::: field
+Password
+:::
+
+::: {.btn .primary-btn}
+LOG IN
+:::
+
+::: {.btn .secondary-btn}
+SIGN UP
+:::
+
+::: {.btn .tertiary-btn}
+Forgot Password?
+:::
+:::
+:::
+
+## Button Distinction
+
+::: good-bad-container
+::: login-screen
+<div>
+
+LOGIN
+
+</div>
+
+::: field
+E-mail address
+:::
+
+::: field
+Password
+:::
+
+::: {.btn .primary-btn}
+LOG IN
+:::
+
+::: {.btn .secondary-btn}
+SIGN UP
+:::
+
+::: {.btn .tertiary-btn}
+Forgot Password?
+:::
+:::
+
+::: buttons
+::: {.btn .primary-btn .small}
+Primary buttons are the most important actions to which we want to draw users' attention.
+:::
+
+::: {.btn .secondary-btn .small}
+Secondary buttons are good for actions that require less emphasis but still require users' attention.
+:::
+
+::: {.btn .tertiary-btn .small}
+Tertiary buttons represent less important actions a user can take.
+:::
+:::
+:::
+
+```{r, echo=FALSE}
+arrow_svg("position:absolute;top: -190px;left:22px;transform: rotate(170deg)scale(0.18);")
+
+arrow_svg("position: absolute;top: -10px;left: 25px;transform: rotate(200deg)scale(0.12);")
+
+arrow_svg("position:absolute;top: 80px;left: 25px;transform: rotate(210deg)scale(0.2);")
+```
+
+## Unaligned Elements
+
+::: {.good-bad-container .move-down}
+::: blue-container
+::: {.title-text style="text-align:center;"}
+Lorem ipsum dolor sit amet.
+:::
+
+<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusanti doloremque laudantium.</p>
+:::
+
+::: blue-container
+::: title-text
+Lorem ipsum dolor sit amet.
+:::
+
+<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusanti doloremque laudantium.</p>
+:::
+:::
+
+::: tip
+```{r, echo=FALSE}
+infobox("A note on alignment:", "Don’t align related items to different sides. Always try to aligning related elements to the same side because it connects them visually")
+```
+:::
+
+## Low contrast
+
+<div class="good-bad-container">
+
+<div class="pay-app">
+
+::: circle-lg
+{{< fa person >}}
+:::
+
+::: name
+Maya G
+:::
+
+::: email
+mayagans\@gmail
+:::
+
+<hr>
+
+::: account
+Account Info
+
+::: info
+::: circle
+{{< fa phone >}}
+:::
+
+<div>
+
+::: info-type
+Mobile Number
+:::
+
+::: account-info
++1 123 345-6789
+:::
+
+</div>
+:::
+
+::: info
+::: circle
+{{< fa bank >}}
+:::
+
+<div>
+
+::: info-type
+Bank Account
+:::
+
+::: account-info
+1234 xxxx xxxx1234
+:::
+
+</div>
+:::
+:::
+
+</div>
+
+<div class="pay-app">
+
+::: {.circle-lg .white}
+{{< fa person >}}
+:::
+
+::: name
+Maya G
+:::
+
+::: email
+mayagans\@gmail
+:::
+
+<hr>
+
+::: account
+Account Info
+
+::: info
+::: {.circle .white}
+{{< fa phone >}}
+:::
+
+<div>
+
+::: info-type
+Mobile Number
+:::
+
+::: account-info
++1 123 345-6789
+:::
+
+</div>
+:::
+
+::: info
+::: {.circle .white}
+{{< fa bank >}}
+:::
+
+<div>
+
+::: info-type
+Bank Account
+:::
+
+::: account-info
+1234 xxxx xxxx1234
+:::
+
+</div>
+:::
+:::
+
+</div>
+
+</div>
+
+## Confusing forms
+
+::: good-bad-container
+::: bad-form
+E-mail
+
+::: formentry
+me\@domain.com
+:::
+
+<br> Password
+
+::: formentry
+\*\*\*\*\*
+:::
+
+::: error
+Error!
+:::
+:::
+
+::: good-form
+E-mail
+
+::: formentry
+me\@domain.com
+:::
+
+<br> Password
+
+::: {.formentry .error-form}
+\*\*\*\*\*
+:::
+
+::: error
+Password incorrect. If you don't remember your password, [reset it here.]{.underline}
+:::
+:::
+:::
+
+## Wrong color code
+
+::: good-bad-container
+::: login-screen
+<div>
+
+BAD
+
+</div>
+
+::: {.btn .submit-btn}
+Cancel
+:::
+
+::: {.btn .cancel-btn}
+Submit
+:::
+:::
+
+::: login-screen
+<div>
+
+GOOD
+
+</div>
+
+::: {.btn .submit-btn}
+Submit
+:::
+
+::: {.btn .cancel-btn}
+Cancel
+:::
+:::
+:::
+
+## Exercise 1: what's wrong in this Shiny app design?
+
+![](./../../assets/images/1-introduction/bad-design-ex1.png){width="80%," fig-align="center"}
+
+```{r, eval=TRUE, echo=FALSE}
+countdown(minutes = 2, seconds = 0)
+```
+
+## Exercise 2: what's wrong in this Shiny app design?
+
+![](./../../assets/images/1-introduction/bad-design-ex2.png){width="80%," fig-align="center"}
+
+```{r, eval=TRUE, echo=FALSE}
+countdown(minutes = 2, seconds = 0)
+```
+
+## Exercise 3
+
+### Why is this app design better?
+
+https://shiny.john-coene.com/coronavirus/
+
+![](./../../assets/images/1-introduction/covid-tracker-2.png){width="100%," fig-align="center"}
+
+```{r, eval=TRUE, echo=FALSE}
+countdown(minutes = 2, seconds = 0)
+```
+
+## Exercise Bonus
+
+```{=html}
+<iframe width="100%" height="500" src="https://cant-unsee-soka.netlify.app/" title="Can't usee"></iframe>
+```

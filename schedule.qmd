@@ -1,0 +1,62 @@
+---
+title: "Schedule"
+---
+
+| Time | Activity |                                                    
+|----------|----------------------------------------|
+| 09:00-10:00 | 📚 [Web Design 101](./slides/1-introduction/introduction.html) |
+| 10:00-10:45 | 🌐 Layout |
+| 10:45-11:00 | ☕ Break |
+| 11:00-12:30 | 👢 Making grids with bslib | 
+| 12:30-13:30 | 🥪 Lunch |
+| 13:30-14:30 | 🎨 Color |
+| 14:30-15:00 | 🔤 Typography |
+| 15:00-15:15 | ☕ Break |
+| 15:15-16:00 | 🕳 Pitfalls |
+| 16:00-16:30 | 🗣️ User Feedback |
+| 16:30-17:00 | 🎁 Wrap up |
+
+## Outline
+
+-   Design 101
+    -   What is Design
+        -   Don Norman
+        -   Exercices
+    -   Good vs Bad UI
+
+-   Design Best Practices
+    -   Layout
+        -   Layout and grid examples
+        -   Symmetry/Asymmetry
+        -   Shapes
+        -   Composition
+        -   Exercise on paper
+        -   Application to Shiny through bslib
+    -   User feedback
+        -   Notifications and loading screen
+        -   Elegantly fail: tryCatch pattern
+    -   Color and Typography
+        -   Color Modes and Properties
+        -   Color in Code
+        -   Color tools
+        -   Creating a color palette
+        -   Typography basics
+        -   Font pairing
+        -   Exercise
+    -   Common Pitfalls
+        -   Don'ts + alternatives (nested boxes, ...)
+        -   Practice
+-   Wireframing
+    -   Simple is beaufiful
+    -   Design for performances
+    -   Exercise: redesign [shinyMons](https://github.com/DivadNojnarg/shinyMons).
+-   Practice
+    -   Take your best app and apply design best practices
+-   Wrap up
+
+## Backlog
+
+-   `{bslib}`, `{gridlayout}`, ...
+-   Shiny UI editor for prototyping? Excalidraw, ...
+-   Should we talk about cognition?
+-   Accessibility

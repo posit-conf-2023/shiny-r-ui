@@ -1,0 +1,7 @@
+---
+title: 'Best Practices'
+---
+
+<iframe width="100%" height="500" src="./slides/2-best-practices/best-practices.html" title="Web design best practices"></iframe>
+
+## Further resources

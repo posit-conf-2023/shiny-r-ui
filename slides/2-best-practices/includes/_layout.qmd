@@ -1,0 +1,656 @@
+# Layout {data-stack-name="Layout"}
+
+::: grid-intro
+::: grid-intro-left
+<h4>Grids</h4>
+
+<p>Why?</p>
+:::
+
+::: grid-intro-right
+::: one
+:::
+
+::: two
+:::
+
+::: three
+:::
+
+::: four
+:::
+
+::: five
+:::
+:::
+:::
+
+```{=html}
+<!-- 
+
+- Organize the chaos, help our brains to construct desperate things and put them together (you can see this in ancient city planning, it's easier to find a house in a grid!)
+
+- Component - rather than figure out everything at once we can only think about the components. First we just think about the layout, then we can think about the font and colors, it helps us to compartmentalize.
+
+-->
+```
+
+------------------------------------------------------------------------
+
+[Symmetry]{.centered-title}
+
+::: balance-symmetry
+::: left
+:::
+
+::: {.circle .circ-one}
+:::
+
+::: {.circle .circ-two}
+:::
+
+::: {.circle .circ-three}
+:::
+:::
+
+------------------------------------------------------------------------
+
+[Symmetry]{.centered-title .move-down}
+
+::: single-image
+<img src="https://thespekt.files.wordpress.com/2015/01/human-reflection-symmetry-body.jpg"/>
+:::
+
+------------------------------------------------------------------------
+
+[Symmetry]{.centered-title}
+
+::: single-image
+<img src="https://th-thumbnailer.cdn-si-edu.com/CbddkFFO3OB80rRz83Iiuf-Z0FY=/1000x750/filters:no_upscale():focal(1471x1061:1472x1062)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/b6/30/b630b48b-7344-4661-9264-186b70531bdc/istock-478831658.jpg"/>
+:::
+
+------------------------------------------------------------------------
+
+[Symmetry]{.centered-title}
+
+::: sym-3
+::: wix-1
+:::
+
+::: wix-2
+:::
+
+::: wix-3
+:::
+
+::: wix-4
+:::
+:::
+
+[https://www.siteinspire.com/]{.annotate}
+
+```{css}
+.single-image {
+  display: grid;
+  justify-content: center;
+}
+
+.single-image img {
+  height: 70%;
+}
+
+.sym-img-2 {
+    height: 600px;
+    margin: 0 auto;
+    width: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+  background-image: url();
+}
+
+
+.sym-3 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    flex-direction: row;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.sym-3 div {
+    height: 250px;
+    width: 400px;
+}
+
+.wix-1 {
+    background-size: contain;
+    background-repeat: no-repeat;
+  background-image: url("https://siteinspire.s3.us-east-1.amazonaws.com/screengrabs/images/000/016/259/small.jpg");
+}
+
+.wix-2 {
+    background-size: contain;
+    background-repeat: no-repeat;
+  background-image: url("https://siteinspire.s3.us-east-1.amazonaws.com/screengrabs/images/000/016/390/small.jpg");
+}
+
+.wix-3 {
+    background-size: contain;
+    background-repeat: no-repeat;
+  background-image: url("https://siteinspire.s3.us-east-1.amazonaws.com/screengrabs/images/000/016/388/medium.jpg");
+}
+
+.wix-4 {
+    background-size: contain;
+    background-repeat: no-repeat;
+  background-image: url("https://siteinspire.s3.us-east-1.amazonaws.com/screengrabs/images/000/016/358/small.jpg");
+}
+
+.annotate {
+font-size: 20px;
+    text-align: center;
+    display: block;
+}
+```
+
+```{=html}
+<!-- 
+- Art
+- Architecture
+- dribbble screenshot (asymmetry leaks in - helps with the rhythm of the piece)
+-->
+```
+
+------------------------------------------------------------------------
+
+[Symmetry Broken!]{.centered-title}
+
+::: single-image
+<img src="https://static.wixstatic.com/media/ea6ac8_b1e158433b5c4b0d885919b7934f4860~mv2.png/v1/fill/w_924,h_540,al_c,q_90,enc_auto/ea6ac8_b1e158433b5c4b0d885919b7934f4860~mv2.png"/> [https://www.wix.com/blog/2022/10/asymmetrical-balance/]{.annotate}
+:::
+
+```{=html}
+<!--
+- when you do break it your eye immediatly goes to the part of the piece where the symmetry was broken (with example and arrow)
+
+- but pure symmetry can start to look really boring (I wouldnt be like OMG I need to share this link of a website I saw with you that was entirely symmetric)
+-->
+```
+
+------------------------------------------------------------------------
+
+[Asymmetry]{.centered-title}
+
+::: balance-symmetry
+::: left
+:::
+
+::: {.async-circle .left-1}
+:::
+
+::: {.async-circle .left-2}
+:::
+
+::: {.async-circle .left-3}
+:::
+
+::: {.async-circle .right-1}
+:::
+
+::: {.async-circle .right-2}
+:::
+
+::: {.async-circle .right-3}
+:::
+:::
+
+```{css}
+.async-circle {
+  background: white;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  grid-area: 1/1/3/2;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+}
+
+.left-1 {
+  left: 150px;
+  top: 20px;
+  height: 50px;
+  width: 50px;
+}
+
+.left-2 {
+  top: 60px;
+  left: 60px;
+}
+
+.left-3 {
+  top: 170px;
+  left: 50px;
+  height: 50px;
+  width: 50px;
+}
+
+.right-1 {
+  right: 150px;
+  bottom: 30px;
+  height: 50px;
+  width: 50px;
+}
+
+.right-2 {
+  bottom: 70px;
+  right: 60px;
+}
+
+.right-3 {
+  bottom: 180px;
+  right: 50px;
+  height: 50px;
+  width: 50px;
+}
+```
+
+------------------------------------------------------------------------
+
+[Asymmetry]{.centered-title}
+
+```{=html}
+<!-- 
+creating balance in an asymmetrical canvas isn't used as much because it's harder because it still needs to be balanced but it has to be balanced more carefully.
+-->
+```
+::: single-image
+<img src="https://s.studiobinder.com/wp-content/uploads/2022/06/The-Great-Wave-off-Kanagawa-by-Katsushika-Hokusai.png"/>
+:::
+
+```{=html}
+<!--
+a study on the best compositions (starry night). given all the ideas of symmetry people gravitate towards an asymmetrical canvass, probably because the world is not perfectly symmetrical
+
+example of western and eastern art (the wave, could have had it in the middle or facing you but it wouldnt be famous if he did)
+
+architecture 
+-->
+```
+
+------------------------------------------------------------------------
+
+[Asymmetry]{.centered-title}
+
+::: single-image
+<img src="https://images.pexels.com/photos/1878293/pexels-photo-1878293.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1260&amp;h=750&amp;dpr=2" style="height:500px;"/>
+:::
+
+------------------------------------------------------------------------
+
+[Asymmetry]{.centered-title}
+
+::: sym-3
+::: wix-5
+:::
+
+::: wix-6
+:::
+
+::: wix-7
+:::
+
+::: wix-8
+:::
+:::
+
+[https://www.siteinspire.com/]{.annotate}
+
+```{css}
+.wix-5 {
+    background-size: contain;
+    background-repeat: no-repeat;
+  background-image: url("https://siteinspire.s3.us-east-1.amazonaws.com/screengrabs/images/000/016/338/small.jpg");
+}
+
+.wix-6 {
+    background-size: contain;
+    background-repeat: no-repeat;
+  background-image: url("https://siteinspire.s3.us-east-1.amazonaws.com/screengrabs/images/000/016/333/small.jpg");
+}
+
+.wix-7 {
+    background-size: contain;
+    background-repeat: no-repeat;
+  background-image: url("https://siteinspire.s3.us-east-1.amazonaws.com/screengrabs/images/000/016/243/small.jpg");
+}
+
+.wix-8 {
+    background-size: contain;
+    background-repeat: no-repeat;
+  background-image: url("https://siteinspire.s3.us-east-1.amazonaws.com/screengrabs/images/000/016/240/small.jpg");
+}
+```
+
+------------------------------------------------------------------------
+
+[Rule of Thirds]{.centered-title}
+
+::: single-image
+<img src="https://www.capturelandscapes.com/wp-content/uploads/2017/10/Greenland-Husky-Rule-of-Thirds.jpg"/>
+:::
+
+------------------------------------------------------------------------
+
+[Rule of Thirds]{.centered-title}
+
+::: single-image
+<img src="https://wpswings.com/wp-content/uploads/2022/07/product-image-grids.png"/>
+:::
+
+------------------------------------------------------------------------
+
+```{=html}
+<!--
+if you break a composition into 9 squares and put the key of the composition there it'll help the composition a great deal
+-->
+```
+[Triad Composition]{.centered-title}
+
+::: single-image
+<img src="https://cdn.kastatic.org/ka-perseus-images/9413e3be098d33b2c7d987b6ac2ee2ed29745d3d.jpg" style="height:500px;"/>
+:::
+
+------------------------------------------------------------------------
+
+[Triad Composition]{.centered-title}
+
+::: single-image
+<img src="https://cdn.kastatic.org/ka-perseus-images/9413e3be098d33b2c7d987b6ac2ee2ed29745d3d.jpg" style="height:500px;"/>
+:::
+
+::: line1
+:::
+
+::: line2
+:::
+
+::: line3
+:::
+
+```{css}
+.line1 {
+    border: solid 2.5px red;
+    width: 0px;
+    height: 250px;
+    position: absolute;
+    top: 200px;
+    left: 450px;
+    transform: rotate(25deg);
+}
+
+.line2 {
+border: solid 2.5px red;
+    width: 0px;
+    height: 250px;
+    position: absolute;
+    top: 315px;
+    left: 520px;
+    transform: rotate(90deg);
+}
+
+.line3 {
+border: solid 2.5px red;
+    width: 0px;
+    height: 270px;
+    position: absolute;
+    top: 190px;
+    left: 570px;
+    transform: rotate(150deg);
+}
+```
+
+------------------------------------------------------------------------
+
+```{=html}
+<!--
+there are intentional triangles in composition and lots of things written in mideavil text about it because your eye is contanstnly circling through the piece, especially post caravagio
+
+- surrat
+- edo style print
+- swiss design
+-->
+```
+[Triad Composition]{.centered-title}
+
+::: triad-container
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/1200px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg"/> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbu5yyBhCNUfdsQICcetODffn9toBHnK4M6g&amp;usqp=CAU"/> <img src="https://www.internationalposter.com/media/54013/swc24939.jpg"/>
+:::
+
+```{css}
+.triad-container p {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 90%;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 12px;
+}
+
+.triad-container img {
+  height: 400px;
+}
+```
+
+------------------------------------------------------------------------
+
+```{=html}
+<!--
+large flat geometric shapes that is all about using and breaking grids obviously. if you want to study or make master copies this is a great place to start!
+-->
+```
+::: full-width-container
+Swiss Design <img src="https://i.pinimg.com/originals/8b/d5/af/8bd5af0aae4036306d85131a405a7d1f.jpg"/>
+:::
+
+------------------------------------------------------------------------
+
+[Shapes]{.centered-title .move-down}
+
+<div class="shapes">
+<div class="shape-circle"></div>
+<div class="shape-square"></div>
+<div class="shape-triangle"></div>
+</div>
+
+```{=html}
+<!--
+- circles draw your eye, weather you like it or not your eye keeps getting drawn to them
+-->
+```
+
+-----
+
+[Saccade]{.centered-title}
+
+::: single-image
+<img src="http://schorlab.berkeley.edu/passpro/oculomotor/assets/images/Fig14-2.gif" style="height:400px;"/>
+:::
+
+```{=html}
+<!--
+when you are looking at something your eye is contasntly in motion, scanning, which is called saccade. this movement happens in a hierarchy where things that are moving are the most important, then bright colors, and also circles
+-->
+```
+```{=html}
+<!--
+you can see that the viewer scans around in a circle but you can also see how drawn into the eye the viewer got. This is also why humans see faces everywhere like how an outlet is a smily face
+-->
+```
+
+---
+
+
+<div class="optical-alignment move-down">
+<div>Optical Alignment</div>
+<img src="./../../assets/images/2-best-practices/layout/optical_alignment0.webp"/>
+</div>
+
+-----
+
+<div class="optical-alignment move-down">
+<div>Optical Alignment</div>
+<img src="./../../assets/images/2-best-practices/layout/optical_alignment1.webp"/>
+</div>
+
+----
+
+<div class="optical-alignment move-down">
+<div>Optical Alignment</div>
+<img src="./../../assets/images/2-best-practices/layout/optical_alignment2.webp"/>
+</div>
+
+---
+
+<div class="optical-alignment move-down">
+<div>Optical Alignment</div>
+<img src="./../../assets/images/2-best-practices/layout/optical_alignment3.webp"/>
+</div>
+
+---
+
+[Diagonals]{.centered-title}
+
+::: diagonal-container
+<img src="https://alyssahabner.weebly.com/uploads/1/9/0/6/19062513/4386035.jpg"/><img src="https://img.artrabbit.com/events/zaha-hadid-architecture-design-and-related-arts/images/jnZLovkdaepb/1500x1125/Heydar-Aliyev-Center.jpg"/>
+:::
+
+```{css}
+.diagonal-container p {
+    width: 60%;
+    margin: 0 auto;
+    gap: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+```
+
+------------------------------------------------------------------------
+
+[Diagonals]{.centered-title}
+
+::: centered
+<img src="https://cdn.dribbble.com/users/486050/screenshots/4078807/iponweb-website-home.jpg"/>dribbble.com
+:::
+
+```{css}
+.centered {
+  display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.centered img {
+    height: 450px;
+}
+```
+
+```{=html}
+<!-- 
+diagonals reign supreme in architecture, "the greatest..." probably because they're a little more rare but we can use these in web design too!
+-->
+```
+
+------------------------------------------------------------------------
+
+[Scale]{.centered-title}
+
+::: triad-container
+<img src="https://static-cse.canva.com/blob/565943/mcdonaldsmcdonaldswakeupoutdoorprint389486adeevee.jpg"/> <img src="https://designshack.net/wp-content/uploads/famouscampaigns-7.jpg"/> <img src="https://sendgrid.com/wp-content/uploads/2019/07/Lyft-email.png"/>
+:::
+
+```{=html}
+<!--
+simple but SO effective - if we change the scale of an image it can become a piece of the grid or layout rather than plopping it on the page. you can take boring images and make it dynamic using scale, cropping, and angle!
+-->
+```
+
+------------------------------------------------------------------------
+
+:::move-down
+<img src="./../../assets/images/2-best-practices/app_screenshot.png" style="filter:drop-shadow(10px 7px 4px gray);"/>
+
+```{=html}
+<!--
+the image itself is not important, the table is, but its pushed into the background and provides texture
+-->
+```
+:::
+
+------------------------------------------------------------------------
+
+::: {.grid-intro .move-down}
+::: grid-left
+<br>
+
+<h2>Anchoring</h2>
+
+<br>
+
+<p>The architecture of space</p>
+:::
+
+::: grid-right
+<img src="https://miro.medium.com/v2/resize:fit:758/1*i8PNKHgpwN4oiOiDzY2LjA.png" style="height:600px;"/>
+:::
+:::
+
+```{=html}
+<!-- while this grid isn't even, things do snap to the grid, and believe me, if these weren't anchored you would hate this page. And it's not even like it's perfect things align relative to one another, but they are not thrown onto the page. Now you can pull down designs and anchor! (activity?)
+
+now when a designer tells you to move things around and as a developer you're like but that's hard, it's because the entire design breaks apart if you move everything out of its anchoring!
+-->
+```
+
+```{=html}
+<!-- 
+noticing your way around a building, you notice its open or its maze like, that's the same as layout, if your confused where to go then the website inst working as you expected.
+-->
+```
+
+<!-- grid examples, alignment logic, this is what you're going to be employing. don't start in the browser because you're in problem solving mode, the quickest most efficient path - but that doesn't make for good design!! -->
+
+<!-- but its also important to break the grid because if its too systematic it's too predictable!! -->
+
+------------------------------------------------------------------------
+
+::: move-down
+
+<h1>Exercise 1</h1>
+
+You've been asked by a client to make a website homepage that includes:
+
+1. An image 
+2. A short excerpt about the company
+3. Their logo
+4. 3 things that the company 
+
+:::
+
+------------------------------------------------------------------------
+
+::: move-down
+
+<h1>Exercise 2</h1>
+
+Create your layout using  `  { bslib }`
+:::
+
+------------------------------------------------------------------------
+
