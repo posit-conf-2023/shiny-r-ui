@@ -1,0 +1,4 @@
+- source: project
+  netlify:
+    - id: 667eb937-549f-4758-a7f2-26e98c6c2c2e
+      url: 'https://starlit-gumdrop-adaabb.netlify.app'
