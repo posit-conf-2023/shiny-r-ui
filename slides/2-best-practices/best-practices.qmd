@@ -1,0 +1,40 @@
+---
+title: Web design best practices
+format:
+  revealjs:
+    css: [
+      './../../assets/css/introduction.css', 
+      './../../assets/css/color.css',
+      './../../assets/css/layout.css'
+    ]
+    code-link: true
+    code-copy: true
+    fontsize: 24pt
+    navigation-mode: vertical
+    controls-layout: bottom-right
+    controls-tutorial: true
+    chalkboard: true
+    transition: slide
+    background-transition: fade
+    title-slide-attributes:
+        data-state: "hide-menubar"
+    simplemenu:
+        barhtml:
+            header: "<div class='menubar'><ul class='menu'></ul><div>"
+            #footer: "<img src='...' class='slide-logo r-stretch'>"
+        scale: 0.67
+revealjs-plugins:
+  - simplemenu
+  - confetti
+---
+
+```{r, echo=FALSE}
+library(htmltools)
+library(shiny)
+library(emo)
+```
+
+{{< include ./includes/_layout.qmd >}}
+{{< include ./includes/_color-typo.qmd >}}
+{{< include ./includes/_user-feedback.qmd >}}
+{{< include ./includes/_pitfalls.qmd >}}

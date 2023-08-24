@@ -1,0 +1,703 @@
+# User feedback {data-stack-name="Feedback"}
+
+
+## Chatty apps
+
+Users should not guess what the app is doing:
+
+    - If something goes wrong, user should know.
+    - If something was successful, users should also know.
+
+
+![](./../../assets/images/2-best-practices/feedback/searching.svg){width=100%, fig-align="center"}
+
+## Respect Design Principles
+
+user action –> app reaction
+
+## Respect people's perseption
+
+- Not everyone can properly see red/green.
+- Prioritise components that are accessibility proven (can be digested by screen readers).
+
+![](./../../assets/images/2-best-practices/feedback/school-grade.jpg){width=100%, fig-align="center"}
+
+## Handle feedback
+
+How to:
+
+(1) Process user input/outputs?
+(2) Handle notifications?
+(3) Handle loading/waiting time?
+(4) Convey extra information?
+
+
+## (1) Inputs validation {.center}
+
+```{css}
+.center h2 {
+  text-align: center;
+}
+```
+
+## Inputs validation: best practices
+
+| Do's | Don'ts |
+|---------|:-----|
+| Proper color      | Only rely on color |
+| Add icon       | Print raw error message    |
+| Meaningful text | Display error before the element |
+| Extra tooltip (on press) | Use toasts (disable auto dismiss) |
+| Provide example of valid statement | Don't highlight correct fields |
+| An error summary (accordion) | |
+
+
+## Inputs validation: example with a single field
+
+<div class="good-bad-container">
+
+<div class="bad-form">
+E-mail
+<div class="formentry">+417562356</div>
+<div class="error">Error 23</div>
+</div>
+
+<div class="good-form">
+{{< fa envelope >}} E-mail 
+<div class="formentry">+417562356</div>
+<div class="error">{{< fa circle-exclamation >}} Error: a valid email should be like <span class="underline">name.surname@domain.com</span></div>
+</div>
+
+</div>
+
+- Added icon next to field label (avoid error).
+- Added icon to error message.
+- Provide valid example.
+
+## Example from my health insurance 😃
+
+![](./../../assets/images/2-best-practices/feedback/grey-error.png){width=100%, fig-align="center"}
+
+
+## Inputs validation: with [{shinyvalidate}](https://rstudio.github.io/shinyvalidate/articles/shinyvalidate.html)
+
+:::: {.columns}
+
+::: {.column width="65%"}
+```{r eval=FALSE, echo=TRUE}
+library(shiny)
+library(shinyvalidate)
+
+ui <- fluidPage(
+  textInput(
+    "email", 
+    tagList(icon("envelope"), "Email"),
+    placeholder = "example: name.surname@domain.com" # <1>
+  )
+)
+
+server <- function(input, output, session) {
+  iv <- InputValidator$new() # <2>
+  iv$add_rule("email", sv_required()) # <3>
+  iv$add_rule( # <3>
+    "email", # <3>
+    sv_email( # <3>
+        message = tagList( # <3>
+            icon("exclamation-circle"), # <3>
+            "Error: a valid email should be like:", # <3>
+            span(class = "underline", "name.surname@domain.com") # <3>
+        ) # <3>
+    ) # <3>
+  ) # <3>
+  iv$enable() # <4>
+}
+```
+
+
+1. Add __placeholder__ as example.
+2. Initialise input validator R6 instance.
+3. Prerequisites + add custom error message with icon.
+4. Activate the validation.
+:::
+
+::: {.column width="35%"}
+![](./../../assets/movies/2-best-practices/shinyvalidate-email.mov){width="320" height="240"}
+:::
+
+::::
+
+## Output validation
+
+How to get an output? [^input-validation]
+
+:::: {.columns}
+
+::: {.column width="65%"}
+```{r eval=FALSE, echo=TRUE}
+ui <- fluidPage(
+  textInput("name", "Name"),
+  textInput("surname", "Surname"),
+  textOutput("res")
+)
+
+server <- function(input, output) {
+  output$res <- renderText({
+    if (nchar(input$name) == 0 || nchar(input$surname) == 0) { # <1>
+        validate("Fill all the inputs to see the result") # <2>
+    } else {
+        paste0(input$name, input$surname)
+    }
+  })
+}
+```
+
+
+1. Condition for which the message will be shown.
+2. Wrap end-user message within __shiny::validate__.
+:::
+
+::: {.column width="35%"}
+![](./../../assets/movies/2-best-practices/validate-output.mov){width="320" height="240"}
+:::
+
+::::
+
+[^input-validation]: complement input validation.
+
+## Going further
+
+- {shiny.emptystate}: https://appsilon.github.io/shiny.emptystate/
+
+
+## (2) Notifications {.center}
+
+
+## Different levels of urgency
+
+- High attention: errors, user confirmation.
+- Medium attention: warnings.
+- Lower attention: success.
+
+::: {layout-ncol=2}
+
+![](./../../assets/images/2-best-practices/feedback/error.svg){width="50%"}
+
+![](./../../assets/images/2-best-practices/feedback/success.svg){width="50%"}
+
+:::
+
+## Best practices
+
+| High attention | Medium attention | Lower attention |
+|---------|:-----|------|
+| No auto close | No auto close | Auto close 
+| Modal with overlay      | Toast    | Toast
+| Meaningful icon       | Meaningful icon | Meaningful icon
+
+## Example for success
+
+:::: {.columns}
+
+::: {.column width="65%"}
+```{r eval=FALSE, echo=TRUE}
+ui <- fluidPage(
+  actionButton("send", "Send mail", icon = icon("paper-plane"))
+)
+
+server <- function(input, output) {
+  observeEvent(input$send, {
+    showNotification(
+        ui = tagList(
+            icon("check"),
+            "Message successfully sent!"
+        )
+    )
+  })
+}
+```
+
+- We used a toast __shiny::showNotification__.
+- Auto close is ok.
+- Displayed in the corner (not high priority).
+
+:::
+
+::: {.column width="35%"}
+![](./../../assets/movies/2-best-practices/success-notification.mov){width="320" height="240"}
+:::
+
+::::
+
+
+## Example for errors
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r eval=FALSE, echo=TRUE}
+ui <- fluidPage(
+  actionButton("run", "Run simulation", icon = icon("calculator"))
+)
+
+server <- function(input, output, session) {
+  observeEvent(input$run, {
+    Sys.sleep(2)
+    showModal(
+        modalDialog(
+            title = tagList(
+                icon("xmark"),
+                "Error: computation failed."
+            ),
+            p("Error description (depends on user level...)"),
+            br(),
+            tagList(
+                icon("exclamation-circle"),
+                "Parameter a is ..."
+            )
+        )
+    )
+  })
+}
+```
+
+- Modal with overlay (focus on error).
+- Correct icons (no need for colors).
+- Brief description.
+- More details (depends on the user level).
+
+:::
+
+::: {.column width="50%"}
+![](./../../assets/movies/2-best-practices/error-notification.mov){width="100%"}
+:::
+
+::::
+
+
+## What if we don't know the result of a given task?
+
+- The same task may succeed or fail based on
+different parameters.
+- Need to capture exceptions.
+- `tryCatch` is your friend.
+
+## Capture exceptions: with {shiny}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r eval=FALSE, echo=TRUE}
+observeEvent(input$run, {
+    res <- sample(c(FALSE, TRUE), 1)
+    tryCatch({
+        if (res) {
+            showNotification(
+                ui = tagList(
+                    icon("check"),
+                    "Computation successful."
+                )
+            )
+        } else {
+            stop("<Error message>")
+        }
+    }, error = function(e) {
+        showModal(
+            modalDialog(
+                title = tagList(icon("xmark"),
+                    "Error: computation failed."
+                ),
+                sprintf("%s", e$message)
+            )
+        )
+    })
+})
+```
+
+- Capture error within `tryCatch`.
+- Return either notification or modal.
+- Note: we could also capture warnings.
+
+:::
+
+::: {.column width="50%"}
+![](./../../assets/movies/2-best-practices/capture-result.mov){width="100%"}
+:::
+
+::::
+
+## Going further
+
+- {elvis}: https://github.com/ThinkR-open/elvis.
+- Error summary: https://service-manual.nhs.uk/design-system/components/error-summary
+
+
+## (3) Loading/waiting time {.center}
+
+## Progress: best practices
+
+- Quantifiable subtasks: __shiny::withProgess__.
+- For blocking tasks: full screen [`{waiter}`](https://waiter.john-coene.com/#/).
+- Button spinner: related to local task, async (can run in the background).
+- Initial loading: full screen `{waiter}`.
+
+## Button spinner
+
+When we don't necessarily know the waiting time ...
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+::: {.panel-tabset}
+
+### R
+```{r eval=FALSE, echo=TRUE}
+ui <- fluidPage(
+  actionButton("run", "Run simulation", icon = icon("calculator"))
+)
+
+server <- function(input, output, session) {
+  observeEvent(input$run, {
+    session$sendCustomMessage("add-spinner", "run")
+    Sys.sleep(2)
+    session$sendCustomMessage("remove-spinner", "run")
+  })
+}
+```
+
+- Indicate user when task is running.
+- Notify when task is over (not shown for space reasons). 
+
+### JS
+
+```js
+$(function() {
+    Shiny.addCustomMessageHandler('add-spinner', function(m) {
+        $('#run i')
+            .removeClass('fa-calculator')
+            .addClass('fa-spinner fa-spin');
+    });
+    Shiny.addCustomMessageHandler('remove-spinner', function(m) {
+        $('#run i')
+            .removeClass('fa-spinner fa-spin')
+            .addClass('fa-calculator')
+    });
+}); 
+```
+
+:::
+
+:::
+
+::: {.column width="40%"}
+![](./../../assets/movies/2-best-practices/spinning-button.mov){width="100%"}
+:::
+
+::::
+
+## Preloader
+
+When the app is loading, you can display a spinner with `Waiter`.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+::: {.panel-tabset}
+
+### UI
+```{r eval=FALSE, echo=TRUE}
+ui <- fluidPage(
+  useWaiter(), # include dependencies
+  h1(icon("world"), "My super app")
+)
+```
+
+### Server
+::: {style="font-size: 50%;"}
+```{r eval=FALSE, echo=TRUE}
+server <- function(input, output, session) {
+  # create a waiter
+  state <- reactiveValues(loaded = FALSE)
+  w <- Waiter$new()
+  
+  # on button click
+  observeEvent(req(!state$loaded), {
+    w$show()
+    tryCatch({
+      connect_db(w)
+      w$update(
+        html = tagList(
+          icon("circle-check", class = "fa-2xl"),
+          h3("Success: connected")
+        )
+      )
+      Sys.sleep(1)
+      state$loaded <- TRUE
+    }, error = function(e) {
+      w$update(
+        html = tagList(
+          icon("circle-xmark", class = "fa-2xl"),
+          h3(sprintf("Error: %s", e$message)),
+          a(
+            onclick = "location.reload()", 
+            "Reload app?", 
+            href = "#", 
+            style = "color: white"
+          )
+        )
+      )
+      Sys.sleep(3)
+    })
+  })
+  
+  observeEvent(req(state$loaded), {
+    w$hide()
+  })
+}
+```
+:::
+
+### Helpers
+
+```{r eval=FALSE, echo=TRUE}
+connect_db <- function(w) {
+  w$update(
+    html = tagList(
+      spin_flower(), 
+      h3("Connecting to database ...")
+    )
+  )
+  Sys.sleep(3)
+  res <- sample(c(FALSE, TRUE), 1)
+  if (!res) stop("could not connect to DB") 
+}
+```
+
+:::
+
+:::
+
+::: {.column width="50%"}
+![](./../../assets/movies/2-best-practices/waiter-preloader.mov){width="100%"}
+:::
+
+::::
+
+
+## Local progress
+
+For async tasks, we indicate local computation with `waiter::Waitress` ...
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+::: {.panel-tabset}
+
+### UI
+::: {style="font-size: 75%;"}
+```{r eval=FALSE, echo=TRUE}
+ui <- fluidPage(
+  useWaitress(),
+  fluidRow(
+    column(
+      width = 6,
+      h3("Long task"),
+      actionButton("go", "Run long task"),
+      plotOutput("long_task") 
+    ),
+    column(
+      width = 6,
+      wellPanel(
+        h3("Other task"),
+        checkboxGroupInput(
+          "variable", 
+          "Variables to show:",
+          c(
+            "Cylinders" = "cyl",
+            "Transmission" = "am",
+            "Gears" = "gear"
+          )
+        ),
+        tableOutput("quick_task")
+      )
+    )
+  )
+)
+```
+:::
+
+### Server
+::: {style="font-size: 50%;"}
+```{r eval=FALSE, echo=TRUE}
+server <- function(input, output, session) {
+  # create a waiter
+  vals <- reactiveValues(job = list(el = NULL, res = NULL))
+  
+  waitress <- Waitress$new(
+    "#go", 
+    theme = "overlay-opacity", 
+    infinite = TRUE
+  )
+  
+  observeEvent(input$go, {
+    vals$job$el <- NULL
+    vals$job$res <- NULL
+    
+    waitress$start()
+    vals$job$el <- callr::r_bg(
+      func = bg_task,
+      supervise = TRUE
+    )
+  })
+  
+  observe({
+    invalidateLater(1000)
+    req(vals$job$el)
+    if (!vals$job$el$is_alive()) {
+      vals$job$res <- vals$job$el$get_result()
+      waitress$close()
+    }
+  })
+  
+  
+  
+  # render the background process message to the UI
+  output$long_task <- renderPlot({
+    if (!is.null(vals$job$res)) {
+      plot(vals$job$res)
+    } 
+  })
+  
+  output$quick_task <- renderTable({
+    mtcars[, c("mpg", input$variable), drop = FALSE]
+  }, rownames = TRUE)
+}
+```
+:::
+
+### Helpers
+
+```{r eval=FALSE, echo=TRUE}
+bg_task <- function() {
+  Sys.sleep(5)
+  return(hist(rnorm(1000)))
+}
+```
+
+:::
+
+:::
+
+::: {.column width="50%"}
+![](./../../assets/movies/2-best-practices/local-progress.mov){width="100%"}
+:::
+
+::::
+
+## Going further
+
+...
+
+## (4) Extra information {.center}
+
+
+## Tooltips vs Popovers
+
+| | tooltips | popovers |
+|--------|---------|:-----|
+| What? | Bubble appearing on hover over an element | Card with title and body on press/hover |
+| How to use? | Display help, supplement input validation, avoid long text | Print extra info, links, ... without cluttering/overloading the main UI |
+
+::: {layout-ncol=2}
+![](./../../assets/images/2-best-practices/feedback/tooltip.png)
+
+![](./../../assets/images/2-best-practices/feedback/popover.png)
+:::
+
+
+## Supercharged input validation with tooltips
+
+Instead of using `placeholder` field, we can show a `tooltip`.
+
+:::: {.columns}
+
+::: {.column width="50%" style="font-size: 75%;"}
+```{r eval=FALSE, echo=TRUE}
+library(shiny)
+library(shinyvalidate)
+library(bslib)
+
+ui <- fluidPage(
+  theme = bs_theme(version = 5L), # <1> 
+  tooltip( # <2> 
+    textInput(
+      "email",
+      tagList(icon("envelope"), "Email")
+    ), 
+    "Example: name.surname@domain.com" # <3> 
+  )
+)
+
+# Server not shown (same as input validation above)
+
+```
+
+- Tooltip only for Bootstrap 5.
+- Wrap UI element with `bslib::tooltip`.
+- Add message content.
+
+:::
+
+::: {.column width="50%"}
+![](./../../assets/movies/2-best-practices/tooltip-validation.mov){width="100%"}
+:::
+
+::::
+
+
+## Popovers
+
+Many help libraries leverage popovers: introjs, ...
+
+:::: {.columns}
+
+::: {.column width="50%" style="font-size: 75%;"}
+```{r eval=FALSE, echo=TRUE}
+library(shiny)
+library(bslib)
+
+ui <- fluidPage(
+  theme = bs_theme(version = 5L),
+  popover(
+    plotOutput("distPlot"),
+    title = "Super plot",
+    options = list(html = TRUE),
+    tagList(
+      tags$b("This is the same plot I've used for every single 
+      demo I am doing since {shiny} exists. Maybe I should change
+      at some point."),
+      tags$img(src = "https://placehold.jp/150x150.png")
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  output$distPlot <- renderPlot({
+    hist(rnorm(1000))
+  })
+}
+```
+
+- Popover only for Bootstrap 5.
+- Wrap UI element with `bslib::popover`.
+- Add message content + custom HTML.
+
+:::
+
+::: {.column width="50%"}
+![](./../../assets/movies/2-best-practices/popover.mov){width="100%"}
+:::
+
+::::
