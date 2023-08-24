@@ -8,7 +8,7 @@ Website design and development is one of the most critical factors contributing 
 
 ## Is This Workshop for Me?
 
-*Minimum expectations: You're an R developer with basic Shiny knowledge*
+**Minimum expectations: You're an R developer with basic Shiny knowledge**
 
 ::: center
 This workshop will be appropriate for attendees who answer yes to these questions:
@@ -53,6 +53,7 @@ If you have questions in advance of the workshop, please answer to this thread: 
 ### How we will communicate during the workshop
 
 During the workshop, we will be using __Discord__ as our main communication method. To make the process go smoothly:
+
 1. Please sign up for an [account](https://discord.com/) if you don’t already have one.
 2. Make sure your [display name](https://support.discord.com/hc/en-us/articles/12620128861463-New-Usernames-Display-Names#h_01GXPQABMYGEHGPRJJXJMPHF5C) is the one you used to register for the conference.
 3. In your “About Me”, put the name of your workshop(s).

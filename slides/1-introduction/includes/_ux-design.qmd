@@ -13,11 +13,11 @@
 -   Tiny changes, high impact.
 -   Fail early.
 
-![](./../../assets/images/1-introduction/why-ux-design.jpeg){width="100%," fig-align="center"}
+![](./../../assets/images/1-introduction/why-ux-design.jpeg){width=100% fig-align="center"}
 
 ## When it's too late
 
-![](./../../assets/images/1-introduction/what-people-need.jpg){width="100%," fig-align="center"}
+![](./../../assets/images/1-introduction/what-people-need.jpg){width=100% fig-align="center"}
 
 ## How?
 
@@ -40,7 +40,7 @@
 
 ## Bad design is everywhere around us (1/X)
 
-![The "masochist's teapot" by Jacques Caralman](./../../assets/images/1-introduction/don-norman.jpg){width="100%," fig-align="center"}
+![The "masochist's teapot" by Jacques Caralman](./../../assets/images/1-introduction/don-norman.jpg){width=100% fig-align="center"}
 
 ## Bad design is everywhere around us (1/X)
 
@@ -50,13 +50,13 @@
 
 Let or right??
 
-![](./../../assets/images/1-introduction/bad-direction.jpg){width=100%, fig-align="center"}
+![](./../../assets/images/1-introduction/bad-direction.jpg){width=100% fig-align="center"}
 
 ## Bad design is everywhere around us (1/X)
 
 > I have winamp on my site 😵‍💫
 
-![](./../../assets/images/1-introduction/exotic-website.png){width=100%, fig-align="center"}
+![](./../../assets/images/1-introduction/exotic-website.png){width=100% fig-align="center"}
 
 ## Your turn: user experience
 
@@ -88,7 +88,7 @@ countdown(minutes = 1, seconds = 0)
 
 ## Your turn: about affordance (2/2)
 
-![](./../../assets/images/1-introduction/old-pacifier.jpg){width=100%, fig-align="center"}
+![](./../../assets/images/1-introduction/old-pacifier.jpg){width=100% fig-align="center"}
 
 . . .
 

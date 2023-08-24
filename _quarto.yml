@@ -5,7 +5,7 @@ project:
 website:
   title: webdesign4shinydevs
   site-url: ""
-  repo-url: https://github.com/MayaGans/webdesign4shinydevs
+  repo-url: https://github.com/posit-conf-2023/shiny-r-ui
   repo-actions: [issue]
   navbar:
     left:
@@ -17,9 +17,9 @@ website:
       - icon: github
         menu:
           - text: Code
-            url: https://github.com/MayaGans/webdesign4shinydevs
+            url: https://github.com/posit-conf-2023/shiny-r-ui
           - text: Issues
-            url: https://github.com/MayaGans/webdesign4shinydevs/issues
+            url: https://github.com/posit-conf-2023/shiny-r-ui/issues
 
   sidebar:
     style: "docked"
