@@ -23,7 +23,7 @@ Maya is a Data Visualization Engineer at Atorus Research where she designs and d
 ::::{.columns}
 
 :::{.column}
-![](./../../assets/images/0-welcome/david-granjon.jpg){width=60%}
+![](./../../assets/images/0-welcome/david-granjon.jpg){width=65%}
 :::
 
 :::{.column}

@@ -35,7 +35,7 @@ This workshop will be appropriate for attendees who answer yes to these question
 During this workshop, we'll use __Posit Cloud__ for the main activity. We kindly ask you to complete the following tasks prior to the workshop so you can get started.
 
 1. Create an account on [Posit Cloud](https://posit.cloud/) (if you don't have one).
-2. Open the following Posit Cloud [project](https://posit.cloud/spaces/400773/join?access_code=ajwkws91bhF-IhEXDVWH9-0mukSUF3jiETCkzrgt) and click on __Start__ to create your own copy of the project. If you’re automatically asked to restore packages, answer yes. Otherwise run `renv::restore()` in the R console. Note: our activity project leverages {renv} for better reproducibility. It roughly takes __20-30 minutes__ to restore all the packages from the renv.lock file on Posit Cloud (less locally if binaries are installed). 
+2. Open the following Posit Cloud [space](https://posit.cloud/spaces/400773/join?access_code=ajwkws91bhF-IhEXDVWH9-0mukSUF3jiETCkzrgt). Open the `shinyMons2` project and click on __Start__ to create your own copy of the project. If you’re automatically asked to restore packages, answer yes. Otherwise run `renv::restore()` in the R console. Note: our activity project leverages {renv} for better reproducibility. It roughly takes __20-30 minutes__ to restore all the packages from the renv.lock file on Posit Cloud (less locally if binaries are installed). 
 
 ### Local setup (backup)
 
@@ -60,6 +60,6 @@ During the workshop, we will be using __Discord__ as our main communication meth
 
 ### Further instructions
 
-Closer to the start of the conference, we will invite you to the posit::conf Discord server, share the repository containing the slides and further instructions to be ready.
+Closer to the start of the conference, we will invite you to the posit::conf Discord server, share the repository containing the slides and any further instructions to be ready.
 
 Looking forward to meeting you!
