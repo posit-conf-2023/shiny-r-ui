@@ -628,6 +628,118 @@ noticing your way around a building, you notice its open or its maze like, that'
 
 <!-- but its also important to break the grid because if its too systematic it's too predictable!! -->
 
+## Introduction to bslib layouts
+
+2 main layouts [^mixed]:
+
+- Columns (grid): `layout_columns()`.
+- Dashboard: `layout_sidebar()`.
+
+[^mixed]: Mixed layout can use dashboard + columns.
+
+## Column-based layout
+
+`layout_column_wrap()` is a simplified interface to CSS [grid](https://css-tricks.com/snippets/css/complete-guide-grid/).
+
+::: {.panel-tabset}
+
+### Fixed columns
+
+:::: {.columns}
+
+::: {.column width="50%"}
+![](./../../assets/movies/2-best-practices/layout/fixed-cols.mov){width="100%"}
+:::
+
+::: {.column width="50%"}
+```{r, eval=FALSE, echo=TRUE}
+layout_column_wrap(
+  width = 1/2, height = 300,
+  card1, card2, card3
+)
+```
+:::
+
+::::
+
+
+### Responsive columns
+
+3 cards of 200px require at least a viewport of 600px to display
+side by side.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+![](./../../assets/movies/2-best-practices/layout/responsive-cols.mov){width="100%"}
+:::
+
+::: {.column width="50%"}
+```{r, eval=FALSE, echo=TRUE}
+layout_column_wrap(
+  width = "200px", height = 300,
+  card1, card2, card3
+)
+```
+:::
+
+::::
+
+### Fixed width
+
+:::: {.columns}
+
+::: {.column width="50%"}
+![](./../../assets/movies/2-best-practices/layout/fixed-width.mov){width="100%"}
+:::
+
+::: {.column width="50%"}
+```{r, eval=FALSE, echo=TRUE}
+layout_column_wrap(
+  width = "200px", height = 300,
+  fixed_width = TRUE,
+  card1, card2, card3
+)
+```
+:::
+
+::::
+
+
+:::
+
+## Your turn: nested layouts `r countdown(minutes = 3, seconds = 0, top = 0)`
+
+<br/>
+
+With your fresh `{bslib}` knowledge, try to reproduce the following
+layout.
+
+::: {.panel-tabset}
+
+## Exercise
+
+![](./../../assets/images/2-best-practices/layout/nested-columns){width=100%}
+
+## Solution
+
+```{r, eval=FALSE, echo=TRUE}
+layout_column_wrap(
+  width = 1/2,
+  height = 300,
+  card1,
+  layout_column_wrap(
+    width = 1,
+    heights_equal = "row",
+    card2, card3
+  )
+)
+```
+
+:::
+
+## Dashboard layout
+
 ------------------------------------------------------------------------
 
 ::: move-down
