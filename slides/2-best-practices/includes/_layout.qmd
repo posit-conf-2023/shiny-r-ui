@@ -639,6 +639,8 @@ noticing your way around a building, you notice its open or its maze like, that'
 
 ## Column-based layout
 
+<br/>
+
 `layout_column_wrap()` is a simplified interface to CSS [grid](https://css-tricks.com/snippets/css/complete-guide-grid/).
 
 ::: {.panel-tabset}
@@ -739,6 +741,78 @@ layout_column_wrap(
 :::
 
 ## Dashboard layout
+
+<br/>
+
+:::: {.columns}
+
+::: {.column width="50%"}
+![](./../../assets/images/2-best-practices/layout/bslib-dashboard){width=100%}
+:::
+
+::: {.column width="50%"}
+```{r, eval=FALSE, echo=TRUE}
+library(shiny)
+library(bslib)
+
+ui <- page_sidebar(
+  title = "My dashboard",
+  sidebar = "Sidebar",
+  "Main content area"
+)
+
+shinyApp(ui, function(input, output) {})
+```
+:::
+
+::::
+
+::: {.callout-tip}
+Best practice:
+
+  - Sidebar: for global __inputs__.
+  - Main content: for __outputs__ (local inputs).
+  
+:::
+
+## Your turn: dashboard layouts `r countdown(minutes = 3, seconds = 0, top = 0)`
+
+<br/>
+
+::: {.panel-tabset}
+
+## Exercise
+
+Take the previous dashboard example and add an input and ouput of your choice.
+
+## Solution
+
+```{r, eval=FALSE, echo=TRUE}
+library(shiny)
+library(bslib)
+
+ui <- page_sidebar(
+  title = "My dashboard",
+  sidebar = tagList(
+    sliderInput(
+      "obs", 
+      "Number of observations:",
+      min = 0, 
+      max = 1000, 
+      value = 500
+    )
+  ),
+  plotOutput("distPlot")
+)
+
+shinyApp(ui, function(input, output) {
+  output$distPlot <- renderPlot({
+    hist(rnorm(input$obs))
+  })
+})
+```
+
+:::
 
 ------------------------------------------------------------------------
 
