@@ -1018,3 +1018,55 @@ shinyApp(ui, function(input, output) {
 ::: {.callout-tip collapse="true" title="Hint"}
 Don't forget that each `nav_panel` is a container which can host its own layout.
 :::
+
+## bslib components overview
+
+<br/>
+
+Let's review the most outstanding `{bslib}` components:
+
+1. Cards.
+2. Accordions. 
+3. Value boxes.
+
+## Cards
+
+<br/>
+
+Card: rectangular container for organizing related content, through a more appealing design. 
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r, echo=FALSE, eval=TRUE}
+describe_layout_function(
+  "Card header: card_header()",
+  "Card footer: card_footer()",
+  element = layout_sidebar(
+    sidebar = sidebar("Card sidebar"),
+    "Card body content",
+    fillable = TRUE
+  ),
+  full_screen = TRUE
+)
+```
+:::
+
+::: {.column width="50%"}
+```{r, echo=TRUE, eval=FALSE}
+card(
+  full_screen = TRUE,
+  card_header("Card header"),
+  # If not passed explicitly, elements are wrapped inside
+  # card_body ...
+  layout_sidebar(
+    sidebar = sidebar("Card sidebar"),
+    "Card body content",
+    fillable = TRUE
+  ),
+  card_footer("Card footer")
+)
+```
+:::
+
+::::
