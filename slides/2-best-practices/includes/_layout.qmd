@@ -630,12 +630,15 @@ noticing your way around a building, you notice its open or its maze like, that'
 
 ## Introduction to bslib layouts
 
-2 main layouts [^mixed]:
+<br/>
+
+3 main layouts [^mixed]:
 
 - Columns (grid): `layout_columns()`.
 - Sidebar: `layout_sidebar()`.
+- Multi pages: `page_navbar()`.
 
-[^mixed]: Mixed layout can use dashboard + columns.
+[^mixed]: any sophisticated layout can be created starting from one of these 3 base layouts.
 
 ## Column-based layout
 
@@ -841,29 +844,39 @@ layout_sidebar(
 
 ::: {.column width="50%"}
 ```{r, eval=TRUE, echo=FALSE}
+tmp <- page_sidebar(
+  title = h1(
+    "My dashboard",
+    # Have to add inline CSS since
+    # Quarto fails with this class...
+    style = "background-color: #212529;
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 300;
+      padding: var(--bslib-spacer, 1rem);
+      padding-left: 1.5rem;
+      margin-bottom: 0;
+    "
+  ),
+  sidebar = "Sidebar",
+  "Main content area"
+)
+
+# Add some borders for nicer rendering. This is
+# ugly but for some reasons htmltools::tagQuery
+# does not want to work on page_sidebar ...
+tmp[[5]][[1]]$children[[2]]$attribs$class <- paste(
+  tmp[[5]][[1]]$children[[2]]$attribs$class,
+  "border rounded-top"
+)
+
 describe_layout_function(
-  "A dashboard with page_sidebar()",
+  "page_sidebar()",
   "<code>layout_sidebar()</code> with title",
   element = card_body(
     class = "p-2",
-    height = 200,
-    page_sidebar(
-      title = h1(
-        "My dashboard",
-        # Have to add inline CSS since
-        # Quarto fails with this class...
-        style = "background-color: #212529;
-          color: #fff;
-          font-size: 1.5rem;
-          font-weight: 300;
-          padding: var(--bslib-spacer, 1rem);
-          padding-left: 1.5rem;
-          margin-bottom: 0;
-        "
-      ),
-      sidebar = "Sidebar",
-      "Main content area"
-    )
+    height = 300,
+     tmp
   )
 )
 ```
@@ -928,14 +941,80 @@ shinyApp(ui, function(input, output) {
 
 :::
 
-## Dashboard: multiple pages and tabs
+## Multi pages layout
+
+<br/>
 
 For more complex dashboards:
 
   - Replace `page_sidebar` by `page_navbar`.
   - Use `nav_panel` for each body tab.
-  
-Ex:
 
-  - how would you do to have a dedicated sidebar per tab?
-  - IDEA: exo with accordions to have multiple unrelated inputs...
+:::: {.columns}
+
+::: {.column width="50%"}
+![](./../../assets/movies/2-best-practices/layout/page-navbar.mov){width="100%"}
+:::
+
+::: {.column width="50%"}
+```{r, echo=TRUE, eval=FALSE}
+page_navbar(
+  title = "Multi pages",
+  nav_panel("Tab 1", "Tab 1 content"),
+  nav_panel("Tab 2", "Tab 2 content")
+)
+```
+:::
+
+::::
+
+
+## Your turn: tab-specific sidebar `r countdown(minutes = 3, seconds = 0, top = 0)`
+
+<br/>
+
+Until now, we only had shared sidebars.
+
+::: {.panel-tabset}
+
+## Exercise
+
+Take the previous `page_navbar` template and try to add a dedicated sidebar for each `nav_panel`.
+
+## Solution
+::: {style="font-size: 50%;"}
+```{r, eval=FALSE, echo=TRUE}
+library(shiny)
+library(bslib)
+
+ui <- page_navbar(
+  title = "Multiple sidebars",
+  nav_panel(
+    "Tab 1", 
+    layout_sidebar(
+      sidebar = sidebar("Sidebar tab 1"),
+      "Tab 1 content"
+    )
+  ),
+  nav_panel(
+    "Tab 2", 
+    layout_sidebar(
+      sidebar = sidebar("Sidebar tab 2"),
+      "Tab 2 content"
+    )
+  )
+)
+
+shinyApp(ui, function(input, output) {
+  output$distPlot <- renderPlot({
+    hist(rnorm(input$obs))
+  })
+})
+```
+:::
+
+:::
+
+::: {.callout-tip collapse="true" title="Hint"}
+Don't forget that each `nav_panel` is a container which can host its own layout.
+:::
