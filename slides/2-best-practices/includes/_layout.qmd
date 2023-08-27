@@ -740,9 +740,54 @@ layout_column_wrap(
 
 :::
 
+## Sidebar layout
+
+<br/>
+
+:::: {.columns}
+
+::: {.column width="50%}
+```{r, eval=TRUE, echo=FALSE}
+describe_layout_function(
+  "layout_sidebar()",
+  "A sidebar layout.",
+  card_body(
+    class = "p-2",
+    height = 200,
+    layout_sidebar(
+      sidebar = sidebar("Sidebar", width = "33%", class = "bg-light"),
+      "Main contents"
+    ) |>
+      tagAppendAttributes(class = "border rounded-top")
+  )
+)
+```
+:::
+
+::: {.column width="50%"}
+```r
+layout_sidebar(
+  sidebar = sidebar("Sidebar"),
+  "Main contents"
+)
+```
+:::
+
+::::
+
+::: {.callout-tip}
+Best practice:
+
+  - Sidebar: for global __inputs__.
+  - Main content: for __outputs__ (local inputs).
+  
+:::
+
 ## Dashboard layout
 
 <br/>
+
+Enhanced sidebar layout.
 
 :::: {.columns}
 
@@ -813,6 +858,17 @@ shinyApp(ui, function(input, output) {
 ```
 
 :::
+
+## Dashboard: multiple pages and tabs
+
+For more complex dashboards:
+
+  - Replace `page_sidebar` by `page_navbar`.
+  - Use `nav_panel` for each body tab.
+  
+Ex: how would you do to have a dedicated sidebar per tab?
+TO DO: talk about layout_sidebar? 
+IDEA: exo with accordions to have multiple unrelated inputs...
 
 ------------------------------------------------------------------------
 
