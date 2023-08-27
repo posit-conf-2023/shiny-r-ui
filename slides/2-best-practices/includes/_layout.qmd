@@ -1070,3 +1070,33 @@ card(
 :::
 
 ::::
+
+
+## Your turn: multiple cards `r countdown(minutes = 3, seconds = 0, top = 0)`
+
+<br/>
+
+::: {.panel-tabset}
+
+## Exercise
+
+Combine `layout_columns_wrap()` and `card()` to create a grid composed of 3 columns and 2 rows. Then play with the screen width and conclude.
+
+## Solution
+```{r, eval=FALSE, echo=TRUE}
+cards <- lapply(1:6, function(i) {
+  card(sprintf("Card %s", i))
+})
+
+layout_column_wrap(
+  width = 1/3,
+  height = 300,
+  !!!cards
+)
+```
+:::
+
+
+::: {.callout-tip collapse="true" title="Hint"}
+You can create those 6 cards programmatically with `lapply()` and pass them with `!!!` inside `layout_columns_wrap()`.
+:::
