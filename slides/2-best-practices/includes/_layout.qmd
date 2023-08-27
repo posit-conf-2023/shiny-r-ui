@@ -633,7 +633,7 @@ noticing your way around a building, you notice its open or its maze like, that'
 2 main layouts [^mixed]:
 
 - Columns (grid): `layout_columns()`.
-- Dashboard: `layout_sidebar()`.
+- Sidebar: `layout_sidebar()`.
 
 [^mixed]: Mixed layout can use dashboard + columns.
 
@@ -783,7 +783,7 @@ Best practice:
   
 :::
 
-## Your turn: nested sidebars `r countdown(minutes = 5, seconds = 0, top = 0)`
+## Your turn: nested sidebars `r countdown(minutes = 3, seconds = 0, top = 0)`
 
 <br/>
 
@@ -837,26 +837,45 @@ layout_sidebar(
 
 <br/>
 
-Enhanced sidebar layout.
-
 :::: {.columns}
 
 ::: {.column width="50%"}
-![](./../../assets/images/2-best-practices/layout/bslib-dashboard){width=100%}
+```{r, eval=TRUE, echo=FALSE}
+describe_layout_function(
+  "A dashboard with page_sidebar()",
+  "<code>layout_sidebar()</code> with title",
+  element = card_body(
+    class = "p-2",
+    height = 200,
+    page_sidebar(
+      title = h1(
+        "My dashboard",
+        # Have to add inline CSS since
+        # Quarto fails with this class...
+        style = "background-color: #212529;
+          color: #fff;
+          font-size: 1.5rem;
+          font-weight: 300;
+          padding: var(--bslib-spacer, 1rem);
+          padding-left: 1.5rem;
+          margin-bottom: 0;
+        "
+      ),
+      sidebar = "Sidebar",
+      "Main content area"
+    )
+  )
+)
+```
 :::
 
 ::: {.column width="50%"}
 ```{r, eval=FALSE, echo=TRUE}
-library(shiny)
-library(bslib)
-
-ui <- page_sidebar(
+page_sidebar(
   title = "My dashboard",
   sidebar = "Sidebar",
   "Main content area"
 )
-
-shinyApp(ui, function(input, output) {})
 ```
 :::
 
@@ -916,33 +935,7 @@ For more complex dashboards:
   - Replace `page_sidebar` by `page_navbar`.
   - Use `nav_panel` for each body tab.
   
-Ex: how would you do to have a dedicated sidebar per tab?
-TO DO: talk about layout_sidebar? 
-IDEA: exo with accordions to have multiple unrelated inputs...
+Ex:
 
-------------------------------------------------------------------------
-
-::: move-down
-
-<h1>Exercise 1</h1>
-
-You've been asked by a client to make a website homepage that includes:
-
-1. An image 
-2. A short excerpt about the company
-3. Their logo
-4. 3 things that the company 
-
-:::
-
-------------------------------------------------------------------------
-
-::: move-down
-
-<h1>Exercise 2</h1>
-
-Create your layout using  `  { bslib }`
-:::
-
-------------------------------------------------------------------------
-
+  - how would you do to have a dedicated sidebar per tab?
+  - IDEA: exo with accordions to have multiple unrelated inputs...

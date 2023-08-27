@@ -52,9 +52,9 @@ describe_layout_function <- function(name, description = NULL, element = NULL) {
 
   card(
     card_header(class = "bg-light text-center", HTML(name)),
-      element,
+    element,
     if (!is.null(description)) {
-      card_footer(class = "bg-white text-center", description)
+      card_footer(class = "bg-white text-center", HTML(description))
     }
   ) 
 }
