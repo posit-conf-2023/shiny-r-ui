@@ -783,6 +783,56 @@ Best practice:
   
 :::
 
+## Your turn: nested sidebars `r countdown(minutes = 5, seconds = 0, top = 0)`
+
+<br/>
+
+::: {.panel-tabset}
+
+## Exercise
+
+Taking a basic `layout_sidebar` and looking at `?bslib::sidebar`, find a way to create another sidebar on the right side.
+
+```{r, eval=TRUE, echo=FALSE}
+describe_layout_function(
+  "Nested layout_sidebar()",
+  element = card_body(
+    class = "p-2",
+    height = 200,
+    layout_sidebar(
+      sidebar = sidebar("Left sidebar", width = "33%", class = "bg-light"),
+      layout_sidebar(
+        sidebar = sidebar("Right sidebar", position = "right"),
+        "Main contents"
+      ),
+      fillable = TRUE,
+      class = "p-0"
+    ) |>
+      tagAppendAttributes(class = "border rounded-top")
+  )
+)
+```
+
+::: {.callout-tip collapse="true" title="Hint"}
+Add `fillable = TRUE` and `class = "p-0"` to the main `layout_sidebar` function.
+:::
+
+## Solution
+
+```{r, eval=FALSE, echo=TRUE}
+layout_sidebar(
+  sidebar = sidebar("Left sidebar", width = "33%", class = "bg-light"),
+  layout_sidebar(
+    sidebar = sidebar("Right sidebar", position = "right"),
+    "Main contents",
+    fillable = TRUE, # fillable, taking all vertical space
+    class = "p-0" # zero padding
+  )
+)
+```
+
+:::
+
 ## Dashboard layout
 
 <br/>
