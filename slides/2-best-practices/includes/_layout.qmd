@@ -753,7 +753,7 @@ layout_column_wrap(
 ```{r, eval=TRUE, echo=FALSE}
 describe_layout_function(
   "layout_sidebar()",
-  "A sidebar layout.",
+  "<small>A sidebar layout.</small>",
   card_body(
     class = "p-2",
     height = 200,
@@ -798,7 +798,6 @@ Taking a basic `layout_sidebar` and looking at `?bslib::sidebar`, find a way to 
 
 ```{r, eval=TRUE, echo=FALSE}
 describe_layout_function(
-  "Nested layout_sidebar()",
   element = card_body(
     class = "p-2",
     height = 200,
@@ -872,7 +871,7 @@ tmp[[5]][[1]]$children[[2]]$attribs$class <- paste(
 
 describe_layout_function(
   "page_sidebar()",
-  "<code>layout_sidebar()</code> with title",
+  "<small><code>layout_sidebar()</code> with title.</small>",
   element = card_body(
     class = "p-2",
     height = 300,
@@ -1047,7 +1046,7 @@ A card is a __rectangular container__ for organizing __related__ content, throug
 ```{r, echo=FALSE, eval=TRUE}
 describe_layout_function(
   "Card header: card_header()",
-  "Card footer: card_footer()",
+  "<small>Card footer: card_footer()</small>",
   element = layout_sidebar(
     sidebar = sidebar("Card sidebar"),
     "Card body content",
@@ -1131,7 +1130,7 @@ panels <- lapply(1:3, function(i) {
 
 describe_layout_function(
   "accordion()",
-  "Child elements are <code>accordion_panel()</code>",
+  "<small>Child elements are <code>accordion_panel()</code></small>",
   element = accordion(
     !!!panels
   )
@@ -1173,8 +1172,6 @@ Combine `layout_sidebar()` to `accordion` to better organize input parameters wi
 
 ```{r, eval=TRUE, echo=FALSE}
 describe_layout_function(
-  "",
-  "",
   element = layout_sidebar(
     sidebar = sidebar(
       textInput("xlab", "X label", "x vals"),
@@ -1225,3 +1222,90 @@ layout_sidebar(
 
 :::
 
+
+## Value boxes
+
+<br/>
+
+Value boxes are __tiny card containers__ dedicated to highight a specific __metric__.
+
+<br/>
+
+::: {.panel-tabset}
+
+### Left-center layout
+
+:::: {.columns}
+
+::: {.column width="50%}
+```{r, eval=TRUE, echo=FALSE}
+describe_layout_function(
+  "value_box()",
+  "<small>Value boxes can also receive <code>full_screen = TRUE</code>.</small>",
+  element = value_box(
+    title = "Title",
+    value = "value",
+    showcase = bs_icon("graph-up"),
+    showcase_layout = showcase_left_center(),
+    "description",
+    theme_color = "success"
+  )
+)
+```
+:::
+
+::: {.column width="50%}
+```{r, eval=FALSE, echo=TRUE}
+# Value box 1
+value_box(
+  title = "Title",
+  value = "value",
+  showcase = bs_icon("graph-up"),
+  showcase_layout = showcase_left_center(),
+  "description",
+  theme_color = "success"
+)
+```
+:::
+
+::::
+
+### Top-right layout
+
+:::: {.columns}
+
+::: {.column width="50%}
+```{r, eval=TRUE, echo=FALSE}
+describe_layout_function(
+  "value_box()",
+  element = value_box(
+    title = "Title",
+    value = "value",
+    showcase = bs_icon("pie-chart"),
+    showcase_layout = showcase_top_right(),
+    "description"
+  )
+)
+```
+:::
+
+::: {.column width="50%}
+```{r, eval=FALSE, echo=TRUE}
+# Value box 1
+value_box(
+  title = "Title",
+  value = "value",
+  showcase = bs_icon("pie-chart"),
+  showcase_layout = showcase_top_right(),
+  "description"
+)
+```
+:::
+
+::::
+
+:::
+
+::: {.callout-tip collapse="true" title="Hint"}
+Value box can receive plots but more treatment is required to have a good rendering when the card is minimized. Please see [here](https://rstudio.github.io/bslib/articles/value-boxes/index.html#expandable-sparklines).
+:::

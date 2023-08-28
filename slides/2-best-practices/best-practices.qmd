@@ -40,9 +40,15 @@ library(emo)
 library(countdown)
 library(bslib)
 library(bsicons)
+library(plotly)
 
-describe_layout_function <- function(name, description = NULL, element = NULL, full_screen = FALSE) {
-  name <- knitr::combine_words(sprintf("<code>%s</code>", name),  and = " or ")
+describe_layout_function <- function(name = NULL, description = NULL, element = NULL, full_screen = FALSE) {
+  if (!is.null(name)) {
+    name <- knitr::combine_words(
+      sprintf("<code>%s</code>", name),  
+      and = " or "
+    )
+  }
 
   if (is.null(element)) {
     element <- card_body(
@@ -53,7 +59,9 @@ describe_layout_function <- function(name, description = NULL, element = NULL, f
 
   card(
     full_screen = full_screen,
-    card_header(class = "bg-light text-center", HTML(name)),
+    if (!is.null(name)) {
+      card_header(class = "bg-light text-center", HTML(name))
+    },
     element,
     if (!is.null(description)) {
       card_footer(class = "bg-white text-center", HTML(description))
