@@ -39,6 +39,7 @@ library(shiny)
 library(emo)
 library(countdown)
 library(bslib)
+library(bsicons)
 
 describe_layout_function <- function(name, description = NULL, element = NULL, full_screen = FALSE) {
   name <- knitr::combine_words(sprintf("<code>%s</code>", name),  and = " or ")

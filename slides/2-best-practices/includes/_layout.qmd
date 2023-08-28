@@ -1029,11 +1029,17 @@ Let's review the most outstanding `{bslib}` components:
 2. Accordions. 
 3. Value boxes.
 
+::: {.callout-tip collapse="true" title="Hint"}
+Most (if not all) `{bslib}` components have a `class` parameter to style them 🎨. They are also browsable, meaning typing `card("My card")` in the R console will show a card in the viewer panel 🎁
+:::
+
 ## Cards
 
 <br/>
 
-Card: rectangular container for organizing related content, through a more appealing design. 
+A card is a __rectangular container__ for organizing __related__ content, through a more __appealing__ design. 
+
+<br/>
 
 :::: {.columns}
 
@@ -1071,6 +1077,10 @@ card(
 
 ::::
 
+::: {.callout-tip collapse="true" title="Hint"}
+Pass `full_screen = TRUE` to make the card maximizable.
+:::
+
 
 ## Your turn: multiple cards `r countdown(minutes = 3, seconds = 0, top = 0)`
 
@@ -1100,3 +1110,118 @@ layout_column_wrap(
 ::: {.callout-tip collapse="true" title="Hint"}
 You can create those 6 cards programmatically with `lapply()` and pass them with `!!!` inside `layout_columns_wrap()`.
 :::
+
+
+## Accordions
+
+<br/>
+
+Accordions are made of __collapsible__ elements to organize content in the same container. 
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r, echo=FALSE, eval=TRUE}
+panels <- lapply(1:3, function(i) {
+  accordion_panel(
+    sprintf("Item %s", i),
+    sprintf("Content %s", i)
+  )
+})
+
+describe_layout_function(
+  "accordion()",
+  "Child elements are <code>accordion_panel()</code>",
+  element = accordion(
+    !!!panels
+  )
+)
+```
+:::
+
+::: {.column width="50%"}
+```{r, echo=TRUE, eval=FALSE}
+panels <- lapply(1:3, function(i) {
+  accordion_panel(
+    sprintf("Item %s", i),
+    sprintf("Content %s", i)
+  )
+})
+accordion(
+  # pass FALSE to have only 1 item open at a time
+  multiple = FALSE,
+  !!!panels
+)
+```
+:::
+
+::::
+
+::: {.callout-tip collapse="true" title="Hint"}
+You can see an accordion as a group of collapsible cards, to save vertical space.
+:::
+
+## Your turn: accordion and sidebars `r countdown(minutes = 3, seconds = 0, top = 0)`
+
+<br/>
+
+::: {.panel-tabset}
+
+## Exercise
+
+Combine `layout_sidebar()` to `accordion` to better organize input parameters within the following example.
+
+```{r, eval=TRUE, echo=FALSE}
+describe_layout_function(
+  "",
+  "",
+  element = layout_sidebar(
+    sidebar = sidebar(
+      textInput("xlab", "X label", "x vals"),
+      numericInput(
+        "obs", 
+        "Number of observations:",
+        min = 0, 
+        max = 1000, 
+        value = 500
+      ),
+      textInput("ylab", "Y label", "y yals"),
+    ),
+    "An imaginary plot"
+  )
+)
+
+```
+
+## Solution
+::: {style="font-size: 75%;"}
+```{r, eval=FALSE, echo=TRUE}
+layout_sidebar(
+  sidebar = sidebar(
+    accordion(
+      accordion_panel(
+        icon = bs_icon("file-bar-graph"),
+        "Value",
+        numericInput(
+          "obs", 
+          "Number of observations:",
+          min = 0, 
+          max = 1000, 
+          value = 500
+        )
+      ),
+      accordion_panel(
+        "Axis",
+        icon = bs_icon("body-text"),
+        textInput("xlab", "X label", "vals"),
+        textInput("ylab", "Y label", "yals")   
+      )
+    )
+  ),
+  "An imaginary plot"
+)
+```
+:::
+
+:::
+
