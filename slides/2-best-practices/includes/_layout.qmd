@@ -1025,8 +1025,9 @@ Don't forget that each `nav_panel` is a container which can host its own layout.
 Let's review the most outstanding `{bslib}` components:
 
 1. Cards.
-2. Accordions. 
-3. Value boxes.
+2. Tabs.
+3. Accordions. 
+4. Value boxes.
 
 ::: {.callout-tip collapse="true" title="Hint"}
 Most (if not all) `{bslib}` components have a `class` parameter to style them 🎨. They are also browsable, meaning typing `card("My card")` in the R console will show a card in the viewer panel 🎁
@@ -1110,6 +1111,57 @@ layout_column_wrap(
 You can create those 6 cards programmatically with `lapply()` and pass them with `!!!` inside `layout_columns_wrap()`.
 :::
 
+## Tabs
+
+<br/>
+
+Tabs allow to organize related content over __multiple pages__ [^not_exactly]. They can be part of navbars (navigation), cards or standalone.
+
+<br/>
+
+:::: {.columns}
+
+::: {.column width="50%"}
+![](./../../assets/images/2-best-practices/layout/tabset.png){width="100%"}
+:::
+
+::: {.column width="50%"}
+```{r, echo=TRUE, eval=FALSE}
+navset_tab(
+  nav_panel(title = "One", p("First tab content.")),
+  nav_panel(title = "Two", p("Second tab content."))
+)
+```
+:::
+
+
+::::
+
+[^not_exactly]: This is not really multiple page from an HTML point of view... but anyway :)
+
+## Your turn: tabs within cards `r countdown(minutes = 3, seconds = 0, top = 0)`
+
+<br/>
+
+::: {.panel-tabset}
+
+## Exercise
+
+Have a look at `?navset_card_tab` to include tabs within a card. Try out with `navset_card_pill`.
+
+## Solution
+```{r, eval=FALSE, echo=TRUE}
+navset_card_tab(
+  nav_panel(title = "One", p("First tab content.")),
+  nav_panel(title = "Two", p("Second tab content."))
+)
+```
+:::
+
+
+::: {.callout-tip collapse="true" title="Hint"}
+All those functions have a server [part](https://rstudio.github.io/bslib/reference/nav_select.html) to programmatically add/remove/select tabs. When doing so, pass an `id` to the parent container like `navset_card_tab(id = ..., ...)`. 
+:::
 
 ## Accordions
 
