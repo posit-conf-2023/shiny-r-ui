@@ -1132,6 +1132,7 @@ describe_layout_function(
   "accordion()",
   "<small>Child elements are <code>accordion_panel()</code></small>",
   element = accordion(
+    multiple = FALSE,
     !!!panels
   )
 )
