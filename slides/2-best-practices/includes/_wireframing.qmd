@@ -39,7 +39,11 @@ Remember about the design thinking process! Fail early rather than too late.
 
 <br/>
 
-Excalidraw (free), Figma (plans), Balsamiq (pay).
+- Excalidraw (free).
+- Figma (plans).
+- Balsamiq (pay).
+
+![](./../../assets/images/2-best-practices/wireframing/balsamiq-example.png){width=100% fig-align="center"}
 
 
 ## Your turn: shinyMons2
