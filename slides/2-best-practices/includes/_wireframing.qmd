@@ -1,0 +1,52 @@
+# Wireframing {data-stack-name="Wireframing"}
+
+
+## What?
+
+Wireframing is the action of drawing an app design on the paper or with a software:
+
+- Shows layout.
+- Shows user interactions.
+- Optional: Colors/typography.
+
+## Different fidelity levels
+
+![https://careerfoundry.com/en/blog/ux-design/what-is-a-wireframe-guide/](./../../assets/images/2-best-practices/wireframing/fidelity-level.png){width=100% fig-align="center"}
+
+
+## Why?
+
+Remember about the design thinking process! Fail early rather than too late.
+
+![](./../../assets/images/1-introduction/why-ux-design.jpeg){width=100% fig-align="center"}
+
+## How: 😎 "A l'ancienne"?
+
+<br/>
+
+::: {.center}
+🖊 pen, 📜 paper, 🧠 brain
+:::
+
+::: {.r-stack}
+![](./../../assets/images/2-best-practices/wireframing/cv.png){.fragment width=40% fig-align="center"}
+
+![](./../../assets/images/2-best-practices/wireframing/cv-final.png){.fragment width=50% fig-align="center"}
+:::
+
+
+## How: 💻 With a software/app?
+
+<br/>
+
+Excalidraw (free), Figma (plans), Balsamiq (pay).
+
+
+## Your turn: shinyMons2
+
+Open the Posit cloud space shared with you and click on the
+`shinyMons2` assignment.
+
+<br/>
+
+![](./../../assets/images/2-best-practices/wireframing/open-posit-cloud.png){width=100% fig-align="center"}

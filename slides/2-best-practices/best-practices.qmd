@@ -71,6 +71,7 @@ describe_layout_function <- function(name = NULL, description = NULL, element = 
 ```
 
 {{< include ./includes/_layout.qmd >}}
+{{< include ./includes/_wireframing.qmd >}}
 {{< include ./includes/_color-typo.qmd >}}
 {{< include ./includes/_user-feedback.qmd >}}
 {{< include ./includes/_pitfalls.qmd >}}

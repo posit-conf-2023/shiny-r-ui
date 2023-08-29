@@ -1280,7 +1280,7 @@ layout_sidebar(
 
 <br/>
 
-Value boxes are __tiny card containers__ dedicated to highight a specific __metric__.
+Value boxes are __tiny card containers__ dedicated to highlight a specific __metric__.
 
 <br/>
 
