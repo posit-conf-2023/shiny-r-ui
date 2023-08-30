@@ -815,4 +815,51 @@ Terminology <br> <br> <img src="./../../assets/images/2-best-practices/typograph
 [Putting it all together:]{style="font-size:100px;"} <br> Choose two fonts <br> and add colors <br> to create a `bslib::bstheme`!
 :::
 
-------------------------------------------------------------------------
+## Fonts with bslib
+
+<br/>
+
+`bs_theme` accepts specific font parameters:
+
+  - __base_font__ Default font for text.
+  - __code_font__ used for code.
+  - __heading_font__ for heading elements.
+  - __font_scale__ Font size multiplier (>0).
+
+Helpers such as `font_google()` allow to serve font files locally [^without-internet].
+
+[^without-internet]: useful without internet connection!
+
+## Your turn: adding fonts `r countdown(minutes = 5, seconds = 0, top = 0)`
+
+<br/>
+
+::: {.panel-tabset}
+
+### Exercise
+
+Taking the previous theme, add a font to it. Don't forget to leverage `{bslib}` font helpers such as `font_link()` and `font_google()` ...
+
+### Solution
+
+```{r, eval=FALSE, echo=TRUE}
+bs_theme(
+  version = 5L,
+  primary = "#A5DCFA",
+  secondary = NULL,
+  success = "#FAF670",
+  info = NULL,
+  warning = NULL,
+  danger = "#FA7D85",
+  base_font = font_link(
+    "Press Start 2P",
+    href = "https://fonts.googleapis.com/css?family=Press+Start+2P"
+  ),#font_google("Azeret Mono"),
+  code_font = font_google("Fira Code"),
+  heading_font = font_google("Inconsolata"),
+  font_scale = 1
+) |> bs_theme_preview()
+```
+
+:::
+
