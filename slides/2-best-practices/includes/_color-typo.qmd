@@ -425,6 +425,96 @@ HOW TO PICK A PALETTE <img src="./../../assets/images/2-best-practices/color/bra
 [Exercise:]{style="font-size:100px;"} <br> Pick a palette!
 :::
 
+
+## Introduction to bslib themes
+
+`{bslib}` provides theming capabilities for Shiny [^wizard].
+
+![](./../../assets/movies/2-best-practices/bslib-themer.mov){width="100%"}
+
+
+[^wizard]: See more at https://unleash-shiny.rinterface.com/beautify-with-bootstraplib.
+
+## Create a new theme 🎨
+
+<br/>
+
+Hello `bs_theme()` [^bootstrap-only]
+
+:::: {.columns}
+
+::: {.column width="50%"}
+- __version__: Bootstrap version (3, 4, 5, ...).
+- __bootswatch__: predefined themes.
+- __fg__: foreground color.
+- __bg__: background color.
+- __primary__, __secondary__, ...: palette 🎨
+- __...__: other theme variables.
+
+:::
+
+::: {.column width="50%"}
+```{r, echo=TRUE, eval=FALSE}
+bs_theme(
+  version = version_default(),
+  bootswatch = NULL,
+  ...,
+  bg = NULL,
+  fg = NULL,
+  primary = NULL,
+  secondary = NULL,
+  success = NULL,
+  info = NULL,
+  warning = NULL,
+  danger = NULL
+)
+```
+:::
+
+::::
+
+[^bootstrap-only]: `{bslib}` primarily supports Bootstrap themes.
+
+## bslib themes workflow
+
+<br/>
+
+```{mermaid}
+%%| fig-width: 6.5
+flowchart LR
+create[Create theme] --> preview[Preview] --> update[Refine]
+```
+
+## Your turn: create a palette `r countdown(minutes = 10, seconds = 0, top = 0)`
+
+<br/>
+
+::: {.panel-tabset}
+
+### Exercise
+
+With what you learnt about colors and `{bslib}`, create the palette of your dreams and preview it. You can browse to https://color.adobe.com/create/color-wheel to create the color palette.
+
+### Solution
+
+```{r, echo=TRUE, eval=FALSE}
+bs_theme(
+  version = 5L,
+  primary = "#A5DCFA",
+  secondary = NULL,
+  success = "#FAF670",
+  info = NULL,
+  warning = NULL,
+  danger = "#FA7D85"
+) |> bs_theme_preview()
+```
+
+:::
+
+::: {.callout-tip collapse="true" title="Hint"}
+To run the theme next to your favorite app, you may call `run_with_themer(shinyApp(ui, server))`.
+:::
+
 ------------------------------------------------------------------------
 
 ::: {.color-in-code .wotford}

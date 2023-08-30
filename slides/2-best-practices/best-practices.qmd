@@ -40,7 +40,6 @@ library(emo)
 library(countdown)
 library(bslib)
 library(bsicons)
-library(plotly)
 
 describe_layout_function <- function(name = NULL, description = NULL, element = NULL, full_screen = FALSE) {
   if (!is.null(name)) {
