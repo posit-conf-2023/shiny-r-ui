@@ -10,9 +10,11 @@ website:
   navbar:
     left:
       - href: index.qmd
-        text: Home
-      - schedule.qmd
-      - about.qmd
+        text: 🏠 Home
+      - href: schedule.qmd
+        text: 🕝 Schedule
+      - href: about.qmd
+        text: 👩‍🏫 🧑‍🏫 About us
     right:
       - icon: github
         menu:
@@ -22,14 +24,17 @@ website:
             url: https://github.com/posit-conf-2023/shiny-r-ui/issues
 
   sidebar:
-    style: "docked"
-    search: true
-    contents:
-      - ./0-welcome.qmd 
-      - ./1-introduction.qmd 
-      - ./2-best-practices.qmd 
-      - ./3-wireframing.qmd 
+    - title: "Slides"
+      style: "docked"
+      search: true
+      contents:
+        - ./0-welcome.qmd
+        - ./1-introduction.qmd
+        - ./2-best-practices.qmd
   page-navigation: true
+
+  #page-footer: 
+  #  left: "Copyright 2023, Norah Jones" 
 
 format:
   html:

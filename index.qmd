@@ -2,7 +2,7 @@
 title: "Web Design for Shiny Devs"
 ---
 
-## Overview
+## 🗾 Overview
 
 Website design and development is one of the most critical factors contributing to whether the user has a good or poor experience while browsing your site, directly influencing the overall impression of your brand. Besides, bad design decisions can significantly impact app performances. By exposing you to common governing rules of design, this course will walk you through the entire design process, from ideation to execution. These rules will help you to become a better collaborator to design teams, and enable you to create beautiful front-end experiences for Shiny.
 
@@ -28,16 +28,16 @@ This workshop will be appropriate for attendees who answer yes to these question
 :::
 :::
 
-## Preparation
+## 🧪 Preparation
 
-### Posit Cloud
+### [![](./assets/images/posit-cloud.svg){fig-alt="Posit Cloud logo" width=25%}](https://posit.cloud/)
 
 During this workshop, we'll use __Posit Cloud__ for the main activity. We kindly ask you to complete the following tasks prior to the workshop so you can get started.
 
 1. Create an account on [Posit Cloud](https://posit.cloud/) (if you don't have one).
 2. Open the following Posit Cloud [space](https://posit.cloud/spaces/400773/join?access_code=ajwkws91bhF-IhEXDVWH9-0mukSUF3jiETCkzrgt). Open the `shinyMons2` project and click on __Start__ to create your own copy of the project. If you’re automatically asked to restore packages, answer yes. Otherwise run `renv::restore()` in the R console. Note: our activity project leverages {renv} for better reproducibility. It roughly takes __20-30 minutes__ to restore all the packages from the renv.lock file on Posit Cloud (less locally if binaries are installed). 
 
-### Local setup (backup)
+### 💻 Local setup (backup)
 
 However, it is more than recommended to have a backup on your personal laptop and that you have relevant software installed and configured prior to the workshop start.
 
@@ -46,11 +46,11 @@ However, it is more than recommended to have a backup on your personal laptop an
 3. Optional: Install VS Code (https://code.visualstudio.com/), with R language support (https://marketplace.visualstudio.com/items?itemName=REditorSupport.r).
 4. Either with RStudio IDE or VSCode, clone the exercise from [here](https://github.com/posit-conf-2023/shiny-r-ui-exercises/tree/main) and restore the {renv} packages (automatically or doing `renv::restore()` in the R console).
 
-### Any questions?
+### ❓❓❓ Any questions?
 
 If you have questions in advance of the workshop, please answer to this thread: https://community.rstudio.com/t/web-design-for-shiny-developers-workshop-posit-conf-2023/172257.
 
-### How we will communicate during the workshop
+### 📻 How we will communicate during the workshop
 
 During the workshop, we will be using __Discord__ as our main communication method. To make the process go smoothly:
 
@@ -58,7 +58,7 @@ During the workshop, we will be using __Discord__ as our main communication meth
 2. Make sure your [display name](https://support.discord.com/hc/en-us/articles/12620128861463-New-Usernames-Display-Names#h_01GXPQABMYGEHGPRJJXJMPHF5C) is the one you used to register for the conference.
 3. In your “About Me”, put the name of your workshop(s).
 
-### Further instructions
+### ➕ Further instructions
 
 Closer to the start of the conference, we will invite you to the posit::conf Discord server, share the repository containing the slides and any further instructions to be ready.
 
