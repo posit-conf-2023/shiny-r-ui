@@ -624,34 +624,43 @@ Instead of using `placeholder` field, we can show a `tooltip`.
 :::: {.columns}
 
 ::: {.column width="50%" style="font-size: 75%;"}
-```{r eval=FALSE, echo=TRUE}
-library(shiny)
-library(shinyvalidate)
-library(bslib)
-
-ui <- fluidPage(
-  theme = bs_theme(version = 5L), # <1> 
-  tooltip( # <2> 
-    textInput(
-      "email",
-      tagList(icon("envelope"), "Email")
-    ), 
-    "Example: name.surname@domain.com" # <3> 
+```{r eval=TRUE, echo=FALSE}
+describe_layout_function(
+  "tooltip()",
+  "<small>Only for Bootstrap 5</small>",
+  element = textInput(
+    "email",
+    tagList(
+      bs_icon("envelope"), 
+      "Email", 
+      tooltip(
+        placement = "right",
+        bs_icon("info-circle", class = "ml-auto"),
+        "Example: name.surname@domain.com"
+      )
+    )
   )
 )
-
 # Server not shown (same as input validation above)
-
 ```
-
-- Tooltip only for Bootstrap 5.
-- Wrap UI element with `bslib::tooltip`.
-- Add message content.
 
 :::
 
 ::: {.column width="50%"}
-![](./../../assets/movies/2-best-practices/tooltip-validation.mov){width="100%"}
+```{r eval=FALSE, echo=TRUE}
+textInput(
+  "email",
+  tagList(
+    bs_icon("envelope"), 
+    "Email", 
+    tooltip(
+      placement = "top",
+      bs_icon("info-circle", class = "ml-auto"),
+      "Example: name.surname@domain.com"
+    )
+  )
+)
+```
 :::
 
 ::::
@@ -663,41 +672,56 @@ Many help libraries leverage popovers: introjs, ...
 
 :::: {.columns}
 
-::: {.column width="50%" style="font-size: 75%;"}
-```{r eval=FALSE, echo=TRUE}
-library(shiny)
-library(bslib)
-
-ui <- fluidPage(
-  theme = bs_theme(version = 5L),
-  popover(
-    plotOutput("distPlot"),
-    title = "Super plot",
-    options = list(html = TRUE),
-    tagList(
-      tags$b("This is the same plot I've used for every single 
-      demo I am doing since {shiny} exists. Maybe I should change
-      at some point."),
-      tags$img(src = "https://placehold.jp/150x150.png")
+::: {.column width="50%"}
+```{r, echo=FALSE, eval=TRUE}
+describe_layout_function(
+  "popover()",
+  "<small>Only for Bootstrap 5</small>",
+  element = value_box(
+    title = "A value box",
+    value = 130,
+    theme_color = "light",
+    showcase = bs_icon("arrow-up"),
+    p(
+      "More info here",
+      popover(
+        bs_icon("info-circle"),
+        title = "Breaking news!",
+        placement = "bottom",
+        options = list(html = TRUE),
+        tagList(
+          tags$b("These few lines of text will change your life forever."),
+          tags$img(src = "https://placehold.jp/150x150.png")
+        )
+      )
     )
   )
 )
-
-server <- function(input, output, session) {
-  output$distPlot <- renderPlot({
-    hist(rnorm(1000))
-  })
-}
 ```
-
-- Popover only for Bootstrap 5.
-- Wrap UI element with `bslib::popover`.
-- Add message content + custom HTML.
-
 :::
 
-::: {.column width="50%"}
-![](./../../assets/movies/2-best-practices/popover.mov){width="100%"}
+::: {.column width="50%" style="font-size: 75%;"}
+```{r eval=FALSE, echo=TRUE}
+value_box(
+  title = "A value box",
+  value = 130,
+  theme_color = "light",
+  showcase = bs_icon("arrow-up"),
+  p(
+    "More info here",
+    popover(
+      bs_icon("info-circle"),
+      title = "Breaking news!",
+      placement = "bottom",
+      options = list(html = TRUE),
+      tagList(
+        tags$b("These few lines of text will change your life forever."),
+        tags$img(src = "https://placehold.jp/150x150.png")
+      )
+    )
+  )
+)
+```
 :::
 
 ::::
