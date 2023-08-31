@@ -3,6 +3,8 @@
 
 ## Chatty apps
 
+<br/>
+
 Users should not guess what the app is doing:
 
   - If something goes wrong, user should know.
@@ -11,20 +13,20 @@ Users should not guess what the app is doing:
 
 ![](./../../assets/images/2-best-practices/feedback/searching.svg){width=100%, fig-align="center"}
 
-## Respect Design Principles
-
-user action –> app reaction
-
 ## Respect people's perseption
 
-- Not everyone can properly see red/green.
+<br/>
+
+- Not everyone can properly see colors.
 - Prioritise components that are accessibility proven (can be digested by screen readers).
 
 ![](./../../assets/images/2-best-practices/feedback/school-grade.jpg){width=100%, fig-align="center"}
 
-## Handle feedback
+## How to handle feedback?
 
-How to:
+<br/>
+
+We'll explore few topics:
 
 (1) Process user input/outputs?
 (2) Handle notifications?
@@ -40,7 +42,9 @@ How to:
 }
 ```
 
-## Inputs validation: best practices
+## Input validation best practices
+
+<br/>
 
 | Do's | Don'ts |
 |---------|:-----|
@@ -52,7 +56,9 @@ How to:
 | An error summary (accordion) | |
 
 
-## Inputs validation with a single field
+## Input validation with a single field
+
+<br/>
 
 <div class="good-bad-container">
 
@@ -180,6 +186,8 @@ server <- function(input, output) {
 
 ## Different levels of urgency
 
+<br/>
+
 - High attention: errors, user confirmation.
 - Medium attention: warnings.
 - Lower attention: success.
@@ -192,7 +200,9 @@ server <- function(input, output) {
 
 :::
 
-## Best practices
+## Notifications best practices
+
+<br/>
 
 | High attention | Medium attention | Lower attention |
 |---------|:-----|------|
@@ -294,6 +304,8 @@ server <- function(input, output, session) {
 
 ## What if we don't know the result of a given task?
 
+<br/>
+
 - The same task may succeed or fail based on
 different parameters.
 - Need to capture exceptions.
@@ -348,13 +360,17 @@ observeEvent(input$run, {
 
 ## Going further
 
+<br/>
+
 - {elvis}: https://github.com/ThinkR-open/elvis.
 - Error summary: https://service-manual.nhs.uk/design-system/components/error-summary
 
 
 ## (3) Loading/waiting time {.center}
 
-## Progress: best practices
+## Progress best practices
+
+<br/>
 
 - Quantifiable subtasks: __shiny::withProgess__.
 - For blocking tasks: full screen [`{waiter}`](https://waiter.john-coene.com/#/).
@@ -637,6 +653,8 @@ bg_task <- function() {
 
 ## Tooltips vs Popovers
 
+<br/>
+
 | | tooltips | popovers |
 |--------|---------|:-----|
 | What? | Bubble appearing on hover over an element | Card with title and body on press/hover |
@@ -649,7 +667,7 @@ bg_task <- function() {
 :::
 
 
-## Supercharged input validation with tooltips
+## Revisit input validation with tooltips
 
 <br/>
 
@@ -700,7 +718,7 @@ textInput(
 ::::
 
 
-## Popovers
+## Provide extra information with popovers
 
 <br/>
 
