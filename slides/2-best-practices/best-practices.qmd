@@ -1,14 +1,20 @@
 ---
 title: Web design best practices
+# To have Bootstrap in revealJS + jQuery for bslib output
+include-after-body:
+  text: |
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script><script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 format:
   revealjs:
     css: [
       './../../assets/css/introduction.css', 
       './../../assets/css/color.css',
-      './../../assets/css/layout.css'
+      './../../assets/css/layout.css',
+      './../../assets/css/bslib.min.css'
     ]
     code-link: true
     code-copy: true
+    code-annotations: hover
     fontsize: 24pt
     navigation-mode: vertical
     controls-layout: bottom-right
@@ -32,9 +38,43 @@ revealjs-plugins:
 library(htmltools)
 library(shiny)
 library(emo)
+library(countdown)
+library(bslib)
+library(bsicons)
+source("./../../assets/R/2-best-practices/sparkline-plot-utils.R")
+
+set.seed(4242)
+
+describe_layout_function <- function(name = NULL, description = NULL, element = NULL, full_screen = FALSE) {
+  if (!is.null(name)) {
+    name <- knitr::combine_words(
+      sprintf("<code>%s</code>", name),  
+      and = " or "
+    )
+  }
+
+  if (is.null(element)) {
+    element <- card_body(
+      class = "d-flex flex-column align-items-center",
+      div(style = "width: 6em; height: 6em; background-color: gray")
+    )
+  }
+
+  card(
+    full_screen = full_screen,
+    if (!is.null(name)) {
+      card_header(class = "bg-light text-center", HTML(name))
+    },
+    element,
+    if (!is.null(description)) {
+      card_footer(class = "bg-white text-center", HTML(description))
+    }
+  ) 
+}
 ```
 
 {{< include ./includes/_layout.qmd >}}
+{{< include ./includes/_wireframing.qmd >}}
 {{< include ./includes/_color-typo.qmd >}}
 {{< include ./includes/_user-feedback.qmd >}}
 {{< include ./includes/_pitfalls.qmd >}}

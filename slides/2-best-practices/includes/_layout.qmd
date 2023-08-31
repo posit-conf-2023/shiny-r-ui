@@ -628,29 +628,771 @@ noticing your way around a building, you notice its open or its maze like, that'
 
 <!-- but its also important to break the grid because if its too systematic it's too predictable!! -->
 
-------------------------------------------------------------------------
+## Introduction to bslib layouts
 
-::: move-down
+<br/>
 
-<h1>Exercise 1</h1>
+3 main layouts [^mixed]:
 
-You've been asked by a client to make a website homepage that includes:
+- Columns (grid): `layout_columns()`.
+- Sidebar: `layout_sidebar()`.
+- Multi pages: `page_navbar()`.
 
-1. An image 
-2. A short excerpt about the company
-3. Their logo
-4. 3 things that the company 
+[^mixed]: any sophisticated layout can be created starting from one of these 3 base layouts.
+
+## Column-based layout
+
+<br/>
+
+`layout_column_wrap()` is a simplified interface to CSS [grid](https://css-tricks.com/snippets/css/complete-guide-grid/).
+
+::: {.panel-tabset}
+
+### Fixed columns
+
+:::: {.columns}
+
+::: {.column width="50%"}
+![](./../../assets/movies/2-best-practices/layout/fixed-cols.mov){width="100%"}
+:::
+
+::: {.column width="50%"}
+```{r, eval=FALSE, echo=TRUE}
+layout_column_wrap(
+  width = 1/2, height = 300,
+  card1, card2, card3
+)
+```
+:::
+
+::::
+
+
+### Responsive columns
+
+3 cards of 200px require at least a viewport of 600px to display
+side by side.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+![](./../../assets/movies/2-best-practices/layout/responsive-cols.mov){width="100%"}
+:::
+
+::: {.column width="50%"}
+```{r, eval=FALSE, echo=TRUE}
+layout_column_wrap(
+  width = "200px", height = 300,
+  card1, card2, card3
+)
+```
+:::
+
+::::
+
+### Fixed width
+
+:::: {.columns}
+
+::: {.column width="50%"}
+![](./../../assets/movies/2-best-practices/layout/fixed-width.mov){width="100%"}
+:::
+
+::: {.column width="50%"}
+```{r, eval=FALSE, echo=TRUE}
+layout_column_wrap(
+  width = "200px", height = 300,
+  fixed_width = TRUE,
+  card1, card2, card3
+)
+```
+:::
+
+::::
+
 
 :::
 
-------------------------------------------------------------------------
+## Your turn: nested layouts `r countdown(minutes = 3, seconds = 0, top = 0)`
 
-::: move-down
+<br/>
 
-<h1>Exercise 2</h1>
+With your fresh `{bslib}` knowledge, try to reproduce the following
+layout.
 
-Create your layout using  `  { bslib }`
+::: {.panel-tabset}
+
+## Exercise
+
+![](./../../assets/images/2-best-practices/layout/nested-columns){width=100%}
+
+## Solution
+
+```{r, eval=FALSE, echo=TRUE}
+layout_column_wrap(
+  width = 1/2,
+  height = 300,
+  card1,
+  layout_column_wrap(
+    width = 1,
+    heights_equal = "row",
+    card2, card3
+  )
+)
+```
+
 :::
 
-------------------------------------------------------------------------
+## Sidebar layout
 
+<br/>
+
+:::: {.columns}
+
+::: {.column width="50%}
+```{r, eval=TRUE, echo=FALSE}
+describe_layout_function(
+  "layout_sidebar()",
+  "<small>A sidebar layout.</small>",
+  card_body(
+    class = "p-2",
+    height = 200,
+    layout_sidebar(
+      sidebar = sidebar("Sidebar", width = "33%", class = "bg-light"),
+      "Main contents"
+    ) |>
+      tagAppendAttributes(class = "border rounded-top")
+  )
+)
+```
+:::
+
+::: {.column width="50%"}
+```r
+layout_sidebar(
+  sidebar = sidebar("Sidebar"),
+  "Main contents"
+)
+```
+:::
+
+::::
+
+::: {.callout-tip}
+Best practice:
+
+  - Sidebar: for global __inputs__.
+  - Main content: for __outputs__ (local inputs).
+  
+:::
+
+## Your turn: nested sidebars `r countdown(minutes = 3, seconds = 0, top = 0)`
+
+<br/>
+
+::: {.panel-tabset}
+
+## Exercise
+
+Taking a basic `layout_sidebar` and looking at `?bslib::sidebar`, find a way to create another sidebar on the right side.
+
+```{r, eval=TRUE, echo=FALSE}
+describe_layout_function(
+  element = card_body(
+    class = "p-2",
+    height = 200,
+    layout_sidebar(
+      sidebar = sidebar("Left sidebar", width = "33%", class = "bg-light"),
+      layout_sidebar(
+        sidebar = sidebar("Right sidebar", position = "right"),
+        "Main contents"
+      ),
+      fillable = TRUE,
+      class = "p-0"
+    ) |>
+      tagAppendAttributes(class = "border rounded-top")
+  )
+)
+```
+
+::: {.callout-tip collapse="true" title="Hint"}
+Add `fillable = TRUE` and `class = "p-0"` to the main `layout_sidebar` function.
+:::
+
+## Solution
+
+```{r, eval=FALSE, echo=TRUE}
+layout_sidebar(
+  sidebar = sidebar("Left sidebar", width = "33%", class = "bg-light"),
+  layout_sidebar(
+    sidebar = sidebar("Right sidebar", position = "right"),
+    "Main contents",
+    fillable = TRUE, # fillable, taking all vertical space
+    class = "p-0" # zero padding
+  )
+)
+```
+
+:::
+
+## Dashboard layout
+
+<br/>
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r, eval=TRUE, echo=FALSE}
+tmp <- page_sidebar(
+  title = h1(
+    "My dashboard",
+    # Have to add inline CSS since
+    # Quarto fails with this class...
+    style = "background-color: #212529;
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 300;
+      padding: var(--bslib-spacer, 1rem);
+      padding-left: 1.5rem;
+      margin-bottom: 0;
+    "
+  ),
+  sidebar = "Sidebar",
+  "Main content area"
+)
+
+# Add some borders for nicer rendering. This is
+# ugly but for some reasons htmltools::tagQuery
+# does not want to work on page_sidebar ...
+tmp[[5]][[1]]$children[[2]]$attribs$class <- paste(
+  tmp[[5]][[1]]$children[[2]]$attribs$class,
+  "border rounded-top"
+)
+
+describe_layout_function(
+  "page_sidebar()",
+  "<small><code>layout_sidebar()</code> with title.</small>",
+  element = card_body(
+    class = "p-2",
+    height = 300,
+     tmp
+  )
+)
+```
+:::
+
+::: {.column width="50%"}
+```{r, eval=FALSE, echo=TRUE}
+page_sidebar(
+  title = "My dashboard",
+  sidebar = "Sidebar",
+  "Main content area"
+)
+```
+:::
+
+::::
+
+::: {.callout-tip}
+Best practice:
+
+  - Sidebar: for global __inputs__.
+  - Main content: for __outputs__ (local inputs).
+  
+:::
+
+## Your turn: dashboard layouts `r countdown(minutes = 3, seconds = 0, top = 0)`
+
+<br/>
+
+::: {.panel-tabset}
+
+## Exercise
+
+Take the previous dashboard example and add an input and ouput of your choice.
+
+## Solution
+
+```{r, eval=FALSE, echo=TRUE}
+library(shiny)
+library(bslib)
+
+ui <- page_sidebar(
+  title = "My dashboard",
+  sidebar = tagList(
+    sliderInput(
+      "obs", 
+      "Number of observations:",
+      min = 0, 
+      max = 1000, 
+      value = 500
+    )
+  ),
+  plotOutput("distPlot")
+)
+
+shinyApp(ui, function(input, output) {
+  output$distPlot <- renderPlot({
+    hist(rnorm(input$obs))
+  })
+})
+```
+
+:::
+
+## Multi pages layout
+
+<br/>
+
+For more complex dashboards:
+
+  - Replace `page_sidebar` by `page_navbar`.
+  - Use `nav_panel` for each body tab.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+![](./../../assets/movies/2-best-practices/layout/page-navbar.mov){width="100%"}
+:::
+
+::: {.column width="50%"}
+```{r, echo=TRUE, eval=FALSE}
+page_navbar(
+  title = "Multi pages",
+  nav_panel("Tab 1", "Tab 1 content"),
+  nav_panel("Tab 2", "Tab 2 content")
+)
+```
+:::
+
+::::
+
+
+## Your turn: tab-specific sidebar `r countdown(minutes = 3, seconds = 0, top = 0)`
+
+<br/>
+
+Until now, we only had shared sidebars.
+
+::: {.panel-tabset}
+
+## Exercise
+
+Take the previous `page_navbar` template and try to add a dedicated sidebar for each `nav_panel`.
+
+## Solution
+::: {style="font-size: 50%;"}
+```{r, eval=FALSE, echo=TRUE}
+library(shiny)
+library(bslib)
+
+ui <- page_navbar(
+  title = "Multiple sidebars",
+  nav_panel(
+    "Tab 1", 
+    layout_sidebar(
+      sidebar = sidebar("Sidebar tab 1"),
+      "Tab 1 content"
+    )
+  ),
+  nav_panel(
+    "Tab 2", 
+    layout_sidebar(
+      sidebar = sidebar("Sidebar tab 2"),
+      "Tab 2 content"
+    )
+  )
+)
+
+shinyApp(ui, function(input, output) {
+  output$distPlot <- renderPlot({
+    hist(rnorm(input$obs))
+  })
+})
+```
+:::
+
+:::
+
+::: {.callout-tip collapse="true" title="Hint"}
+Don't forget that each `nav_panel` is a container which can host its own layout.
+:::
+
+## bslib components overview
+
+<br/>
+
+Let's review the most outstanding `{bslib}` components:
+
+1. Cards.
+2. Tabs.
+3. Accordions. 
+4. Value boxes.
+
+::: {.callout-tip collapse="true" title="Hint"}
+Most (if not all) `{bslib}` components have a `class` parameter to style them 🎨. They are also browsable, meaning typing `card("My card")` in the R console will show a card in the viewer panel 🎁
+:::
+
+## Cards
+
+<br/>
+
+A card is a __rectangular container__ for organizing __related__ content, through a more __appealing__ design. 
+
+<br/>
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r, echo=FALSE, eval=TRUE}
+describe_layout_function(
+  "Card header: card_header()",
+  "<small>Card footer: card_footer()</small>",
+  element = layout_sidebar(
+    sidebar = sidebar("Card sidebar"),
+    "Card body content",
+    fillable = TRUE
+  ),
+  full_screen = TRUE
+)
+```
+:::
+
+::: {.column width="50%"}
+```{r, echo=TRUE, eval=FALSE}
+card(
+  full_screen = TRUE,
+  card_header("Card header"),
+  # If not passed explicitly, elements are wrapped inside
+  # card_body ...
+  layout_sidebar(
+    sidebar = sidebar("Card sidebar"),
+    "Card body content",
+    fillable = TRUE
+  ),
+  card_footer("Card footer")
+)
+```
+:::
+
+::::
+
+::: {.callout-tip collapse="true" title="Hint"}
+Pass `full_screen = TRUE` to make the card maximizable.
+:::
+
+
+## Your turn: multiple cards `r countdown(minutes = 3, seconds = 0, top = 0)`
+
+<br/>
+
+::: {.panel-tabset}
+
+## Exercise
+
+Combine `layout_columns_wrap()` and `card()` to create a grid composed of 3 columns and 2 rows. Then play with the screen width and conclude.
+
+## Solution
+```{r, eval=FALSE, echo=TRUE}
+cards <- lapply(1:6, function(i) {
+  card(sprintf("Card %s", i))
+})
+
+layout_column_wrap(
+  width = 1/3,
+  height = 300,
+  !!!cards
+)
+```
+:::
+
+
+::: {.callout-tip collapse="true" title="Hint"}
+You can create those 6 cards programmatically with `lapply()` and pass them with `!!!` inside `layout_columns_wrap()`.
+:::
+
+## Tabs
+
+<br/>
+
+Tabs allow to organize related content over __multiple pages__ [^not_exactly]. They can be part of navbars (navigation), cards or standalone.
+
+<br/>
+
+:::: {.columns}
+
+::: {.column width="50%"}
+![](./../../assets/images/2-best-practices/layout/tabset.png){width="100%"}
+:::
+
+::: {.column width="50%"}
+```{r, echo=TRUE, eval=FALSE}
+navset_tab(
+  nav_panel(title = "One", p("First tab content.")),
+  nav_panel(title = "Two", p("Second tab content."))
+)
+```
+:::
+
+
+::::
+
+[^not_exactly]: This is not really multiple page from an HTML point of view... but anyway :)
+
+## Your turn: tabs within cards `r countdown(minutes = 3, seconds = 0, top = 0)`
+
+<br/>
+
+::: {.panel-tabset}
+
+## Exercise
+
+Have a look at `?navset_card_tab` to include tabs within a card. Try out with `navset_card_pill`.
+
+## Solution
+```{r, eval=FALSE, echo=TRUE}
+navset_card_tab(
+  nav_panel(title = "One", p("First tab content.")),
+  nav_panel(title = "Two", p("Second tab content."))
+)
+```
+:::
+
+
+::: {.callout-tip collapse="true" title="Hint"}
+All those functions have a server [part](https://rstudio.github.io/bslib/reference/nav_select.html) to programmatically add/remove/select tabs. When doing so, pass an `id` to the parent container like `navset_card_tab(id = ..., ...)`. 
+:::
+
+## Accordions
+
+<br/>
+
+Accordions are made of __collapsible__ elements to organize content in the same container. 
+
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r, echo=FALSE, eval=TRUE}
+panels <- lapply(1:3, function(i) {
+  accordion_panel(
+    sprintf("Item %s", i),
+    sprintf("Content %s", i)
+  )
+})
+
+describe_layout_function(
+  "accordion()",
+  "<small>Child elements are <code>accordion_panel()</code></small>",
+  element = accordion(
+    multiple = FALSE,
+    !!!panels
+  )
+)
+```
+:::
+
+::: {.column width="50%"}
+```{r, echo=TRUE, eval=FALSE}
+panels <- lapply(1:3, function(i) {
+  accordion_panel(
+    sprintf("Item %s", i),
+    sprintf("Content %s", i)
+  )
+})
+accordion(
+  # pass FALSE to have only 1 item open at a time
+  multiple = FALSE,
+  !!!panels
+)
+```
+:::
+
+::::
+
+::: {.callout-tip collapse="true" title="Hint"}
+You can see an accordion as a group of collapsible cards, to save vertical space.
+:::
+
+## Your turn: accordion and sidebars `r countdown(minutes = 3, seconds = 0, top = 0)`
+
+<br/>
+
+::: {.panel-tabset}
+
+## Exercise
+
+Combine `layout_sidebar()` to `accordion` to better organize input parameters within the following example.
+
+```{r, eval=TRUE, echo=FALSE}
+describe_layout_function(
+  element = layout_sidebar(
+    sidebar = sidebar(
+      textInput("xlab", "X label", "x vals"),
+      numericInput(
+        "obs", 
+        "Number of observations:",
+        min = 0, 
+        max = 1000, 
+        value = 500
+      ),
+      textInput("ylab", "Y label", "y yals"),
+    ),
+    "An imaginary plot"
+  )
+)
+
+```
+
+## Solution
+::: {style="font-size: 75%;"}
+```{r, eval=FALSE, echo=TRUE}
+layout_sidebar(
+  sidebar = sidebar(
+    accordion(
+      accordion_panel(
+        icon = bs_icon("file-bar-graph"),
+        "Value",
+        numericInput(
+          "obs", 
+          "Number of observations:",
+          min = 0, 
+          max = 1000, 
+          value = 500
+        )
+      ),
+      accordion_panel(
+        "Axis",
+        icon = bs_icon("body-text"),
+        textInput("xlab", "X label", "vals"),
+        textInput("ylab", "Y label", "yals")   
+      )
+    )
+  ),
+  "An imaginary plot"
+)
+```
+:::
+
+:::
+
+
+## Value boxes
+
+<br/>
+
+Value boxes are __tiny card containers__ dedicated to highlight a specific __metric__.
+
+<br/>
+
+::: {.panel-tabset}
+
+### Left-center layout
+
+:::: {.columns}
+
+::: {.column width="50%}
+```{r, eval=TRUE, echo=FALSE}
+describe_layout_function(
+  "value_box()",
+  "<small>Value boxes can also receive <code>full_screen = TRUE</code>.</small>",
+  element = value_box(
+    title = "Title",
+    value = "value",
+    showcase = bs_icon("graph-up"),
+    showcase_layout = showcase_left_center(),
+    "description",
+    theme = "success"
+  )
+)
+```
+:::
+
+::: {.column width="50%}
+```{r, eval=FALSE, echo=TRUE}
+# Value box 1
+value_box(
+  title = "Title",
+  value = "value",
+  showcase = bs_icon("graph-up"),
+  showcase_layout = showcase_left_center(),
+  "description",
+  theme = "success"
+)
+```
+:::
+
+::::
+
+### Top-right layout
+
+:::: {.columns}
+
+::: {.column width="50%}
+```{r, eval=TRUE, echo=FALSE}
+describe_layout_function(
+  "value_box()",
+  "<small> With <code>showcase_top_right()</code></small>",
+  element = value_box(
+    title = "Title",
+    value = "value",
+    showcase = bs_icon("pie-chart"),
+    showcase_layout = showcase_top_right(),
+    "description"
+  )
+)
+```
+:::
+
+::: {.column width="50%}
+```{r, eval=FALSE, echo=TRUE}
+# Value box 1
+value_box(
+  title = "Title",
+  value = "value",
+  showcase = bs_icon("pie-chart"),
+  showcase_layout = showcase_top_right(),
+  "description"
+)
+```
+:::
+
+::::
+
+### Bottom layout
+
+:::: {.columns}
+
+::: {.column width="50%}
+```{r, eval=TRUE, echo=FALSE}
+describe_layout_function(
+  "value_box()",
+  "<small> With <code>showcase_bottom()</code></small>",
+  element = value_box(
+    title = "Title",
+    value = "value",
+    showcase = sparkline_plot(),
+    showcase_layout = showcase_bottom()
+  )
+)
+```
+:::
+
+::: {.column width="50%}
+```{r, eval=FALSE, echo=TRUE}
+# Value box 1
+value_box(
+  title = "Title",
+  value = "value",
+  showcase = sparkline_plot(),
+  showcase_layout = showcase_bottom()
+)
+```
+:::
+
+::::
+
+:::
+
+::: {.callout-tip collapse="true" title="Hint"}
+Value box can receive plots but more treatment is required to have a good rendering when the card is minimized. Please see [here](https://rstudio.github.io/bslib/articles/value-boxes/index.html#expandable-sparklines).
+:::
