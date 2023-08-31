@@ -14,6 +14,7 @@ format:
     ]
     code-link: true
     code-copy: true
+    code-annotations: hover
     fontsize: 24pt
     navigation-mode: vertical
     controls-layout: bottom-right

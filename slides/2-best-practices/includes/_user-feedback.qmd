@@ -5,8 +5,8 @@
 
 Users should not guess what the app is doing:
 
-    - If something goes wrong, user should know.
-    - If something was successful, users should also know.
+  - If something goes wrong, user should know.
+  - If something was successful, users should also know.
 
 
 ![](./../../assets/images/2-best-practices/feedback/searching.svg){width=100%, fig-align="center"}
@@ -52,7 +52,7 @@ How to:
 | An error summary (accordion) | |
 
 
-## Inputs validation: example with a single field
+## Inputs validation with a single field
 
 <div class="good-bad-container">
 
@@ -79,11 +79,17 @@ E-mail
 ![](./../../assets/images/2-best-practices/feedback/grey-error.png){width=100%, fig-align="center"}
 
 
-## Inputs validation: with [{shinyvalidate}](https://rstudio.github.io/shinyvalidate/articles/shinyvalidate.html)
+## Inputs validation with [{shinyvalidate}](https://rstudio.github.io/shinyvalidate/articles/shinyvalidate.html)
+
+<br/>
 
 :::: {.columns}
 
-::: {.column width="65%"}
+::: {.column width="50%"}
+![](./../../assets/movies/2-best-practices/shinyvalidate-email.mov){width="100%" height="300"}
+:::
+
+::: {.column width="50%" style="font-size: 75%;"}
 ```{r eval=FALSE, echo=TRUE}
 library(shiny)
 library(shinyvalidate)
@@ -92,47 +98,47 @@ ui <- fluidPage(
   textInput(
     "email", 
     tagList(icon("envelope"), "Email"),
-    placeholder = "example: name.surname@domain.com" # <1>
+    placeholder = "example: name.surname@domain.com"             # <1>
   )
 )
 
 server <- function(input, output, session) {
-  iv <- InputValidator$new() # <2>
-  iv$add_rule("email", sv_required()) # <3>
-  iv$add_rule( # <3>
-    "email", # <3>
-    sv_email( # <3>
-        message = tagList( # <3>
-            icon("exclamation-circle"), # <3>
-            "Error: a valid email should be like:", # <3>
-            span(class = "underline", "name.surname@domain.com") # <3>
-        ) # <3>
-    ) # <3>
-  ) # <3>
-  iv$enable() # <4>
+  iv <- InputValidator$new()                                     # <2>
+  iv$add_rule("email", sv_required())                            # <3>
+  iv$add_rule(                                                   # <3>
+    "email",                                                     # <3>
+    sv_email(                                                    # <3>
+      message = tagList(                                       # <3>
+        icon("exclamation-circle"),                          # <3>
+        "Error: a valid email should be like:",              # <3>
+        span(class = "underline", "name.surname@domain.com") # <3>
+      )                                                        # <3>
+    )                                                            # <3>
+  )                                                              # <3>
+  iv$enable()                                                    # <4>
 }
 ```
-
 
 1. Add __placeholder__ as example.
 2. Initialise input validator R6 instance.
 3. Prerequisites + add custom error message with icon.
 4. Activate the validation.
-:::
 
-::: {.column width="35%"}
-![](./../../assets/movies/2-best-practices/shinyvalidate-email.mov){width="320" height="240"}
 :::
 
 ::::
 
-## Output validation
+## Output validation [^validation-bonus]
 
-How to get an output? [^input-validation]
+<br/>
 
 :::: {.columns}
 
-::: {.column width="65%"}
+::: {.column width="50%"}
+![](./../../assets/movies/2-best-practices/validate-output.mov){width="100%" height="240"}
+:::
+
+::: {.column width="50%" style="font-size: 75%;"}
 ```{r eval=FALSE, echo=TRUE}
 ui <- fluidPage(
   textInput("name", "Name"),
@@ -143,28 +149,28 @@ ui <- fluidPage(
 server <- function(input, output) {
   output$res <- renderText({
     if (nchar(input$name) == 0 || nchar(input$surname) == 0) { # <1>
-        validate("Fill all the inputs to see the result") # <2>
+      validate("Fill all the inputs to see the result")      # <2>
     } else {
-        paste0(input$name, input$surname)
+      paste0(input$name, input$surname)
     }
   })
 }
 ```
 
-
 1. Condition for which the message will be shown.
 2. Wrap end-user message within __shiny::validate__.
-:::
 
-::: {.column width="35%"}
-![](./../../assets/movies/2-best-practices/validate-output.mov){width="320" height="240"}
 :::
 
 ::::
 
-[^input-validation]: complement input validation.
+[^validation-bonus]: complements input validation.
 
 ## Going further
+
+<br/>
+
+![](./../../assets/images/2-best-practices/feedback/shiny-emptystate.gif){width="100%"}
 
 - {shiny.emptystate}: https://appsilon.github.io/shiny.emptystate/
 
@@ -196,34 +202,40 @@ server <- function(input, output) {
 
 ## Example for success
 
+<br/>
+
 :::: {.columns}
 
-::: {.column width="65%"}
+::: {.column width="50%"}
+![](./../../assets/movies/2-best-practices/success-notification.mov){width="100%" height="240"}
+:::
+
+::: {.column width="50%" style="font-size: 75%;"}
 ```{r eval=FALSE, echo=TRUE}
 ui <- fluidPage(
-  actionButton("send", "Send mail", icon = icon("paper-plane"))
+  actionButton(
+    "send", 
+    "Send mail", 
+    icon = icon("paper-plane")
+  )
 )
 
 server <- function(input, output) {
   observeEvent(input$send, {
     showNotification(
-        ui = tagList(
-            icon("check"),
-            "Message successfully sent!"
-        )
+      ui = tagList(
+        icon("check"),
+        "Message successfully sent!"
+      )
     )
   })
 }
 ```
 
-- We used a toast __shiny::showNotification__.
+- We used __shiny::showNotification__.
 - Auto close is ok.
 - Displayed in the corner (not high priority).
 
-:::
-
-::: {.column width="35%"}
-![](./../../assets/movies/2-best-practices/success-notification.mov){width="320" height="240"}
 :::
 
 ::::
@@ -231,30 +243,40 @@ server <- function(input, output) {
 
 ## Example for errors
 
+<br/>
+
 :::: {.columns}
 
 ::: {.column width="50%"}
+![](./../../assets/movies/2-best-practices/error-notification.mov){width="100%"}
+:::
+
+::: {.column width="50%" style="font-size: 75%;"}
 ```{r eval=FALSE, echo=TRUE}
 ui <- fluidPage(
-  actionButton("run", "Run simulation", icon = icon("calculator"))
+  actionButton(
+    "run", 
+    "Run simulation", 
+    icon = icon("calculator")
+  )
 )
 
 server <- function(input, output, session) {
   observeEvent(input$run, {
     Sys.sleep(2)
     showModal(
-        modalDialog(
-            title = tagList(
-                icon("xmark"),
-                "Error: computation failed."
-            ),
-            p("Error description (depends on user level...)"),
-            br(),
-            tagList(
-                icon("exclamation-circle"),
-                "Parameter a is ..."
-            )
+      modalDialog(
+        title = tagList(
+          icon("xmark"),
+          "Error: computation failed."
+        ),
+        p("Error description (depends on user level...)"),
+        br(),
+        tagList(
+          icon("exclamation-circle"),
+          "Parameter a is ..."
         )
+      )
     )
   })
 }
@@ -267,10 +289,6 @@ server <- function(input, output, session) {
 
 :::
 
-::: {.column width="50%"}
-![](./../../assets/movies/2-best-practices/error-notification.mov){width="100%"}
-:::
-
 ::::
 
 
@@ -281,35 +299,42 @@ different parameters.
 - Need to capture exceptions.
 - `tryCatch` is your friend.
 
-## Capture exceptions: with {shiny}
+## Capture exceptions with {shiny}
+
+<br/>
 
 :::: {.columns}
 
 ::: {.column width="50%"}
+![](./../../assets/movies/2-best-practices/capture-result.mov){width="100%"}
+:::
+
+::: {.column width="50%" style="font-size: 75%;"}
 ```{r eval=FALSE, echo=TRUE}
 observeEvent(input$run, {
-    res <- sample(c(FALSE, TRUE), 1)
-    tryCatch({
-        if (res) {
-            showNotification(
-                ui = tagList(
-                    icon("check"),
-                    "Computation successful."
-                )
-            )
-        } else {
-            stop("<Error message>")
-        }
-    }, error = function(e) {
-        showModal(
-            modalDialog(
-                title = tagList(icon("xmark"),
-                    "Error: computation failed."
-                ),
-                sprintf("%s", e$message)
-            )
+  res <- sample(c(FALSE, TRUE), 1)
+  tryCatch({
+    if (res) {
+      showNotification(
+        ui = tagList(
+          icon("check"),
+          "Computation successful."
         )
-    })
+      )
+    } else {
+        stop("<Error message>")
+    }
+  }, error = function(e) {
+    showModal(
+      modalDialog(
+        title = tagList(
+          icon("xmark"),
+          "Error: computation failed."
+        ),
+        sprintf("%s", e$message)
+      )
+    )
+  })
 })
 ```
 
@@ -317,10 +342,6 @@ observeEvent(input$run, {
 - Return either notification or modal.
 - Note: we could also capture warnings.
 
-:::
-
-::: {.column width="50%"}
-![](./../../assets/movies/2-best-practices/capture-result.mov){width="100%"}
 :::
 
 ::::
@@ -342,46 +363,57 @@ observeEvent(input$run, {
 
 ## Button spinner
 
+<br/>
+
 When we don't necessarily know the waiting time ...
 
 :::: {.columns}
 
-::: {.column width="60%"}
+::: {.column width="50%"}
+![](./../../assets/movies/2-best-practices/spinning-button.mov){width="100%"}
+:::
+
+::: {.column width="50%" style="font-size: 75%;"}
 
 ::: {.panel-tabset}
 
 ### R
 ```{r eval=FALSE, echo=TRUE}
 ui <- fluidPage(
-  actionButton("run", "Run simulation", icon = icon("calculator"))
+  actionButton(
+    "run", 
+    "Run simulation", 
+    icon = icon("calculator")
+  )
 )
 
 server <- function(input, output, session) {
   observeEvent(input$run, {
     session$sendCustomMessage("add-spinner", "run")
-    Sys.sleep(2)
+    Sys.sleep(2) # Fake calculation time
     session$sendCustomMessage("remove-spinner", "run")
   })
 }
 ```
 
 - Indicate user when task is running.
-- Notify when task is over (not shown for space reasons). 
+- Notify when task is over (not shown for space reasons).
+- May be combined with notification, error handling, ...
 
 ### JS
 
 ```js
 $(function() {
-    Shiny.addCustomMessageHandler('add-spinner', function(m) {
-        $('#run i')
-            .removeClass('fa-calculator')
-            .addClass('fa-spinner fa-spin');
-    });
-    Shiny.addCustomMessageHandler('remove-spinner', function(m) {
-        $('#run i')
-            .removeClass('fa-spinner fa-spin')
-            .addClass('fa-calculator')
-    });
+  Shiny.addCustomMessageHandler('add-spinner', function(m) {
+    $('#run i')
+      .removeClass('fa-calculator')
+      .addClass('fa-spinner fa-spin');
+  });
+  Shiny.addCustomMessageHandler('remove-spinner', function(m) {
+    $('#run i')
+      .removeClass('fa-spinner fa-spin')
+      .addClass('fa-calculator')
+  });
 }); 
 ```
 
@@ -389,17 +421,19 @@ $(function() {
 
 :::
 
-::: {.column width="40%"}
-![](./../../assets/movies/2-best-practices/spinning-button.mov){width="100%"}
-:::
-
 ::::
 
 ## Preloader
 
+<br/>
+
 When the app is loading, you can display a spinner with `Waiter`.
 
 :::: {.columns}
+
+::: {.column width="50%"}
+![](./../../assets/movies/2-best-practices/waiter-preloader.mov){width="100%"}
+:::
 
 ::: {.column width="50%"}
 
@@ -478,18 +512,20 @@ connect_db <- function(w) {
 
 :::
 
-::: {.column width="50%"}
-![](./../../assets/movies/2-best-practices/waiter-preloader.mov){width="100%"}
-:::
-
 ::::
 
 
 ## Local progress
 
+<br/>
+
 For async tasks, we indicate local computation with `waiter::Waitress` ...
 
 :::: {.columns}
+
+::: {.column width="50%"}
+![](./../../assets/movies/2-best-practices/local-progress.mov){width="100%"}
+:::
 
 ::: {.column width="50%"}
 
@@ -590,10 +626,6 @@ bg_task <- function() {
 
 :::
 
-::: {.column width="50%"}
-![](./../../assets/movies/2-best-practices/local-progress.mov){width="100%"}
-:::
-
 ::::
 
 ## Going further
@@ -619,6 +651,8 @@ bg_task <- function() {
 
 ## Supercharged input validation with tooltips
 
+<br/>
+
 Instead of using `placeholder` field, we can show a `tooltip`.
 
 :::: {.columns}
@@ -635,7 +669,7 @@ describe_layout_function(
       "Email", 
       tooltip(
         placement = "right",
-        bs_icon("info-circle", class = "ml-auto"),
+        bs_icon("info-circle"),
         "Example: name.surname@domain.com"
       )
     )
@@ -655,7 +689,7 @@ textInput(
     "Email", 
     tooltip(
       placement = "top",
-      bs_icon("info-circle", class = "ml-auto"),
+      bs_icon("info-circle"),
       "Example: name.surname@domain.com"
     )
   )
@@ -668,7 +702,7 @@ textInput(
 
 ## Popovers
 
-Many help libraries leverage popovers: introjs, ...
+<br/>
 
 :::: {.columns}
 
