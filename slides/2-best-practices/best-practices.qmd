@@ -41,6 +41,9 @@ library(emo)
 library(countdown)
 library(bslib)
 library(bsicons)
+source("./../../assets/R/2-best-practices/sparkline-plot-utils.R")
+
+set.seed(4242)
 
 describe_layout_function <- function(name = NULL, description = NULL, element = NULL, full_screen = FALSE) {
   if (!is.null(name)) {

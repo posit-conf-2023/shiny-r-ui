@@ -1331,6 +1331,7 @@ value_box(
 ```{r, eval=TRUE, echo=FALSE}
 describe_layout_function(
   "value_box()",
+  "<small> With <code>showcase_top_right()</code></small>",
   element = value_box(
     title = "Title",
     value = "value",
@@ -1351,6 +1352,39 @@ value_box(
   showcase = bs_icon("pie-chart"),
   showcase_layout = showcase_top_right(),
   "description"
+)
+```
+:::
+
+::::
+
+### Bottom layout
+
+:::: {.columns}
+
+::: {.column width="50%}
+```{r, eval=TRUE, echo=FALSE}
+describe_layout_function(
+  "value_box()",
+  "<small> With <code>showcase_bottom()</code></small>",
+  element = value_box(
+    title = "Title",
+    value = "value",
+    showcase = sparkline_plot(),
+    showcase_layout = showcase_bottom()
+  )
+)
+```
+:::
+
+::: {.column width="50%}
+```{r, eval=FALSE, echo=TRUE}
+# Value box 1
+value_box(
+  title = "Title",
+  value = "value",
+  showcase = sparkline_plot(),
+  showcase_layout = showcase_bottom()
 )
 ```
 :::
