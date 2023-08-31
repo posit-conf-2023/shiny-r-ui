@@ -358,6 +358,29 @@ observeEvent(input$run, {
 
 ::::
 
+## Your turn: errors in `{shinyMons2}` `r countdown(minutes = 10, seconds = 0, top = 0)`
+
+<br/>
+
+::: {.panel-tabset}
+
+## Exercise
+
+Taking our `{shinyMons2}` app, the `select_pokemon()` [function](https://github.com/posit-conf-2023/shiny-r-ui-exercises/blob/main/R/utils.R#L201) has unpredictible behavior and may crash. Leverage `tryCatch` so that the app can handle success (`notification`) or errors (`modal`). 
+
+```{r, eval=TRUE, echo=FALSE}
+
+```
+
+## Solution
+::: {style="font-size: 75%;"}
+```{r, eval=FALSE, echo=TRUE}
+
+```
+:::
+
+:::
+
 ## Going further
 
 <br/>
@@ -529,6 +552,30 @@ connect_db <- function(w) {
 :::
 
 ::::
+
+
+## Your turn: a preloader for `{shinyMons2}` `r countdown(minutes = 10, seconds = 0, top = 0)`
+
+<br/>
+
+::: {.panel-tabset}
+
+## Exercise
+
+Taking our `{shinyMons2}` app, the `select_pokemon()` [function](https://github.com/posit-conf-2023/shiny-r-ui-exercises/blob/main/R/utils.R#L188) is still slow. Leverage `{waiter}` so that the app displays a loading screen at start and each time the selected pokemon changes.
+
+```{r, eval=TRUE, echo=FALSE}
+
+```
+
+## Solution
+::: {style="font-size: 75%;"}
+```{r, eval=FALSE, echo=TRUE}
+
+```
+:::
+
+:::
 
 
 ## Local progress
@@ -777,3 +824,27 @@ value_box(
 :::
 
 ::::
+
+
+## Your turn: tooltips and popovers for `{shinyMons2}` `r countdown(minutes = 10, seconds = 0, top = 0)`
+
+<br/>
+
+::: {.panel-tabset}
+
+## Exercise
+
+Taking our `{shinyMons2}` app, leverage `tooltip()` and/or `popovers()` to better convey additional information and help messages.
+
+```{r, eval=TRUE, echo=FALSE}
+
+```
+
+## Solution
+::: {style="font-size: 75%;"}
+```{r, eval=FALSE, echo=TRUE}
+
+```
+:::
+
+:::
