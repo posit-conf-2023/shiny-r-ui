@@ -25,6 +25,7 @@ website:
     style: "docked"
     search: true
     contents:
+      - ./0-welcome.qmd 
       - ./1-introduction.qmd 
       - ./2-best-practices.qmd 
       - ./3-wireframing.qmd 
