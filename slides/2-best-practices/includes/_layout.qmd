@@ -1301,7 +1301,7 @@ describe_layout_function(
     showcase = bs_icon("graph-up"),
     showcase_layout = showcase_left_center(),
     "description",
-    theme_color = "success"
+    theme = "success"
   )
 )
 ```
@@ -1316,7 +1316,7 @@ value_box(
   showcase = bs_icon("graph-up"),
   showcase_layout = showcase_left_center(),
   "description",
-  theme_color = "success"
+  theme = "success"
 )
 ```
 :::

@@ -714,7 +714,7 @@ describe_layout_function(
   element = value_box(
     title = "A value box",
     value = 130,
-    theme_color = "light",
+    theme = "light",
     showcase = bs_icon("arrow-up"),
     p(
       "More info here",
