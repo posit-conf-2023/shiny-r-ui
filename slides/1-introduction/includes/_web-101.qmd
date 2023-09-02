@@ -4,6 +4,26 @@
 
 Mastering HTML and CSS is clearly not the goal of this workshop but you need to know where all of this come from to move to the next part.
 
+## Exercise: what's behind a Shiny app? `r countdown(minutes = 5, seconds = 0, top = 0)`
+
+<br/>
+
+. . .
+
+1. Run the below app and open it with __Google Chrome__:
+
+```r
+ui <- fluidPage(p("Hello World"))
+server <- function(input, output, session) {}
+shinyApp(ui, server)
+```
+
+<br/>
+
+. . .
+
+2. Do `CTRL + SHIFT + C` Linux, `F12` Windows, or `Command + SHIFT + C` on Mac (or just right click + inspect).
+
 ------------------------------------------------------------------------
 
 ::: color-code-slide
@@ -210,9 +230,11 @@ HTML tags can have a semantic contrary to `div`.
 
 ## CSS
 
-Cascading Style Sheets (CSS) is a property/rules based languages that lies next to HTML to style elements.
+<br/>
 
-CSS supports more sofisticated layouts such as:
+Cascading Style Sheets (CSS) is a __property/rules__ based languages that lies next to HTML to __style__ elements.
+
+CSS supports more sofisticated __layouts__ such as:
 
 - [flexbox](https://www.w3schools.com/css/css3_flexbox.asp).
 - [grid](https://www.w3schools.com/css/css_grid.asp).
@@ -295,27 +317,13 @@ Decreasing specificity from left to right.
 :::
 :::
 
-## Exercise: about the developer inspector
-
-```{r, eval=TRUE, echo=FALSE}
-countdown(minutes = 2, seconds = 0)
-```
-
-1. Run the below app and open it with __Google Chrome__:
-
-```r
-ui <- fluidPage(p("Hello World"))
-server <- function(input, output, session) {}
-shinyApp(ui, server)
-```
-
-2. Do `CTRL + SHIFT + C` Linux, `F12` Windows, or `Command + SHIFT + C` on Mac (or just right click + inspect).
-
 ## Modern web toolkits
+
+<br/>
 
 Benefit from more advanced CSS features such as __grid__.
 
-:::: {.columns}
+:::: {.columns .incremental}
 
 ::: {.column width="50%"}
 ![](./../../assets/images/1-introduction/bootstrap-logo.svg)
@@ -329,15 +337,29 @@ Benefit from more advanced CSS features such as __grid__.
 
 ## About `{bslib}`
 
+<br/>
+
+. . .
+
 During this workshop, we'll leverage [`{bslib}`](https://rstudio.github.io/bslib/index.html) for the layout and colors, so you can focus on the features, rather than on the technical HTML and CSS aspects.
+
+. . .
+
+<br/>
 
 ```r
 install.packages("bslib")
 ```
 
+. . .
+
+<br/>
+
 Under the hood, `{bslib}` offers a R abstraction for the Bootstrap framework.
 
-## More 
+## If you're curious 🤔
+
+<br/>
 
 - [CSS](https://unleash-shiny.rinterface.com/beautify-css) for Shiny.
 - [Sass](https://unleash-shiny.rinterface.com/beautify-sass) for Shiny.
