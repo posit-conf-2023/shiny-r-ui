@@ -4,7 +4,8 @@ format:
   revealjs:
     css: [
       './../../assets/css/introduction.css',
-      './../../assets/css/color.css'
+      './../../assets/css/color.css',
+      './../../assets/css/styles.css'
     ]
     code-link: true
     code-copy: true
