@@ -26,6 +26,7 @@ format:
 revealjs-plugins:
   - simplemenu
   - confetti
+  - attribution
 ---
 
 ```{r, echo=FALSE}
