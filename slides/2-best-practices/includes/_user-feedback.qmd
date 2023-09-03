@@ -1,4 +1,4 @@
-# User feedback {data-stack-name="Feedback"}
+# User feedback {data-stack-name="User Feedback"}
 
 
 ## Chatty apps

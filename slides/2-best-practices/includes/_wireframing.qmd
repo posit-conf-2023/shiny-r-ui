@@ -46,11 +46,107 @@ Remember about the design thinking process! Fail early rather than too late.
 ![](./../../assets/images/2-best-practices/wireframing/balsamiq-example.png){width=100% fig-align="center"}
 
 
-## Your turn: shinyMons2
+## 🥼 Your turn: open `{shinyMons2}` `r countdown(minutes = 5, seconds = 0, top = 0)`
 
-Open the Posit cloud space shared with you and click on the
+1. Open the Posit cloud space shared with you and click on the
 `shinyMons2` assignment.
 
 <br/>
 
 ![](./../../assets/images/2-best-practices/wireframing/open-posit-cloud.png){width=100% fig-align="center"}
+
+2. Open `./app.R`, run the app and discuss.
+
+## About `{shinyMons2}`
+
+<br/>
+
+This is an __uglyfied__ pokemon app[^first-gen] suffering from few UX/UI issues:
+
+::: incremental
+
+  - Wrong color choice and typography.
+  - Confusing layout.
+  - Confusing error messages.
+  - ...
+
+:::
+
+. . .
+
+<br/>
+
+You got it, this app s*cks 🙊
+
+[^first-gen]: Only the first 151 pokemons are considered.
+
+## `{shinyMons2}` structure [^flow-pkg]
+
+<br/>
+
+This app is composed of 7 modules (you can check in `./R`).
+
+<br/>
+
+![](./../../assets/images/2-best-practices/wireframing/shinyMons2-structure.png){width=40% fig-align="center"}
+
+[^flow-pkg]: This diagram is powered by `{flow}` by Antoine [Fabri](https://github.com/moodymudskipper).
+
+## 🥼 Your turn: `{shinyMons2}` data `r countdown(minutes = 5, seconds = 0, top = 0)`
+
+<br/>
+
+`poke_data` is a nested list containing all relevant data for 151 pokemons.
+
+```{=html}
+<iframe width="100%" height="500" src="./../../assets/images/2-best-practices/wireframing/poke-data.html" title="Poke data explorator"></iframe>
+```
+
+## What if I don't know anything about Pokemons? 🤔
+
+<br/>
+
+What would we expect to know from a Pokemon?
+
+::: incremental
+
+- What's its __name__? Type? Any detail counts!
+- Is it __powerful__?
+- __Where__ to find it?
+- How it __looks__ like (__sprites__ are images).
+- Whether it is an __evolution__ from a child pokemon.
+- ...
+
+:::
+
+## `{shinyMons2}` redesign rules
+
+<br/>
+
+From there, you're free on how to proceed:
+
+::: incremental
+
+- You can use any data from `poke_data`.
+- You can keep the original module structure. 
+- You'll choose the `{bslib}` layout that suits your needs.
+- You'll fine tune the `{bslib}` theme.
+- ...
+
+:::
+
+
+## 🥼 Your turn: wireframing `r countdown(minutes = 45, seconds = 0, top = 0)`
+
+<br/> 
+
+Considering the above data, with the 🖊 pen, 📜 paper and 🧠 brain approach discussed earlier, propose a new design for `{shinyMons2}`.
+
+::: {.callout-tip collapse="true" title="Hint"}
+Only focus on the UI, not on the server part. Ask yourself: what would people want to know about their favorite Pokemon?
+:::
+
+. . .
+
+
+Time to check what you all did `r countdown(minutes = 15)`

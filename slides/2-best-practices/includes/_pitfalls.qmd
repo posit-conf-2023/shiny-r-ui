@@ -1,5 +1,0 @@
-# Common mistakes and alternatives {data-stack-name="Pitfalls"}
-
-## TBD 
-
-TBD
