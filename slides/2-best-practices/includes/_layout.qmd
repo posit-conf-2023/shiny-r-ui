@@ -1396,3 +1396,23 @@ value_box(
 ::: {.callout-tip collapse="true" title="Hint"}
 Value box can receive plots but more treatment is required to have a good rendering when the card is minimized. Please see [here](https://rstudio.github.io/bslib/articles/value-boxes/index.html#expandable-sparklines).
 :::
+
+
+## 🥼 Your turn: `{shinyMons2}` layout `r countdown(minutes = 30, seconds = 0, top = 0)`
+
+<br/> 
+
+Considering the wireframing obtained in the previous part, create a new `{bslib}` layout which illustrates the most your original idea.
+
+1. You'll switch to the cleaned-workshop branch, which has the 7 modules but without any existing UI nore server.
+2. You may not need all modules depending on the wireframe.
+3. TO DO
+
+::: {.callout-tip collapse="true" title="Hint"}
+TO DO
+:::
+
+. . .
+
+
+Time to check what you all did `r countdown(minutes = 15)`

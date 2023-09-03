@@ -863,3 +863,19 @@ bs_theme(
 
 :::
 
+
+## 🥼 Your turn: `{shinyMons2}` colors `r countdown(minutes = 20, seconds = 0, top = 0)`
+
+<br/> 
+
+Considering the layout obtained in the previous part, create a new `{bslib}` palette to make `{shinyMons2}` shining.
+
+
+::: {.callout-tip collapse="true" title="Hint"}
+TO DO
+:::
+
+. . .
+
+
+Time to check what you all did `r countdown(minutes = 15)`
