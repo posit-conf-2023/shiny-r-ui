@@ -1404,7 +1404,7 @@ Value box can receive plots but more treatment is required to have a good render
 
 Considering the wireframing obtained in the previous part, create a new `{bslib}` layout which illustrates the most your original idea.
 
-1. You'll switch to the cleaned-workshop branch, which has the 7 modules but without any existing UI nore server.
+1. You'll switch to the cleaned-workshop branch, which has the 7 modules but without any existing UI nor server.
 2. You may not need all modules depending on the wireframe.
 3. TO DO
 

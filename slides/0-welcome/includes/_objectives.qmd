@@ -2,9 +2,13 @@
 
 ## We got an important call
 
+<br/>
+
 ![](./../../assets/images/0-welcome/prof-chen.jpg){width="100%," fig-align="center"}
 
 ## Your mission, should you accept it
+
+<br/>
 
 Redesign `{shinyMons2}`
 
@@ -14,6 +18,8 @@ Redesign `{shinyMons2}`
 
 ## Fear not, we'll do it step by step
 
+<br/>
+
 :::{.incremental}
 - We'll start by the __layout__ and do some wireframing.
 - Then move to the __colors__ and __typography__.
@@ -21,6 +27,8 @@ Redesign `{shinyMons2}`
 :::
 
 ## Workshop material
+
+<br/>
 
 If not done already (ICYMI):
 
@@ -34,3 +42,19 @@ If not done already (ICYMI):
     - Open the following Posit Cloud [space](https://posit.cloud/spaces/400773/join?access_code=ajwkws91bhF-IhEXDVWH9-0mukSUF3jiETCkzrgt). Open the shinyMons2 project and click on __Start__ to create your own copy. If you’re automatically asked to restore packages, answer yes. Otherwise run __renv::restore()__ in the R console.
     - If you work locally, clone this [repo](https://github.com/posit-conf-2023/shiny-r-ui-exercises/tree/main) and proceed with renv as described above.
 :::
+
+## 👥 Discover your workshop team
+
+<br/>
+
+We acknowledge not everyone is a Git specialist, nor a Shiny modules expert. Therefore, to ease the workshop exercises, you've been all assigned a __team__.
+
+. . .
+
+<br/>
+
+Design your __team lead__, who will be responsible for (only during the main activity):
+
+- Creating the __team branch__ on GitHub.
+- Regularly __commiting__ the activity code to GitHub.
+- Raising team __issues__.
