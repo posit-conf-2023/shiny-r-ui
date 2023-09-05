@@ -154,8 +154,8 @@ ui <- fluidPage(
 
 server <- function(input, output) {
   output$res <- renderText({
-    if (nchar(input$name) == 0 || nchar(input$surname) == 0) { # <1>
-      validate("Fill all the inputs to see the result")      # <2>
+    if (nchar(input$name) == 0 || nchar(input$surname) == 0) {
+      validate("Fill all the inputs to see the result")
     } else {
       paste0(input$name, input$surname)
     }
@@ -163,8 +163,8 @@ server <- function(input, output) {
 }
 ```
 
-1. Condition for which the message will be shown.
-2. Wrap end-user message within __shiny::validate__.
+- `if` statement: condition for which the message will be shown.
+- Wrap end-user message within __shiny::validate__.
 
 :::
 

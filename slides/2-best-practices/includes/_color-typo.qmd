@@ -475,15 +475,6 @@ bs_theme(
 
 [^bootstrap-only]: `{bslib}` primarily supports Bootstrap themes.
 
-## bslib themes workflow
-
-<br/>
-
-```{mermaid}
-%%| fig-width: 6.5
-flowchart LR
-create[Create theme] --> preview[Preview] --> update[Refine]
-```
 
 ## Your turn: create a palette `r countdown(minutes = 10, seconds = 0, top = 0)`
 
