@@ -192,13 +192,16 @@ server <- function(input, output) {
 - Medium attention: warnings.
 - Lower attention: success.
 
-::: {layout-ncol=2}
-
-![](./../../assets/images/2-best-practices/feedback/error.svg){width="50%"}
-
-![](./../../assets/images/2-best-practices/feedback/success.svg){width="50%"}
-
-:::
+<div class="container text-center">
+<div class="row">
+<div class="col">
+<img src="./../../assets/images/2-best-practices/feedback/error.svg" width="50%">
+</div>
+<div class="col">
+<img src="./../../assets/images/2-best-practices/feedback/success.svg" width="50%">
+</div>
+</div>
+</div>
 
 ## Notifications best practices
 
