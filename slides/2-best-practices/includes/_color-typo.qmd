@@ -189,17 +189,13 @@ Edward H. Adelson
 
 ::: contrast
 ::: contrast-description
-<p>Contrast</p>
-
-<p class="contrast-link">
-
-https://colorable.jxnblk.com
-
-</p>
+<p>Contrast[^contrast-url]</p>
 :::
 
 <img src="./../../assets/images/2-best-practices/color/contrast.png"/>
 :::
+
+[^contrast-url]: https://colorable.jxnblk.com
 
 ------------------------------------------------------------------------
 
@@ -476,7 +472,7 @@ bs_theme(
 [^bootstrap-only]: `{bslib}` primarily supports Bootstrap themes.
 
 
-## Your turn: create a palette `r countdown(minutes = 10, seconds = 0, top = 0)`
+## 🥼 Your turn: create a palette `r countdown(minutes = 10, seconds = 0, top = 0)`
 
 <br/>
 
@@ -821,7 +817,7 @@ Helpers such as `font_google()` allow to serve font files locally [^without-inte
 
 [^without-internet]: useful without internet connection!
 
-## Your turn: adding fonts `r countdown(minutes = 5, seconds = 0, top = 0)`
+## 🥼 Your turn: adding fonts `r countdown(minutes = 5, seconds = 0, top = 0)`
 
 <br/>
 
@@ -859,14 +855,32 @@ bs_theme(
 
 <br/> 
 
-Considering the layout obtained in the previous part, create a new `{bslib}` palette to make `{shinyMons2}` shining.
+Considering the layout from the previous part, create a new `{bslib}` palette to make `{shinyMons2}` shining.
 
+<br/>
+
+:::: {.columns style="font-size: 75%;"}
+
+::: {.column width="50%"}
+To help validate your theme:
+
+- Open the __developer tools__ (Chrome).
+- Enable __CSS Overview__: Options -> More Tools -> CSS Overview.
+- Click on __Capture overview__.
+- Look at __Contrast issues__ and target AA (even AAA).
+:::
+
+::: {.column width="50%"}
+![](./../../assets/images/2-best-practices/color/contrast-issue.png){width="100%" fig-align="center"}
+:::
+
+::::
 
 ::: {.callout-tip collapse="true" title="Hint"}
-TO DO
+`bslib::bs_theme()` will be your best friend. You may have a look [here](https://unleash-shiny.rinterface.com/beautify-with-bootstraplib#bslib-low-level) to discover more `{bslib}` helper functions. 
 :::
 
 . . .
 
 
-Time to check what you all did `r countdown(minutes = 15)`
+Time to check what you all did `r countdown(minutes = 15, bottom = 5)`
