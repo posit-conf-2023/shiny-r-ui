@@ -119,18 +119,18 @@ What would we expect to know from a Pokemon?
 
 :::
 
-## `{shinyMons2}` redesign rules
+
+## `{shinyMons2}` redesign steps
 
 <br/>
 
-From there, you're free on how to proceed:
+From there, we'll cover the redesign step by step:
 
 ::: incremental
 
-- You can use any data from `poke_data`.
-- You can keep the original module structure. 
-- You'll choose the `{bslib}` layout that suits your needs.
-- You'll fine tune the `{bslib}` theme.
+- Do the wireframing from `poke_data`.
+- Create the corresponding layout with `{bslib}`.
+- You'll fine tune the `{bslib}` theme (colors and typography).
 - ...
 
 :::
@@ -140,7 +140,9 @@ From there, you're free on how to proceed:
 
 <br/> 
 
-Considering the above data, with the 🖊 pen, 📜 paper and 🧠 brain approach discussed earlier, propose a new design for `{shinyMons2}`.
+1. Open the `shinyMons2` project in the Posit Cloud [space](https://posit.cloud/spaces/400773/join?access_code=ajwkws91bhF-IhEXDVWH9-0mukSUF3jiETCkzrgt).
+2. Run `pkgload::load_all()`.
+3. Considering the available `poke_data` data, with the 🖊 pen, 📜 paper and 🧠 brain approach discussed earlier, propose a new design for `{shinyMons2}`.
 
 ::: {.callout-tip collapse="true" title="Hint"}
 Only focus on the UI, not on the server part. Ask yourself: what would people want to know about their favorite Pokemon?

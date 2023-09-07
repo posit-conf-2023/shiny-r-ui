@@ -1404,15 +1404,20 @@ Value box can receive plots but more treatment is required to have a good render
 
 Considering the wireframing obtained in the previous part, create a new `{bslib}` layout which illustrates the most your original idea.
 
-1. You'll switch to the cleaned-workshop branch, which has the 7 modules but without any existing UI nor server.
-2. You may not need all modules depending on the wireframe.
-3. TO DO
+<br/>
+
+::: {style="font-size: 75%;"}
+1. Switch to the `fresh-start ` git branch, which has the 7 modules but without any existing UI nor server.
+2. `mod_poke_select` does not need to be changed. 
+3. For each module in the `R` folder, you'll see `WORKSHOP TO DO`. Looking at `poke_data`, complete each module with your layout.
+4. You can run the app by sourcing the `./app.R` script ...
+:::
 
 ::: {.callout-tip collapse="true" title="Hint"}
-TO DO
+Module files are like `./R/mod_poke_*.R`. You may not need all modules depending on the wireframe. To go faster, you may assign 1 module per person in your team.
 :::
 
 . . .
 
 
-Time to check what you all did `r countdown(minutes = 15)`
+Time to check what you all did `r countdown(minutes = 15, bottom = 5)`
