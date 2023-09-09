@@ -1,0 +1,33 @@
+# Going further {data-stack-name="What's next?"}
+
+## 🎉 🎉 🎉 Congrats
+
+<br/>
+
+::: {.center}
+First of all congrats for reaching this part!
+:::
+
+## 👀 Where to go now?
+
+<br/>
+
+As you may imagine, we only scratched the surface of web design. We'd like to advise you to:
+
+::: incremental
+- Watch UX videos such as from the [NNgroup](https://www.youtube.com/@NNgroup) (Nielsen Norman Group).
+- Investigate __human psychology__ (emotional design): [Laws](https://lawsofux.com/) of UX.
+- Simply talk to people.
+:::
+
+## 🙏 Thanks
+
+<br/>
+
+Thanks for attenting this workshop.
+
+. . .
+
+<br/>
+
+We hope it will give you some inspiration on your upcoming or ongoing projects.

@@ -50,3 +50,4 @@ set.seed(4242)
 {{< include ./includes/_layout.qmd >}}
 {{< include ./includes/_color-typo.qmd >}}
 {{< include ./includes/_user-feedback.qmd >}}
+{{< include ./includes/_going-further.qmd >}}
