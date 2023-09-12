@@ -1,7 +1,20 @@
 # Wireframing {data-stack-name="Wireframing"}
 
+## Build me a house
+
+::: {.r-stack}
+![](./../../assets/images/2-best-practices/wireframing/3d-map.jpg){.fragment width=100% fig-align="center"}
+
+![](./../../assets/images/2-best-practices/wireframing/ground-map.jpg){.fragment width=50% fig-align="center"}
+:::
+
+::: {.attribution}
+By https://www.imaginationshaper.com/design-category/house-map/
+:::
 
 ## What?
+
+<br/>
 
 Wireframing is the action of drawing an app design on the paper or with a software:
 
@@ -13,10 +26,15 @@ Wireframing is the action of drawing an app design on the paper or with a softwa
 
 ![https://careerfoundry.com/en/blog/ux-design/what-is-a-wireframe-guide/](./../../assets/images/2-best-practices/wireframing/fidelity-level.png){width=100% fig-align="center"}
 
-
 ## Why?
 
-Remember about the design thinking process! Fail early rather than too late.
+<br/>
+
+::: incremental
+- Have a physical representation of the goal to reach (for you and the end users).
+- Quickly realise potential caveats: fail early rather than too late.
+- End users will help you to get the right map.
+:::
 
 ![](./../../assets/images/1-introduction/why-ux-design.jpeg){width=100% fig-align="center"}
 
