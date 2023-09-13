@@ -1,0 +1,14 @@
+# Important information {data-stack-name="Information"}
+
+## Before we start
+
+::: {style="font-size: 80%"}
+- 📶 WiFi:
+  - Network: Posit Conf 2023
+  - Password: conf2023
+- There are __gender-neutral bathrooms__ located are among the __Grand Suite Bathrooms__.
+- There are two __meditation/prayer rooms__: __Grand Suite 2A__ and __Grand Suite 2B__. Open Sunday - Tuesday 7:30 a.m. - 7:00 p.m., Wednesday 8:00 a.m. - 6:00 p.m.
+- The __lactation room__ is located in __Grand Suite 1__. Open Sunday - Tuesday 7:30 a.m. - 7:00 p.m., Wednesday 8:00 a.m. - 6:00 p.m.
+- Participants who __do not wish__ to be photographed have __red lanyards__; please note everyone's lanyard colors before taking a photo and respect their choices.
+- The __Code of Conduct__ and __COVID policies__ can be found at https://posit.co/code-of-conduct/. Please review them carefully. You can report Code of Conduct violations in person, by email, or by phone. Please see the policy linked above for contact information.
+:::

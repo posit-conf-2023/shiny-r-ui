@@ -33,6 +33,7 @@ library(emo)
 library(countdown)
 ```
 
+{{< include ./includes/_important-info.qmd >}}
 {{< include ./includes/_about-you.qmd >}}
 {{< include ./includes/_about-us.qmd >}}
 {{< include ./includes/_objectives.qmd >}}
