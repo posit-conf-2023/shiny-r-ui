@@ -4,7 +4,7 @@
 
 Mastering HTML and CSS is clearly not the goal of this workshop but you need to know where all of this come from to move to the next part.
 
-## Exercise: what's behind a Shiny app? `r countdown(minutes = 5, seconds = 0, top = 0)`
+## 🥼 Your turn: what's behind a Shiny app? `r countdown(minutes = 5, seconds = 0, top = 0)`
 
 <br/>
 

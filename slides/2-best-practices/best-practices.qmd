@@ -12,6 +12,8 @@ format:
       './../../assets/css/layout.css',
       './../../assets/css/bslib.min.css'
     ]
+    height: 900
+    width: 1600
     code-link: true
     code-copy: true
     code-annotations: hover

@@ -495,20 +495,20 @@ Cancel
 :::
 :::
 
-## Your turn: what's wrong here? `r countdown(minutes = 2, seconds = 0, top = 0)`
+## 🥼 Your turn: what's wrong here? `r countdown(minutes = 2, seconds = 0, top = 0)`
 
 <br/>
 
 ![](./../../assets/images/1-introduction/bad-design-ex1.png){width="80%" fig-align="center"}
 
-## Your turn: what's wrong here? `r countdown(minutes = 2, seconds = 0, top = 0)`
+## 🥼 Your turn: what's wrong here? `r countdown(minutes = 2, seconds = 0, top = 0)`
 
 <br/>
 
 ![](./../../assets/images/1-introduction/bad-design-ex2.png){width="80%" fig-align="center"}
 
 
-## Your turn: why is it better? `r countdown(minutes = 2, seconds = 0, top = 0)`
+## 🥼 Your turn: why is it better? `r countdown(minutes = 2, seconds = 0, top = 0)`
 
 <br/>
 
@@ -520,7 +520,7 @@ Cancel
 Coronavirus [tracker](https://shiny.john-coene.com/coronavirus/) by John Coene.
 :::
 
-## Your turn: a little challenge [^cant-unsee] `r countdown(minutes = 5, seconds = 0, top = 0)`
+## 🥼 Your turn: a little challenge [^cant-unsee] `r countdown(minutes = 5, seconds = 0, top = 0)`
 
 ```{=html}
 <iframe width="100%" height="500" src="https://cant-unsee-soka.netlify.app/" title="Can't usee"></iframe>

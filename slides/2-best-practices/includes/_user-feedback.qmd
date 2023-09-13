@@ -5,10 +5,12 @@
 
 <br/>
 
+::: incremental
 Users should not guess what the app is doing:
 
   - If something goes wrong, user should know.
   - If something was successful, users should also know.
+:::
 
 
 ![](./../../assets/images/2-best-practices/feedback/searching.svg){width=100%, fig-align="center"}
@@ -26,12 +28,14 @@ Users should not guess what the app is doing:
 
 <br/>
 
+::: incremental
 We'll explore few topics:
 
 (1) Process user input/outputs?
 (2) Handle notifications?
 (3) Handle loading/waiting time?
 (4) Convey extra information?
+:::
 
 
 ## (1) Inputs validation {.center}
@@ -46,7 +50,7 @@ We'll explore few topics:
 
 <br/>
 
-| Do's | Don'ts |
+| 👍 Do's | 👎 Don'ts |
 |---------|:-----|
 | Proper color      | Only rely on color |
 | Add icon       | Print raw error message    |
@@ -76,9 +80,11 @@ E-mail
 
 </div>
 
+::: incremental
 - Added icon next to field label (avoid error).
 - Added icon to error message.
 - Provide valid example.
+:::
 
 ## Example from my health insurance 😃
 
@@ -95,7 +101,7 @@ E-mail
 ![](./../../assets/movies/2-best-practices/shinyvalidate-email.mov){width="100%" height="300"}
 :::
 
-::: {.column width="50%" style="font-size: 75%;"}
+::: {.column width="50%"}
 ```{r eval=FALSE, echo=TRUE}
 library(shiny)
 library(shinyvalidate)
@@ -144,7 +150,7 @@ server <- function(input, output, session) {
 ![](./../../assets/movies/2-best-practices/validate-output.mov){width="100%" height="240"}
 :::
 
-::: {.column width="50%" style="font-size: 75%;"}
+::: {.column width="50%"}
 ```{r eval=FALSE, echo=TRUE}
 #| code-line-numbers: "9|10"
 ui <- fluidPage(
@@ -189,6 +195,7 @@ server <- function(input, output) {
 
 <br/>
 
+::: incremental
 - High attention: errors, user confirmation.
 - Medium attention: warnings.
 - Lower attention: success.
@@ -203,6 +210,8 @@ server <- function(input, output) {
 </div>
 </div>
 </div>
+
+:::
 
 ## Notifications best practices
 
@@ -224,7 +233,7 @@ server <- function(input, output) {
 ![](./../../assets/movies/2-best-practices/success-notification.mov){width="100%" height="240"}
 :::
 
-::: {.column width="50%" style="font-size: 75%;"}
+::: {.column width="50%"}
 ```{r eval=FALSE, echo=TRUE}
 #| code-line-numbers: "11-16"
 ui <- fluidPage(
@@ -266,7 +275,7 @@ server <- function(input, output) {
 ![](./../../assets/movies/2-best-practices/error-notification.mov){width="100%"}
 :::
 
-::: {.column width="50%" style="font-size: 75%;"}
+::: {.column width="50%"}
 ```{r eval=FALSE, echo=TRUE}
 #| code-line-numbers: "12-25"
 ui <- fluidPage(
@@ -312,10 +321,12 @@ server <- function(input, output, session) {
 
 <br/>
 
+::: incremental
 - The same task may succeed or fail based on
 different parameters.
 - Need to capture __exceptions__.
 - `tryCatch` is your friend.
+:::
 
 ## Capture exceptions with {shiny}
 
@@ -327,7 +338,7 @@ different parameters.
 ![](./../../assets/movies/2-best-practices/capture-result.mov){width="100%"}
 :::
 
-::: {.column width="50%" style="font-size: 75%;"}
+::: {.column width="50%"}
 ```{r eval=FALSE, echo=TRUE}
 observeEvent(input$run, {
   res <- sample(c(FALSE, TRUE), 1)
@@ -364,7 +375,7 @@ observeEvent(input$run, {
 
 ::::
 
-## Your turn: errors in `{shinyMons2}` `r countdown(minutes = 10, seconds = 0, top = 0)`
+## 🥼 Your turn: errors in `{shinyMons2}` `r countdown(minutes = 10, seconds = 0, top = 0)`
 
 <br/>
 
@@ -422,7 +433,7 @@ When we don't necessarily know the waiting time ...
 ![](./../../assets/movies/2-best-practices/spinning-button.mov){width="100%"}
 :::
 
-::: {.column width="50%" style="font-size: 75%;"}
+::: {.column width="50%"}
 
 ::: {.panel-tabset}
 
@@ -499,7 +510,6 @@ ui <- fluidPage(
 ```
 
 ### Server
-::: {style="font-size: 50%;"}
 ```{r eval=FALSE, echo=TRUE}
 #| code-line-numbers: "4|8|11-16|20-31|37"
 server <- function(input, output, session) {
@@ -542,7 +552,6 @@ server <- function(input, output, session) {
   })
 }
 ```
-:::
 
 ### Helpers
 
@@ -568,7 +577,7 @@ connect_db <- function(w) {
 ::::
 
 
-## Your turn: a preloader for `{shinyMons2}` `r countdown(minutes = 10, seconds = 0, top = 0)`
+## 🥼 Your turn: a preloader for `{shinyMons2}` `r countdown(minutes = 10, seconds = 0, top = 0)`
 
 <br/>
 
@@ -596,7 +605,7 @@ Taking our `{shinyMons2}` app, the `select_pokemon()` [function](https://github.
 
 <br/>
 
-For async tasks, we indicate local computation with `waiter::Waitress` ...
+For __async tasks__, we indicate local computation with `waiter::Waitress` ...
 
 :::: {.columns}
 
@@ -609,7 +618,6 @@ For async tasks, we indicate local computation with `waiter::Waitress` ...
 ::: {.panel-tabset}
 
 ### UI
-::: {style="font-size: 75%;"}
 ```{r eval=FALSE, echo=TRUE}
 #| code-line-numbers: "2"
 ui <- fluidPage(
@@ -640,10 +648,8 @@ ui <- fluidPage(
   )
 )
 ```
-:::
 
 ### Server
-::: {style="font-size: 50%;"}
 ```{r eval=FALSE, echo=TRUE}
 #| code-line-numbers: "5-9|15|27"
 server <- function(input, output, session) {
@@ -688,7 +694,6 @@ server <- function(input, output, session) {
   }, rownames = TRUE)
 }
 ```
-:::
 
 ### Helpers
 
@@ -731,9 +736,11 @@ bg_task <- function() {
 
 Instead of using `placeholder` field, we can show a `tooltip`.
 
+<br/>
+
 :::: {.columns}
 
-::: {.column width="50%" style="font-size: 75%;"}
+::: {.column width="50%"}
 ```{r eval=TRUE, echo=FALSE}
 describe_layout_function(
   "tooltip()",
@@ -811,7 +818,7 @@ describe_layout_function(
 ```
 :::
 
-::: {.column width="50%" style="font-size: 75%;"}
+::: {.column width="50%"}
 ```{r eval=FALSE, echo=TRUE}
 #| code-line-numbers: "8-17"
 value_box(
@@ -839,7 +846,7 @@ value_box(
 ::::
 
 
-## Your turn: tooltips and popovers for `{shinyMons2}` `r countdown(minutes = 10, seconds = 0, top = 0)`
+## 🥼 Your turn: tooltips and popovers for `{shinyMons2}` `r countdown(minutes = 10, seconds = 0, top = 0)`
 
 <br/>
 

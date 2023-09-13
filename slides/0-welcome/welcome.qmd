@@ -7,6 +7,8 @@ format:
       './../../assets/css/color.css',
       './../../assets/css/styles.css'
     ]
+    height: 900
+    width: 1600
     code-link: true
     code-copy: true
     fontsize: 24pt

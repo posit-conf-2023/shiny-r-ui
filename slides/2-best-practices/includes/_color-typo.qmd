@@ -482,6 +482,10 @@ bs_theme(
 
 With what you learnt about colors and `{bslib}`, create the palette of your dreams and preview it. You can browse to https://color.adobe.com/create/color-wheel to create the color palette.
 
+::: {.callout-tip collapse="true" title="Hint"}
+To run the theme next to your favorite app, you may call `run_with_themer(shinyApp(ui, server))`.
+:::
+
 ### Solution
 
 ```{r, echo=TRUE, eval=FALSE}
@@ -496,10 +500,6 @@ bs_theme(
 ) |> bs_theme_preview()
 ```
 
-:::
-
-::: {.callout-tip collapse="true" title="Hint"}
-To run the theme next to your favorite app, you may call `run_with_themer(shinyApp(ui, server))`.
 :::
 
 ------------------------------------------------------------------------
@@ -796,12 +796,6 @@ Terminology <br> <br> <img src="./../../assets/images/2-best-practices/typograph
 
 <!-- its called this because when originally printing a book you'd add a small piece of lead to change the line height-->
 
-------------------------------------------------------------------------
-
-::: pick-a-palette
-[Putting it all together:]{style="font-size:100px;"} <br> Choose two fonts <br> and add colors <br> to create a `bslib::bstheme`!
-:::
-
 ## Fonts with bslib
 
 <br/>
@@ -883,4 +877,4 @@ To help validate your theme:
 . . .
 
 
-Time to check what you all did `r countdown(minutes = 15, bottom = 5)`
+Time to check what you all did 😃 `r countdown(minutes = 15, bottom = 5)`

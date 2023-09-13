@@ -782,7 +782,7 @@ layout_sidebar(
 Best practice:
 
   - Sidebar: for global __inputs__.
-  - Main content: for __outputs__ (local inputs).
+  - Main content: for __outputs__ (with optional local inputs).
   
 :::
 
@@ -949,6 +949,8 @@ For more complex dashboards:
   - Replace `page_sidebar` by `page_navbar`.
   - Use `nav_panel` for each body tab.
 
+<br/>
+
 :::: {.columns}
 
 ::: {.column width="50%"}
@@ -980,8 +982,11 @@ Until now, we only had shared sidebars.
 
 Take the previous `page_navbar` template and try to add a dedicated sidebar for each `nav_panel`.
 
+::: {.callout-tip collapse="true" title="Hint"}
+Don't forget that each `nav_panel` is a container which can host its own layout.
+:::
+
 ## Solution
-::: {style="font-size: 50%;"}
 ```{r, eval=FALSE, echo=TRUE}
 library(shiny)
 library(bslib)
@@ -1010,12 +1015,7 @@ shinyApp(ui, function(input, output) {
   })
 })
 ```
-:::
 
-:::
-
-::: {.callout-tip collapse="true" title="Hint"}
-Don't forget that each `nav_panel` is a container which can host its own layout.
 :::
 
 ## bslib components overview
@@ -1092,6 +1092,10 @@ Pass `full_screen = TRUE` to make the card maximizable.
 
 Combine `layout_columns_wrap()` and `card()` to create a grid composed of 3 columns and 2 rows. Then play with the screen width and conclude.
 
+::: {.callout-tip collapse="true" title="Hint"}
+You can create those 6 cards programmatically with `lapply()` and pass them with `!!!` inside `layout_columns_wrap()` ([introduced](https://shiny.posit.co/r/reference/shiny/1.7.0/upgrade.html) in `{shiny}` 1.7.0).
+:::
+
 ## Solution
 ```{r, eval=FALSE, echo=TRUE}
 cards <- lapply(1:6, function(i) {
@@ -1106,16 +1110,13 @@ layout_column_wrap(
 ```
 :::
 
-
-::: {.callout-tip collapse="true" title="Hint"}
-You can create those 6 cards programmatically with `lapply()` and pass them with `!!!` inside `layout_columns_wrap()`.
-:::
-
 ## Tabs
 
 <br/>
 
-Tabs allow to organize related content over __multiple pages__ [^not_exactly]. They can be part of navbars (navigation), cards or standalone.
+Tabs allow to organize related content over __multiple pages__ [^not_exactly]. 
+
+They can be part of navbars (navigation), cards or standalone.
 
 <br/>
 
@@ -1139,7 +1140,7 @@ navset_tab(
 
 [^not_exactly]: This is not really multiple page from an HTML point of view... but anyway :)
 
-## Your turn: tabs within cards `r countdown(minutes = 3, seconds = 0, top = 0)`
+## 🥼 Your turn: tabs within cards `r countdown(minutes = 3, seconds = 0, top = 0)`
 
 <br/>
 
@@ -1149,25 +1150,32 @@ navset_tab(
 
 Have a look at `?navset_card_tab` to include tabs within a card. Try out with `navset_card_pill`.
 
+::: {.callout-tip collapse="true" title="Hint"}
+All those functions have a server [part](https://rstudio.github.io/bslib/reference/nav_select.html) to programmatically add/remove/select tabs. When doing so, pass an `id` to the parent container like `navset_card_tab(id = ..., ...)`. 
+:::
+
 ## Solution
 ```{r, eval=FALSE, echo=TRUE}
-navset_card_tab(
+panels <- list(
   nav_panel(title = "One", p("First tab content.")),
   nav_panel(title = "Two", p("Second tab content."))
 )
+
+# Tabs
+navset_card_tab(!!!panels)
+
+# Pills
+navset_card_pill(!!!panels)
 ```
-:::
-
-
-::: {.callout-tip collapse="true" title="Hint"}
-All those functions have a server [part](https://rstudio.github.io/bslib/reference/nav_select.html) to programmatically add/remove/select tabs. When doing so, pass an `id` to the parent container like `navset_card_tab(id = ..., ...)`. 
 :::
 
 ## Accordions
 
 <br/>
 
-Accordions are made of __collapsible__ elements to organize content in the same container. 
+Accordions are made of __collapsible__ elements to organize content in the same container.
+
+<br/>
 
 :::: {.columns}
 
@@ -1213,7 +1221,7 @@ accordion(
 You can see an accordion as a group of collapsible cards, to save vertical space.
 :::
 
-## Your turn: accordion and sidebars `r countdown(minutes = 3, seconds = 0, top = 0)`
+## 🥼 Your turn: accordion and sidebars `r countdown(minutes = 3, seconds = 0, top = 0)`
 
 <br/>
 
@@ -1244,7 +1252,6 @@ describe_layout_function(
 ```
 
 ## Solution
-::: {style="font-size: 75%;"}
 ```{r, eval=FALSE, echo=TRUE}
 layout_sidebar(
   sidebar = sidebar(
@@ -1271,7 +1278,6 @@ layout_sidebar(
   "An imaginary plot"
 )
 ```
-:::
 
 :::
 
@@ -1398,11 +1404,21 @@ Value box can receive plots but more treatment is required to have a good render
 :::
 
 
+## 🥼 Your turn: a value box themer `r countdown(minutes = 3, seconds = 0, top = 0)`
+
+<br/>
+
+Spend few minutes to play with the below value box generator.
+
+```{=html}
+<iframe width="100%" height="800" src="https://bslib.shinyapps.io/build-a-box/" title="Quarto Documentation"></iframe>
+```
+
 ## 🥼 Your turn: `{shinyMons2}` layout `r countdown(minutes = 30, seconds = 0, top = 0)`
 
 <br/> 
 
-Considering the wireframing obtained in the previous part, create a new `{bslib}` layout which illustrates the most your original idea.
+Considering the __wireframing__ obtained in the previous part, create a new `{bslib}` layout which illustrates the most your original idea.
 
 <br/>
 
@@ -1420,4 +1436,4 @@ Module files are like `./R/mod_poke_*.R`. You may not need all modules depending
 . . .
 
 
-Time to check what you all did `r countdown(minutes = 15, bottom = 5)`
+Time to check what you all did 😃 `r countdown(minutes = 15, bottom = 5)`
