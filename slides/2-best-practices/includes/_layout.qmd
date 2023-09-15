@@ -1095,8 +1095,7 @@ Combine `layout_columns_wrap()` and `card()` to create a grid composed of 3 colu
 ## Solution
 ```{shinylive-r}
 #| standalone: true
-#| components: [editor, viewer, terminal]
-# #| components: [editor, viewer]
+#| components: [editor, viewer]
 library(shiny)
 library(bslib)
 
