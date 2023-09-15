@@ -154,7 +154,7 @@ From there, we'll cover the redesign step by step:
 :::
 
 
-## 🥼 Your turn: wireframing `r countdown(minutes = 45, seconds = 0, top = 0)`
+## 🥼 Your turn: wireframing `r countdown(minutes = 30, seconds = 0, top = 0)`
 
 <br/> 
 

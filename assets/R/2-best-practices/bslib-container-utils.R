@@ -2,7 +2,9 @@ describe_layout_function <- function(
   name = NULL,
   description = NULL,
   element = NULL,
-  full_screen = FALSE
+  full_screen = FALSE,
+  height = NULL,
+  ...
 ) {
   if (!is.null(name)) {
     name <- knitr::combine_words(
@@ -19,6 +21,8 @@ describe_layout_function <- function(
   }
 
   card(
+    height = height,
+    ...,
     full_screen = full_screen,
     if (!is.null(name)) {
       card_header(class = "bg-light text-center", HTML(name))

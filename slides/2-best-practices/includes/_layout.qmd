@@ -713,7 +713,7 @@ layout_column_wrap(
 
 :::
 
-## Your turn: nested layouts `r countdown(minutes = 3, seconds = 0, top = 0)`
+## 🥼 Your turn: nested layouts `r countdown(minutes = 3, seconds = 0, top = 0)`
 
 <br/>
 
@@ -724,7 +724,7 @@ layout.
 
 ## Exercise
 
-![](./../../assets/images/2-best-practices/layout/nested-columns){width=100%}
+![](./../../assets/images/2-best-practices/layout/nested-columns){width=90% fig-align="center"}
 
 ## Solution
 
@@ -762,7 +762,8 @@ describe_layout_function(
       "Main contents"
     ) |>
       tagAppendAttributes(class = "border rounded-top")
-  )
+  ),
+  height = 450
 )
 ```
 :::
@@ -778,7 +779,7 @@ layout_sidebar(
 
 ::::
 
-::: {.callout-tip}
+::: {.callout-tip collapse="true" title="Hint"}
 Best practice:
 
   - Sidebar: for global __inputs__.
@@ -786,7 +787,7 @@ Best practice:
   
 :::
 
-## Your turn: nested sidebars `r countdown(minutes = 3, seconds = 0, top = 0)`
+## 🥼 Your turn: nested sidebars `r countdown(minutes = 3, seconds = 0, top = 0)`
 
 <br/>
 
@@ -811,7 +812,8 @@ describe_layout_function(
       class = "p-0"
     ) |>
       tagAppendAttributes(class = "border rounded-top")
-  )
+  ),
+  height = 350
 )
 ```
 
@@ -893,7 +895,7 @@ page_sidebar(
 
 ::::
 
-::: {.callout-tip}
+::: {.callout-tip collapse="true" title="Hint"}
 Best practice:
 
   - Sidebar: for global __inputs__.
@@ -901,7 +903,7 @@ Best practice:
   
 :::
 
-## Your turn: dashboard layouts `r countdown(minutes = 3, seconds = 0, top = 0)`
+## 🥼 Your turn: dashboard layouts `r countdown(minutes = 3, seconds = 0, top = 0)`
 
 <br/>
 
@@ -970,7 +972,7 @@ page_navbar(
 ::::
 
 
-## Your turn: tab-specific sidebar `r countdown(minutes = 3, seconds = 0, top = 0)`
+## 🥼 Your turn: tab-specific sidebar `r countdown(minutes = 3, seconds = 0, top = 0)`
 
 <br/>
 
@@ -1053,7 +1055,8 @@ describe_layout_function(
     "Card body content",
     fillable = TRUE
   ),
-  full_screen = TRUE
+  full_screen = TRUE,
+  height = 450
 )
 ```
 :::
@@ -1082,7 +1085,7 @@ Pass `full_screen = TRUE` to make the card maximizable.
 :::
 
 
-## Your turn: multiple cards `r countdown(minutes = 3, seconds = 0, top = 0)`
+## 🥼 Your turn: multiple cards `r countdown(minutes = 3, seconds = 0, top = 0)`
 
 <br/>
 
@@ -1099,7 +1102,8 @@ You can create those 6 cards programmatically with `lapply()` and pass them with
 ## Solution
 ```{shinylive-r}
 #| standalone: true
-#| components: [editor, viewer]
+#| components: [editor, viewer, terminal]
+#| viewerHeight: 700
 library(shiny)
 library(bslib)
 
@@ -1242,6 +1246,11 @@ You can see an accordion as a group of collapsible cards, to save vertical space
 
 Combine `layout_sidebar()` to `accordion` to better organize input parameters within the following example.
 
+<br/>
+
+:::: {.columns}
+
+::: {.column width="50%"}
 ```{r, eval=TRUE, echo=FALSE}
 describe_layout_function(
   element = layout_sidebar(
@@ -1257,10 +1266,34 @@ describe_layout_function(
       textInput("ylab", "Y label", "y yals"),
     ),
     "An imaginary plot"
-  )
+  ),
+  min_height = 450
 )
 
 ```
+:::
+
+::: {.column width="50%"}
+```{r, eval=FALSE, echo=TRUE}
+layout_sidebar(
+  sidebar = sidebar(
+    textInput("xlab", "X label", "x vals"),
+    numericInput(
+      "obs", 
+      "Number of observations:",
+      min = 0, 
+      max = 1000, 
+      value = 500
+    ),
+    textInput("ylab", "Y label", "y yals"),
+  ),
+  "An imaginary plot"
+)
+```
+:::
+
+::::
+
 
 ## Solution
 ```{r, eval=FALSE, echo=TRUE}
@@ -1411,7 +1444,7 @@ value_box(
 :::
 
 ::: {.callout-tip collapse="true" title="Hint"}
-Value box can receive plots but more treatment is required to have a good rendering when the card is minimized. Please see [here](https://rstudio.github.io/bslib/articles/value-boxes/index.html#expandable-sparklines).
+Value box can __host__ plots but more treatment is required to have a good rendering when the card is minimized. Please see [here](https://rstudio.github.io/bslib/articles/value-boxes/index.html#expandable-sparklines).
 :::
 
 
@@ -1419,13 +1452,13 @@ Value box can receive plots but more treatment is required to have a good render
 
 <br/>
 
-Spend few minutes to play with the below value box generator.
+Spend a few minutes to play with the below value box [generator](https://github.com/rstudio/bslib/tree/7e5155048ba1db1eb75c2702c8c76044e237f8fc/inst/examples/build-a-box).
 
 ```{=html}
-<iframe width="100%" height="800" src="https://bslib.shinyapps.io/build-a-box/" title="Quarto Documentation"></iframe>
+<iframe width="100%" height="600" src="https://bslib.shinyapps.io/build-a-box/" title="Quarto Documentation"></iframe>
 ```
 
-## 🥼 Your turn: `{shinyMons2}` layout `r countdown(minutes = 30, seconds = 0, top = 0)`
+## 🥼 Your turn: `{shinyMons2}` layout `r countdown(minutes = 45, seconds = 0, top = 0)`
 
 <br/> 
 
