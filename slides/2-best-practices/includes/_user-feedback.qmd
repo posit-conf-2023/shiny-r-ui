@@ -8,7 +8,7 @@
 ::: incremental
 Users should not guess what the app is doing:
 
-  - If something goes wrong, user should know.
+  - If something goes wrong, users should know.
   - If something was successful, users should also know.
 :::
 
@@ -29,11 +29,11 @@ Users should not guess what the app is doing:
 <br/>
 
 ::: incremental
-We'll explore few topics:
+We'll explore a few topics:
 
-(1) Process user input/outputs?
-(2) Handle notifications?
-(3) Handle loading/waiting time?
+(1) __Validate__ user input/outputs?
+(2) Handle __notifications__?
+(3) Handle __loading/waiting__ time?
 (4) Convey extra information?
 :::
 
@@ -195,11 +195,6 @@ server <- function(input, output) {
 
 <br/>
 
-::: incremental
-- High attention: errors, user confirmation.
-- Medium attention: warnings.
-- Lower attention: success.
-
 <div class="container text-center">
 <div class="row">
 <div class="col">
@@ -211,6 +206,10 @@ server <- function(input, output) {
 </div>
 </div>
 
+::: incremental
+- High attention: errors, user confirmation.
+- Medium attention: warnings.
+- Lower attention: success.
 :::
 
 ## Notifications best practices
@@ -219,7 +218,7 @@ server <- function(input, output) {
 
 | High attention | Medium attention | Lower attention |
 |---------|:-----|------|
-| No auto close | No auto close | Auto close 
+| Blocking, no auto close | No auto close | Auto close 
 | Modal with overlay      | Toast    | Toast
 | Meaningful icon       | Meaningful icon | Meaningful icon
 
@@ -385,16 +384,88 @@ observeEvent(input$run, {
 
 Taking our `{shinyMons2}` app, the `select_pokemon()` [function](https://github.com/posit-conf-2023/shiny-r-ui-exercises/blob/main/R/utils.R#L201) has unpredictible behavior and may crash. Leverage `tryCatch` so that the app can handle success (`notification`) or errors (`modal`). 
 
-```{r, eval=TRUE, echo=FALSE}
+:::: {.columns}
 
-```
+::: {.column width="50%"}
+```{r, echo=TRUE}
+select_pokemon <- function(selected) {
+  # We make the function slow on purpose.
 
-## Solution
-::: {style="font-size: 75%;"}
-```{r, eval=FALSE, echo=TRUE}
+  # WORKSHOP TODO
+  # Find a way to warn the user about this waiting time ...
+  Sys.sleep(5)
 
+  # We simulate an imaginary failing API connection
+  # This randomly fails so the function result
+  # isn't predictable...and the app crashes without
+  # notifying the user of what happened...
+
+  # WORKSHOP TODO
+  # Find a way to make this function elegantly failing
+  # and warn the end user ...
+  res <- sample(c(FALSE, TRUE), 1)
+  if (!res) {
+    stop("Could not connect to the Pokemon API ...")
+  } else {
+    poke_data[[selected]]
+  }
+}
 ```
 :::
+
+::: {.column width="50%"}
+```{r, echo=TRUE}
+# Server code
+selected_pokemon <- eventReactive(input$selected, {
+  select_pokemon(input$selected)
+})
+```
+:::
+
+::::
+
+## Solution
+```{r, eval=FALSE, echo=TRUE}
+select_pokemon <- function(selected, session) {
+  # We make the function slow on purpose.
+
+  # WORKSHOP TODO
+  # Find a way to warn the user about this waiting time ...
+  Sys.sleep(5)
+  
+  res <- sample(c(FALSE, TRUE), 1)
+  tryCatch({
+    if (res) {
+      showNotification(
+        ui = tagList(
+          icon("check", class = "fa-2xl"),
+          "Successfully connected to the Pokemon API ..."
+        )
+      )
+      poke_data[[selected]]
+    } else {
+        stop("Could not connect to the Pokemon API ...")
+    }
+  }, error = function(e) {
+    showModal(
+      modalDialog(
+        title = tagList(
+          icon("xmark", class = "fa-2xl"),
+          "Error..."
+        ),
+        sprintf("%s", e$message),
+        br(),
+        a(
+          onclick = "location.reload()", 
+          "Reload app?", 
+          href = "#", 
+          style = "color: white"
+        )
+      )
+    )
+  })
+}
+```
 
 :::
 
@@ -421,11 +492,13 @@ Taking our `{shinyMons2}` app, the `select_pokemon()` [function](https://github.
 - Button spinner: related to local task, async (can run in the background).
 :::
 
-## Button spinner
+## Button spinner [^r-and-js]
 
 <br/>
 
 When we don't necessarily know the waiting time ...
+
+<br/>
 
 :::: {.columns}
 
@@ -459,7 +532,6 @@ server <- function(input, output, session) {
 
 - Indicate user when task is running.
 - Notify when task is over (not shown for space reasons).
-- May be combined with notification, error handling, ...
 
 ### JS
 
@@ -483,6 +555,8 @@ $(function() {
 :::
 
 ::::
+
+[^r-and-js]: To know more about R and JS [communication](https://unleash-shiny.rinterface.com/shiny-custom-handler#custom-handlers).
 
 ## Preloader
 
@@ -577,7 +651,7 @@ connect_db <- function(w) {
 ::::
 
 
-## 🥼 Your turn: a preloader for `{shinyMons2}` `r countdown(minutes = 10, seconds = 0, top = 0)`
+## 🥼 Your turn: a preloader for `{shinyMons2}` `r countdown(minutes = 20, seconds = 0, top = 0)`
 
 <br/>
 
@@ -585,18 +659,93 @@ connect_db <- function(w) {
 
 ## Exercise
 
-Taking our `{shinyMons2}` app, the `select_pokemon()` [function](https://github.com/posit-conf-2023/shiny-r-ui-exercises/blob/main/R/utils.R#L188) is still slow. Leverage `{waiter}` so that the app displays a loading screen at start and each time the selected pokemon changes.
+Taking our `{shinyMons2}` app, the `select_pokemon()` [function](https://github.com/posit-conf-2023/shiny-r-ui-exercises/blob/main/R/utils.R#L188) is still slow. Modify the previous function so that it leverage `{waiter}` to display a loading screen at start and each time the selected pokemon changes.
 
-```{r, eval=TRUE, echo=FALSE}
+<br/>
 
-```
+1. Load the waiter dependencies in the `app_ui.R` with `waiter::useWaiter()`.
+2. Initialize the waiter in `mod_poke_select_server` with `Waiter$new()`.
+3. Replace `eventReactive` by `observEvent` and store the selected pokemon is a `reactiveVal`.
+4. Add a `w` parameter to `select_pokemon` to pass the waiter.
+5. Within `select_pokemon`, replace `showNotification` and `showModal` by `waiter$show()`, `waiter$update()`.
 
 ## Solution
-::: {style="font-size: 75%;"}
-```{r, eval=FALSE, echo=TRUE}
+:::: {.columns}
 
+::: {.column width="40%"}
+```{r, eval=FALSE, echo=TRUE}
+# utils.R
+select_pokemon <- function(selected, w) {
+  w$show()
+  w$update(
+    html = tagList(
+      spin_flower(),
+      h3(sprintf("Getting %s data ...", selected))
+    )
+  )
+  Sys.sleep(5)
+  res <- sample(c(FALSE, TRUE), 1)
+  tryCatch({
+    if (res) {
+      w$show()
+      w$update(
+        html = tagList(
+          icon("circle-check", class = "fa-2xl"),
+          h3("Success ...")
+        )
+      )
+      Sys.sleep(1)
+      w$hide()
+      poke_data[[selected]]
+    } else {
+      stop("Could not connect to the Pokemon API ...")
+    }
+  }, error = function(e) {
+    w$update(
+      html = tagList(
+        icon("circle-xmark", class = "fa-2xl"),
+        h3(sprintf("Error: %s", e$message)),
+        a(
+          onclick = "location.reload()",
+          "Reload app?",
+          href = "#",
+          style = "color: white"
+        )
+      )
+    )
+    Sys.sleep(5)
+    w$hide()
+    NULL
+  })
+}
 ```
 :::
+
+::: {.column width="40%"}
+```{r, eval=FALSE, echo=TRUE}
+# mod_poke_select_server
+
+# Init waiter
+w <- Waiter$new()
+# Init pokemon data
+selected_pokemon <- reactiveVal(NULL)
+
+# Replace by observeEvent
+observeEvent(input$selected, {
+  # Get and store pokemon data
+  selected_pokemon(select_pokemon(input$selected, w))
+})
+```
+:::
+
+::: {.column width="20%"}
+```{r, eval=FALSE, echo=TRUE}
+# UI code: add this to app_ui.R to load the waiter assets
+waiter::useWaiter()
+```
+:::
+
+::::
 
 :::
 
@@ -607,10 +756,12 @@ Taking our `{shinyMons2}` app, the `select_pokemon()` [function](https://github.
 
 For __async tasks__, we indicate local computation with `waiter::Waitress` ...
 
+<br/>
+
 :::: {.columns}
 
 ::: {.column width="50%"}
-![](./../../assets/movies/2-best-practices/local-progress.mov){width="100%"}
+![](./../../assets/movies/2-best-practices/local-progress.mov){width="100%" height="600"}
 :::
 
 ::: {.column width="50%"}
@@ -711,7 +862,7 @@ bg_task <- function() {
 ::::
 
 
-## (4) Extra information {.center}
+## (4) Convey extra information {.center}
 
 
 ## Tooltips vs Popovers
@@ -756,7 +907,8 @@ describe_layout_function(
         "Example: name.surname@domain.com"
       )
     )
-  )
+  ),
+  height = 300
 )
 # Server not shown (same as input validation above)
 ```
@@ -776,7 +928,8 @@ textInput(
       bs_icon("info-circle"),
       "Example: name.surname@domain.com"
     )
-  )
+  ),
+  height = 300
 )
 ```
 :::
