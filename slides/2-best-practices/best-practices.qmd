@@ -35,6 +35,8 @@ revealjs-plugins:
   - simplemenu
   - confetti
   - attribution
+filters:
+  - shinylive
 ---
 
 ```{r, echo=FALSE}
