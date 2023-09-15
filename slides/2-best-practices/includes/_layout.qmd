@@ -1100,28 +1100,16 @@ You can create those 6 cards programmatically with `lapply()` and pass them with
 :::
 
 ## Solution
-```{shinylive-r}
-#| standalone: true
-#| components: [editor, viewer, terminal]
-#| viewerHeight: 700
-library(shiny)
-library(bslib)
-
+```{r, eval=FALSE, echo=TRUE}
 cards <- lapply(1:6, function(i) {
   card(sprintf("Card %s", i))
 })
 
-ui <- page_fluid(
-  layout_column_wrap(
-    width = 1/3,
-    height = 300,
-    !!!cards
-  )
+layout_column_wrap(
+  width = 1/3,
+  height = 300,
+  !!!cards
 )
-
-server <- function(input, output) {}
-
-shinyApp(ui, server)
 ```
 :::
 

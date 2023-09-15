@@ -28,8 +28,6 @@ format:
 revealjs-plugins:
   - simplemenu
   - confetti
-filters:
-  - shinylive
 ---
 
 ```{r, echo=FALSE}
