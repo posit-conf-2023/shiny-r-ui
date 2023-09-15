@@ -19,6 +19,10 @@ jobs:
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
+        
+      - name: Set up deps
+        run: |
+          sudo bash -c 'apt-get update; apt-get install -y libarchive-dev; apt-get clean; rm -rf /var/lib/apt/lists/*'
 
       - name: Install R
         uses: r-lib/actions/setup-r@v2
