@@ -26,13 +26,16 @@ format:
 revealjs-plugins:
   - simplemenu
   - confetti
+filters:
+  - shinylive
 ---
 
 ```{r, echo=FALSE}
 library(emo)
 library(countdown)
+library(shinylive)
 ```
 
-{{< include ./includes/_about-you.qmd >}}
-{{< include ./includes/_about-us.qmd >}}
+{{< include ./includes/_about-you.qmd >}} 
+{{< include ./includes/_about-us.qmd >}} 
 {{< include ./includes/_objectives.qmd >}}
