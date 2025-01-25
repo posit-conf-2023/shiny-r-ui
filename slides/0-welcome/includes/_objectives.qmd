@@ -10,11 +10,7 @@
 
 <br/>
 
-Redesign `{shinyMons2}`
-
-```{=html}
-<iframe width="100%" height="500" src="https://dgranjon.shinyapps.io/shinyMonsUgly" title="Quarto Documentation"></iframe>
-```
+Redesign `{shinyMons2}` at https://github.com/posit-conf-2023/shiny-r-ui-exercises.
 
 ## 😱 Fear not, we'll do it step by step
 
